@@ -1,0 +1,19 @@
+<div class="row" *ngIf="loadLayout">
+    <div class="col-xs-12">
+        <app-header></app-header>
+    </div>
+</div>
+
+<div class="row" *ngIf="loadLayout">
+    <div class="col-xs-12">
+        <section class="panel" >
+            <router-outlet></router-outlet>
+        </section>
+    </div>
+</div>
+
+<div class="row" *ngIf="loadLayout">
+    <div class="col-xs-12">
+        <app-footer></app-footer>
+    </div>
+</div>

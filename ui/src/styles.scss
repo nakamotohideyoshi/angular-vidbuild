@@ -1,0 +1,304 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~flexboxgrid/dist/flexboxgrid.min.css";
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700,900');
+
+
+* {
+    font-family: 'Muli', sans-serif;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color:#fff;
+}
+
+/*     ---- Style Guide ------  */
+
+/*Colors*/  /*According http://chir.ag/projects/name-that-color*/
+$mine-shaft: #252525;
+$regent-grey: #8d99a0;
+$java: #1dbec4;
+$gallery: #ebebeb;
+$surfie-green: #108682;
+$white: #fff;
+$black: #000;
+$red: #FF0000;
+$salem: #077E40;
+$ripe-lemon: #F3E61B;
+
+
+/*Fonts family*/
+$font-muli-light: 'Muli Light', sans-serif;
+$font-muli-regular: 'Muli Regular', sans-serif;
+$font-muli-bold: 'Muli Bold', sans-serif;
+$font-muli-black: 'Muli Black', sans-serif;
+
+/* Font Sizes */
+$font-12: 12px;
+$font-14: 14px;
+$font-16: 16px;
+$font-18: 18px;
+$font-20: 20px;
+$font-24: 24px;
+$font-34: 34px;
+
+/* Font Wheights*/
+$light: 300;
+$normal: 400;
+$semibold: 500;
+$bold: 700;
+
+.bold{
+  font-weight: $bold;
+}
+/* Mixins */
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+/*text align*/
+.text-center{
+    text-align: center;
+}
+.text-right{
+    text-align: right;
+}
+.text-left{
+    text-align: left;
+}
+/*margin*/
+.margin-bottom-20{
+  margin-bottom: 20px;
+}
+
+/* Messages */
+.message {
+  border: 1px solid $white;
+  padding: 10px;
+  color: $mine-shaft;
+}
+.success {
+  @extend .message;
+  border-color: $salem;
+}
+.error {
+  @extend .message;
+  border-color: $red;
+}
+.warning {
+  @extend .message;
+  border-color: $ripe-lemon;
+}
+
+/* P tag */
+p{
+  font-size: 14px;
+  font-family: 'Muli';
+}
+
+/* H tag */
+h1{
+  font-size: 32px;
+  text-align: center;
+  font-family: $font-muli-black;
+}
+
+h2{
+  font-size: 24px;
+  text-align: center;
+}
+
+h3{
+  font-size: 16px;
+}
+
+
+/* Buttons */
+
+button, button:hover, button:visited{
+  border: none;
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+.btn-primary{
+    position: relative;
+    background-color: $java;
+    color: $white;
+    @include border-radius(25px);
+    font-size: $font-14;
+    cursor: pointer;
+}
+.btn-primary:hover{
+  background-color: $surfie-green;
+}
+
+.btn-secondary{
+  font-size: $font-18;
+  color: $regent-grey;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-secondary:hover{
+  background-color: transparent;
+  color: $java;
+}
+
+.btn-tertiary{
+    position: relative;
+    background-color: transparent;
+    color: $java;
+    border: 2px solid $java;
+    @include border-radius(25px);
+    font-size: $font-14;
+    cursor: pointer;
+}
+.btn-tertiary:hover{
+  background-color: transparent;
+  border: 2px solid $java;
+}
+
+.btn-left-radius{
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.btn-right-radius{
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.btn-over-video{
+  border: 2px solid $white;
+  color: $white;
+  background: rgba(10, 54, 54, 0.5);
+}
+.btn-over-video:hover{
+  border: 2px solid $white;
+  color: $white;
+  background: rgba(10, 54, 54, 0.5);
+}
+
+.btn-no-radius{
+  border-radius: 0px;
+}
+
+/* Sidebar button */
+.btn-sidebar{
+  width: 100%;
+  height: 140px;
+  background-color: $mine-shaft;
+  color: $white;
+  padding: 40px 20px;
+  text-align: left;
+  cursor: pointer;
+
+  .btn-sidebar-title{
+    font-size: $font-20;
+    text-transform: uppercase;
+  }
+}
+.btn-sidebar:hover{
+  background-color: $java;
+}
+.btn-sidebar:focus, .btn-sidebar:active, .btn-sidebar:visited{
+  background-color: #464646;
+}
+
+/* Inputs */
+
+input, input:hover, input:visited, input:focus{
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+.input-primary{
+  border: 2px solid #c8c8c8;
+  @include border-radius(25px);
+}
+
+.input-btn-radio{
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 2px;
+}
+.input-btn-radio[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        left: 2px;
+        top: 0px;
+        position: relative;
+        background-color: $java;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid $white;
+    }
+
+.radius-standar{
+  @include border-radius(25px);
+}
+
+
+
+
+/* ----- Video Container -------*/
+.video-block-container{
+  width: 300px;
+  display: inline-block;
+  
+  .margin-25{  margin: 25px;}
+  .video-thumb-container{
+      width: 300px;
+      height: 300px;
+      padding: 0;
+
+      video {
+          width: 100%;
+          height: 100%;
+          background-color: $black;
+      }
+  }
+}
+
+.video-small-block-container{
+  width: 300px;
+  display: inline-block;
+  position: relative;
+  
+  .margin-25{  margin: 25px;}
+  .video-small-container{
+      padding: 0;
+
+      video {
+          width: 100%;
+          height: 160px;
+          background-color: $black;
+      }
+      .over-video{
+        position: absolute;
+        width: 100px;
+        margin: 0 auto;
+        top:50%;
+        left: 50%;
+        margin: -25px 0 0 -50px;
+      }
+  }
+}

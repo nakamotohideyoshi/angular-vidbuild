@@ -1,0 +1,20 @@
+{
+    "teams": [
+        {"name": "team1"}
+    ],
+    "players": [
+        {"name": "player 1"}
+    ],
+    "tournaments": [
+        {"name": "tournament 1", "matches": []}
+    ],
+    "matches": [
+        {"name": "match 1"}
+    ],
+    "users": [
+        {"name": "user 1"}
+    ],
+    "settings": [
+        {"prod": false}
+    ]
+}

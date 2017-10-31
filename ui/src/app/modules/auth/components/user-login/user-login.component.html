@@ -1,0 +1,26 @@
+<section class="user-login">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="login-container" *ngIf="!auth.currentUser">
+        <user-form></user-form>
+        <div class="row margin-bottom-20">
+          <div class="col-sm-6">
+            <div class="text-center">
+              <button (click)="signInWithFacebook()" class="btn-login btn-login-facebook"> Login with Facebook</button>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="text-center">
+              <button (click)="signInWithGoogle()"  class="btn-login btn-login-google"> Login with Google </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<ng-template #alreadyLoggedIn>
+    <p class="text-success">
+      Already logged in!
+    </p>
+  </ng-template>-->
+</section>

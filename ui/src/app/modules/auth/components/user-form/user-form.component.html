@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="create-account-title">Create an Account</h1>
+    <form [formGroup]="userForm" (ngSubmit)="signup()">
+      <div class="form-group row">
+        <label for="name" class="col-4 col-form-label">Name</label>
+        <div class="col-8">
+          <input class="form-control input-primary" formControlName="email" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-4 col-form-label">Email Address</label>
+        <div class="col-8">
+          <input class="form-control input-primary" formControlName="email" type="email">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="password" class="col-4 col-form-label">Password</label>
+        <div class="col-8">
+          <input class="form-control input-primary" formControlName="password" type="password">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="repeat-password" class="col-4 col-form-label">Repeat Password</label>
+        <div class="col-8">
+          <input class="form-control input-primary" formControlName="password" type="password">
+        </div>
+      </div>
+      <div class="form-group row margin-bottom-20">
+        <span class="col-4 col-form-label"></span>
+        <div class="col-8">
+          <button class="btn btn-primary btn-create-account" type="submit" [disabled]="!userForm.valid">Create Account</button>
+        </div>
+      </div>
+      <span *ngIf="userForm.valid" class="help is-success">Form Looks Valid</span>
+      <a *ngIf="!passReset && userForm.controls.email.valid" class="help is-info" (click)="resetPassword()">Reset Password for {{userForm.value.email}}?</a>
+      <p *ngIf="passReset" class="help is-info">Reset requested. Check your email instructions.</p>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h2 class="login-title">or Sign In</h2>
+    <form [formGroup]="userForm" (ngSubmit)="login()">
+      <div class="form-group row">
+        <label for="email" class="col-4 col-form-label">Email Address</label>
+        <div class="col-8">
+          <input class="form-control input-primary" type="email" formControlName="email">
+        </div>
+        <div *ngIf="formErrors.email" class="notification is-danger">
+          {{ formErrors.email }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="password" class="col-4 col-form-label">Password</label>
+        <div class="col-8">
+          <input class="form-control input-primary" type="password" formControlName="password">
+        </div>
+        <div *ngIf="formErrors.password" class="notification is-danger">
+          {{ formErrors.password }}
+        </div>
+      </div>
+      <div class="form-group row margin-bottom-20">
+        <span class="col-4 col-form-label"></span>
+        <div class="col-8">
+          <button class="btn btn-primary btn-create-account" type="submit" [disabled]="!userForm.valid">Sign in</button>
+        </div>
+        <div *ngIf="userForm.valid" class="notification is-success">Form is valid</div>
+      </div>
+    </form>
+  </div>
+</div>

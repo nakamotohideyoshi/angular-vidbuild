@@ -1,0 +1,105 @@
+<section class="landing">
+  <div class="row">
+      <div class="col-sm-12">
+        <div class="video-container">
+            <div class="video-content" > 
+              <video #videoMain autoplay loop class="img-responsive">
+                <source src="http://ganucs.com/mp4/main_20percent.mp4" type="video/mp4" />
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+            <div class="video-txt">
+              <div class="title-video"><h1>LOREM IPSUM DOLOR SIT AMET</h1></div>
+              <button class="btn btn-primary btn-video" routerLink="/dashboard">Create your advert</button>
+            </div>
+            <span class="arrow-sevices" (click)="scrollToServices()"></span>
+        </div>
+        <div id="services"  class="services-container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6">
+              <div class="video-thumb-container">
+                <video #video1 loop (mouseenter)="video1.play()" (mouseleave)="video1.load()" poster="assets/teasers.jpg">
+                  <source src="http://ganucs.com/mp4/teaser.mp4" type="video/mp4" />
+                  Your browser does not support HTML5 video.
+                </video>
+              </div>
+              <div class="title-services"><h2>What is <b>vid</b>build?</h2></div>
+              <div class="txt-services">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.<br><br>Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. </div>
+            </div>
+            <div class="col-md-3 col-sm-6 ">
+              <div class="video-thumb-container">
+                <video #video2 loop (mouseenter)="video2.play()" (mouseleave)="video2.load()" poster="assets/social.jpg">
+                  <source src="http://ganucs.com/mp4/social.mp4" type="video/mp4" />
+                  Your browser does not support HTML5 video.
+                </video>
+              </div>
+              <div class="title-services"><h2>Simple to <b>create</b>?</h2></div>
+              <div class="txt-services">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.<br><br>Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="video-thumb-container">
+                <video #video3 loop (mouseenter)="video3.play()" (mouseleave)="video3.load()" poster="assets/campaigns.jpg">
+                  <source src="http://ganucs.com/mp4/campaign.mp4" type="video/mp4" />
+                  Your browser does not support HTML5 video.
+                </video>
+              </div>
+              <div class="title-services"><h2><b>Beautiful</b> content</h2></div>
+              <div class="txt-services">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.<br><br>Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="video-thumb-container">
+                <video #video4 loop (mouseenter)="video4.play()" (mouseleave)="video4.load()" poster="assets/narrative.jpg">
+                  <source src="http://ganucs.com/mp4/narrative.mp4" type="video/mp4" />
+                  Your browser does not support HTML5 video.
+                </video>
+              </div>
+              <div class="title-services"><h2>Limitless <b>possibilities</b></h2></div>
+              <div class="txt-services">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.<br><br>Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. </div>
+            </div>
+          </div>
+        </div>
+        <div class="sections-container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 ">
+              <div class="individual-section">
+                <div class="icon-sections icon-video-music"></div>
+                <div class="title-sections">Add Video &amp; Music </div>
+                <div class="txt-sections">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="individual-section">
+                <div class="icon-sections icon-voiceover"></div>
+                <div class="title-sections">Add Voiceover </div>
+                <div class="txt-sections">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="individual-section">
+                <div class="icon-sections icon-edit"></div>
+                <div class="title-sections">Edit your Advert </div>
+                <div class="txt-sections">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="individual-section">
+                <div class="icon-sections icon-build"></div>
+                <div class="title-sections">Build </div>
+                <div class="txt-sections">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="partners-container">
+          <div class="row">
+            <div class="col-md-12">
+              <a class="logo-partner" routerLink="/legal" fragment="partners" href="#"><img alt="Getty logo" class="img-responsive" src="assets/logo-getty.jpg"/></a>
+              <a class="logo-partner" routerLink="/legal" fragment="partners" href="#"><img alt="Story Blocks logo" class="img-responsive" src="assets/logo-story-blocks.jpg"/></a>
+              <a class="logo-partner" routerLink="/legal" fragment="partners" href="#"><img alt="IStock logo" class="img-responsive" src="assets/logo-istock.jpg"/></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>

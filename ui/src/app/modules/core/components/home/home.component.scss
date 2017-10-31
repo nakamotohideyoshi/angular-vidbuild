@@ -1,0 +1,156 @@
+@import './../../../../../styles.scss';
+
+$arrow-services: #fcfcfc;
+
+.landing{
+ font-size: $font-16;
+
+    .video-container{
+        position: relative;
+        text-align: center;
+        margin-bottom: 35px;
+
+        .video-content {
+            position: relative;
+
+            video {
+                width: 100%;
+                height: auto;
+            }
+        }
+        .video-txt{
+            position: absolute;
+            top: 25%;
+            width: 100%;
+            text-align: center;
+
+            .title-video{
+                padding: 10px;
+                letter-spacing: 2px;
+                font-size: $font-34;
+                font-family: $font-muli-regular;
+                color: $white;
+            }
+            
+            .btn-video{
+                display: block;
+                margin: 20px auto;
+                width: 175px;
+                height: 50px;
+            }
+        }
+        .arrow-sevices{
+            position: absolute;
+            bottom: 30%;
+            cursor: pointer;
+            border-right: 3px solid $arrow-services;
+            border-bottom: 3px solid $arrow-services;
+            height: 35px;
+            width: 35px;
+            margin-left: -18px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        
+    }
+
+    .services-container{
+        position: relative;
+        margin-bottom: 40px;
+        padding: 0 40px;
+
+        .video-thumb-container{
+            width: 100%;
+
+            video {
+                width: 100%;
+                height: auto;
+                background-color: $white;
+            }
+        }
+        .title-services{
+            padding: 20px 0;
+            font-size: 150%;
+            text-align: left;
+        }
+        .txt-services{
+            margin-bottom: 20px;
+            padding-right: 15px;
+            font-size: $font-14;
+            text-align: left;
+        }
+    }
+
+    .sections-container{
+        position: relative;
+        background-size: cover;
+        background-image: url('/assets/city-background.jpg');
+        color: $white;
+
+        .individual-section{
+            padding: 100px 20px;
+            position: relative;
+            text-align: center;
+
+            .icon-sections{
+                background: url(/assets/service-icons.png) no-repeat;
+                width: 64px;
+                height: 64px;
+                display: block;
+                padding: 50px 0;
+                position: relative;
+                left: 50%;
+                margin-left: -32px;
+            }
+            .icon-voiceover{ background-position-x: -64px;}
+            .icon-edit {background-position-x: -128px;}
+            .icon-build {background-position-x: -192px;}
+
+            .title-sections{
+                position: relative;
+                margin-bottom: 20px;
+                font-size: $font-24;
+            }
+            .txt-sections{
+                position: relative;
+                font-size: $font-14;
+            }
+        }  
+    }
+
+    .partners-container{
+        position: relative;
+        text-align: center;
+
+        .logo-partner{
+            display: inline-block;
+            margin: 20px;
+
+            img{
+                width: 75%;
+            }
+        }
+    }
+
+
+}
+
+
+.bk-gray{
+    background-color: #f2f2f2;
+}
+
+
+
+@media (max-width: 768px) {
+    .landing {
+        .sections-container{
+            .individual-section{
+                padding: 40px 20px;
+            }
+        } 
+        .arrow-sevices{
+            display:none;
+        }
+    }
+}

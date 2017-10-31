@@ -1,0 +1,100 @@
+<section id="component-map">
+  <div class="row">
+      <div class="col-sm-12">
+        <span class="component-title">H tags</span>
+        <h1>H1 Tag</h1>
+        <h2>H2 Tag</h2>
+        <h3>H3 Tag</h3>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-12">
+        <span class="component-title">P tag</span>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.</p>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-12">
+        <span class="component-title">Buttons</span>
+        <!--https://v4-alpha.getbootstrap.com/components/buttons/#examples-->
+        <button class="btn btn-primary" >Button Primary</button>
+        <button class="btn btn-primary btn-left-radius" >Button Primary Radius Left</button>
+        <button class="btn btn-primary btn-right-radius" >Button Primary Radius Right</button>
+        <button class="btn btn-secondary" >Button Secondary</button>
+        <button class="btn btn-primary btn-over-video" >Button Primary Video</button>
+        <button class="btn btn-tertiary" >Button Tertiary</button>
+        <button class="btn-sidebar"><span class="btn-sidebar-title">ADD VIDEO</span><p>Find the perfect Video Clips</p></button>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-12">
+        <span class="component-title">Inputs</span>
+        <!--https://v4-alpha.getbootstrap.com/components/forms/#textual-inputs-->
+        <div class="form-group row">
+          <label for="example-text-input" class="col-1 col-form-label">Text</label>
+          <div class="col-11">
+            <input class="form-control input-primary" value="Input Value" id="example-text-input" type="text">
+          </div>
+        </div>
+        <div style="margin:20px"></div>
+        <div class="input-group">
+          <!--https://v4-alpha.getbootstrap.com/components/input-group/#button-addons-->
+          <span class="input-group-addon btn-left-radius" id="basic-addon1">?</span>
+          <input class="form-control btn-right-radius" placeholder="Search" aria-describedby="basic-addon1" type="text">
+        </div>
+        <div style="margin:20px"></div>
+        <div class="form-group">
+            <label for="exampleTextarea">Example textarea</label>
+            <textarea class="form-control radius-standar" id="exampleTextarea" rows="3" style="height: 101px;"></textarea>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-12">
+        <fieldset class="form-group">
+          <span class="component-title">Radio buttons</span>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input input-btn-radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">
+               Option 1
+            </label>
+          </div>
+          <div class="form-check">
+          <label class="form-check-label">
+              <input class="form-check-input input-btn-radio" name="optionsRadios" id="optionsRadios2" value="option2" type="radio">
+              Option 2
+            </label>
+          </div>
+        </fieldset>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <span class="component-title">Video Containers</span>
+      <div class="video-block-container">
+        <div class="video-thumb-container">
+          <video #video1 loop (mouseenter)="video1.play()" (mouseleave)="video1.load()" poster="http://img.lum.dolimg.com/v1/images/starwars_551c43f4.jpeg">
+            <source src="http://ganucs.com/mp4/1.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+        <div class="margin-25"><h2>What is <b>vid</b>build.com?</h2></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.</p>
+      </div>
+      
+      <div class="video-small-block-container">
+        <div class="video-small-container">
+          <video #video2 loop (mouseenter)="video2.play()" (mouseleave)="video2.load()" poster="http://img.lum.dolimg.com/v1/images/starwars_551c43f4.jpeg">
+            <source src="http://ganucs.com/mp4/2.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+          <button class="btn btn-primary over-video" >Build Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+      

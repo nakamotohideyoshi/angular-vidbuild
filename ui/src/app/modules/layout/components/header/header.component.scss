@@ -1,0 +1,94 @@
+@import './../../../../../styles.scss';
+
+.header{
+    position: fixed;
+    width: 100%;
+    background: $mine-shaft;
+    height: 73px;
+    padding: 6px 25px;
+    font-size: 200%;
+    color: $white;
+    z-index: 9;
+
+    .btn-logo{
+        cursor: pointer;
+        text-decoration: none;
+        outline: none;
+        padding: 5px 0 -1px;
+    }
+    .txt-right{
+        text-align: right
+    }
+    .btn-my-account, .btn-my-library, .btn-signin, .btn-logout{
+        padding: 10px 0;
+        text-align: center;
+        display: inline-block;
+        width: 130px;
+        margin: 0 auto;
+
+        .account-icon{
+            width: 26px;
+            position: relative;
+            height: 26px;
+            background-image: url(/assets/account-library.jpg);
+            display: inline-block;
+            top: 6px;
+            margin-right: 5px;
+        }
+    }
+    .btn-my-account, .btn-my-library, .btn-signin, .btn-logout{
+        color: $regent-grey;
+    }
+    .btn-logout, .btn-pricing{
+        margin-top: 10px;
+    }
+    .btn-my-library{
+        .account-icon{
+            background-position-x: 26px;
+        }
+    }
+    .btn-new-advert{
+        margin: 6px 0 0 20px;
+        padding: 13px;
+        width: 200px;
+        height: 49px;
+    }
+
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .hidden-sm-less{
+        display: none !important;
+    }
+    .header{ 
+        .btn-my-account{
+            text-align: right;
+            width: 30px;
+        }
+        .btn-logout{
+            width: 85px
+        }
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 769px) and (max-width : 1024px) {
+    .header{
+        .btn-new-advert{
+            width: 120px;
+        }
+        .btn-my-account, .btn-my-library, .btn-signin{
+            width: 125px;
+        }
+        .btn-logout{
+            width: 85px
+        }
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}

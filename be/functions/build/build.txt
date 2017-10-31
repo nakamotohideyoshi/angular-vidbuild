@@ -1,0 +1,71 @@
+
+/users-current-proyect/uid/ = object({
+    projectId,
+    projectData:
+    type: export || preview
+    created:timestrap,
+    status: validating | / valid / downloading assets / assets downloaded/ processing / exporting
+}).trigger...
+
+//Build Validation
+if(status === validating)
+    users-current-proyect/uid.lenght === 1 && type
+
+if export
+-> get project from user-project/uid/projectId
+    count credits required
+    get user credits amount
+    validate purchase
+        if amount insuficient -> twron error 1003 insuficient founds
+    users-current-builds/uid/buildId = object({
+        status: valid
+    }).trigger
+if preview
+    users-current-builds/uid/buildId = object({
+        status: valid
+    }).trigger
+
+
+//build Queue
+if(status === valid)
+    get project from user-project/uid/projectId
+    
+    if(preview) set preview files if(export) set export files to
+    queueRef => /users-files-queue/uid/files[]
+    proyect.files.forEach(item = ref.push({itemUrl: itemUrl, status: pending}))
+
+//build Assets download
+    /users-files-queue/uid/files[item].onWrite() and status pending
+
+    request -> lambda -> ({openshotIuRL, openshotProjectId, highresUrl}) -> openshot returns newFilesUrls/ idfile
+    
+    request -> updateProjectClips with the newFilesUrls/ idfile
+
+    if fails -> retry
+
+    if ok -> /users-files-queue/uid/files[item] = status downloaded
+    remove credits?
+
+//build begin
+
+/users-files-queue/uid/files trigger => if each file status donwloaded
+    request -> openshot -> set resolution
+    then
+    request -> openshot export (resolution) -> if status completed, progress 100% -> output -> url
+
+    result -> fileURL -> lambda(fileURL) -> move to s3 -> result -> s3URL
+
+users-files-queue/uid/files .empty
+users-current-builds/uid/buildId .delete
+
+
+// get request project exporting status (projectID)
+
+
+
+//sources
+sources: [
+    {
+        type:'video || audio || voice' fileURl: "", openshotIuRL: "", highResUrl:, premium:, credits:
+    }
+];

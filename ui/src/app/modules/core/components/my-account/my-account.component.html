@@ -1,0 +1,159 @@
+<div class="my-account">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="title-page">My Account</h1>
+        <div class="cards-container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card">
+                <h2 class="account-subtitle">Account Details</h2>
+                <form [formGroup]="accountDetails" (ngSubmit)="saveAccountDetails()">
+                  <div class="form-group row">
+                    <label for="text" class="col-4 col-form-label">First Name</label>
+                    <div class="col-8">
+                      <input class="form-control input-primary" formControlName="text" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="text" class="col-4 col-form-label">Last Name</label>
+                    <div class="col-8">
+                      <input class="form-control input-primary" formControlName="text" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="text" class="col-4 col-form-label">Business Name</label>
+                    <div class="col-8">
+                      <input class="form-control input-primary" formControlName="text" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="email" class="col-4 col-form-label">Email Address</label>
+                    <div class="col-8">
+                      <input class="form-control input-primary" formControlName="email" type="email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="text" class="col-4 col-form-label">Address</label>
+                    <div class="col-8">
+                      <textarea class="form-control input-primary radius-standar" formControlName="text" rows="4"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row margin-bottom-20">
+                    <div class="col-12">
+                      <div class="save-account-details-btn-container">
+                        <button class="btn btn-tertiary btn-save-account-details" type="submit" [disabled]="!accountDetails.valid">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!--<span *ngIf="userForm.valid" class="help is-success">Form Looks Valid</span>
+                  <a *ngIf="!passReset && userForm.controls.email.valid" class="help is-info" (click)="resetPassword()">Reset Password for {{userForm.value.email}}?</a>
+                  <p *ngIf="passReset" class="help is-info">Reset requested. Check your email instructions.</p>-->
+                </form>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card text-center middle-card">
+                <h2 class="account-subtitle">My Plan</h2>
+                <div>
+                  <div class="card-header">
+                    <div class="pricing-plan"><span class="currency bolder">£ {{paymentService.myplan.price}}</span><span class="period">per {{paymentService.myplan.frequency}}</span></div>
+                  </div>
+                  <div class="card-block">
+                    <div>
+                      <span class="txt-card-description"><b>{{paymentService.myplan.credits}}</b> clip credits per {{paymentService.myplan.frequency}}</span>
+                      <span class="txt-card-description">You can upload <b>{{paymentService.myplan.storage}}GB</b> of data to your library.</span>
+                      <span class="txt-card-description">Create unlimited videos*</span>
+                    </div>
+                    <button routerLink="/pricing" class="btn btn-primary btn-change-plan">Change Plan</button>
+                    <button class="btn btn-secondary btn-cancel-subscription" (click)="updateSubscription('canceled')">Cancel Subscription</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <h2 class="account-subtitle">Top-up my credits</h2>
+                <div class="credit-container">
+                  <span class="credit-amount">1 credit</span>
+                  <button (click)="openHandler('Buy 1 Credit', 'Buy 1 Credit', 1000, '1credit')" class="btn btn-primary btn-get-credit">£ 10</button>
+                </div>
+                <div class="credit-container">
+                  <span class="credit-amount">5 credits</span>
+                  <button (click)="openHandler('Buy 5 Credits', 'Buy 5 Credits', 1000, '5credits')" class="btn btn-primary btn-get-credit">£ 40</button>
+                </div>
+                <div class="credit-container">
+                  <span class="credit-amount">10 credits</span>
+                  <button (click)="openHandler('Buy 10 Credits', 'Buy 10 Credits', 1000, '10credits')" class="btn btn-primary btn-get-credit">£ 70</button>
+                </div>
+                <div class="credit-container">
+                  <span class="credit-amount">20 credits</span>
+                  <button (click)="openHandler('Buy 20 Credits', 'Buy 20 Credits', 1000, '20credits')" class="btn btn-primary btn-get-credit">£ 120</button>
+                </div>
+                <div class="credit-container">
+                  <span class="credit-amount">50 credits</span>
+                  <button (click)="openHandler('Buy 50 Credits', 'Buy 50 Credits', 1000, '50credits')" class="btn btn-primary btn-get-credit">£ 220</button>
+                </div>
+                <div class="credit-container">
+                  <span class="credit-amount">100 credits</span>
+                  <button (click)="openHandler('Buy 100 Credits', 'Buy 100 Credits', 1000, '100credits')" class="btn btn-primary btn-get-credit">£ 400</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<h3>Buy Conins</h3>
+<p>
+  <button (click)="openHandler('Buy 1 Coin', 'Buy 1 Coin', 1000, '1coin')" class="btn btn-gradient mt-2">Buy 1 Coin</button>
+  <button (click)="openHandler('Buy 5 Coins', 'Buy 5 Coins', 4000, '5coins')" class="btn btn-gradient mt-2">Buy 5 Coins</button>
+  <button (click)="openHandler('Buy 10 Coins', 'Buy 10 Coins', 7000, '10coins')" class="btn btn-gradient mt-2">Buy 10 Coins</button>
+  <button (click)="openHandler('Buy 20 Coins', 'Buy 20 Coins', 12000, '20coins')" class="btn btn-gradient mt-2">Buy 20 Coins</button>
+  <button (click)="openHandler('Buy 50 Coins', 'Buy 50 Coins', 22000, '50coins')" class="btn btn-gradient mt-2">Buy 50 Coins</button>
+  <button (click)="openHandler('Buy 100 Coins', 'Buy 100 Coins', 40000, '100coins')" class="btn btn-gradient mt-2">Buy 100 Coins</button>
+</p>
+
+<h3>Change Plan</h3>
+<p> Month
+  <button (click)="updateSubscription('starter')" class="btn btn-gradient mt-2">Starter</button>
+  <button (click)="updateSubscription('basic')" class="btn btn-gradient mt-2">Basic</button>
+  <button (click)="updateSubscription('popular')" class="btn btn-gradient mt-2">Popular</button>
+  <button (click)="updateSubscription('gold')" class="btn btn-gradient mt-2">Gold</button>
+  <button (click)="updateSubscription('platinum')" class="btn btn-gradient mt-2">Platinum</button>
+</p>
+<p> Year
+  <button (click)="updateSubscription('starter-year')" class="btn btn-gradient mt-2">Starter</button>
+  <button (click)="updateSubscription('basic-year')" class="btn btn-gradient mt-2">Basic</button>
+  <button (click)="updateSubscription('popular-year')" class="btn btn-gradient mt-2">Popular</button>
+  <button (click)="updateSubscription('gold-year')" class="btn btn-gradient mt-2">Gold</button>
+  <button (click)="updateSubscription('platinum-year')" class="btn btn-gradient mt-2">Platinum</button>
+</p>
+<h3>Cancel Subscription</h3>
+<p>
+  <button (click)="updateSubscription('canceled')" class="btn btn-gradient mt-2">Cancel Subscription</button>
+</p>
+<p *ngIf="paymentService.membership.plan == 'canceled'">The subscription it's canceled</p>
+
+<h3>Emulate Build Payment</h3>
+<p>
+  <button (click)="payWithCoins(5)" class="btn btn-gradient mt-2">Pay 5 Coins</button>
+  <button (click)="payWithCoins(10)" class="btn btn-gradient mt-2">Pay 10 Coins</button>
+</p>
+
+<pre>
+  {{ paymentService.myplan | json }}
+</pre>
+
+
+<pre>
+  {{ paymentService.plans | json }}
+</pre>
+ MEMBERSHIP
+<pre>
+ 
+    {{paymentService.membership | json}}
+</pre>
+<pre>Current Coins: {{ AuthService.currentCoins | json }}</pre>

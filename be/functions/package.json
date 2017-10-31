@@ -1,0 +1,19 @@
+{
+  "name": "VidBuild-Cloud-Functions",
+  "description": "Set of firebase cloud functions",
+  "dependencies": {
+    "@google-cloud/logging": "^0.7.1",
+    "cors": "^2.8.4",
+    "firebase-admin": "^4.0.5",
+    "firebase-functions": "^0.5.1",
+    "install": "^0.10.1",
+    "lodash": "^4.17.4",
+    "npm": "^5.5.1",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "stripe": "^4.25.0"
+  },
+  "scripts": {
+    "deploy": "firebase deploy --only functions"
+  }
+}
