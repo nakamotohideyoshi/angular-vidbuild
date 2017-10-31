@@ -1,0 +1,13 @@
+
+<button class="btn btn-primary" (click)="addFile('video', 'https://media.gettyimages.com/videos/flag-of-argentina-at-the-stadium-video-id497855423?b=1&k=6&m=497855423&h=-i4vFpK5hmsYTmH5m18KqBbtG2k59zBurVV4o1QLIEU=
+')">Add video 1</button>
+<button class="btn btn-primary" (click)="addFile('video', 'https://s3.eu-west-2.amazonaws.com/assetss/los-argentinos-se-desahogaron-tras-el-triunfo-de-su-seleccion-ante-video-id86_grEeE1U')">Add video 2</button>
+<br>
+<button class="btn btn-primary" (click)="build('preview')">Call Preview</button>
+<br>
+<button class="btn btn-primary" (click)="build('export')">Call Export</button>
+<br>
+<br>
+<pre>
+  {{editorService.currentProject | json}}
+</pre>

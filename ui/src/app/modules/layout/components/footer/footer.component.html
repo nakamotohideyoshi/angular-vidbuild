@@ -1,0 +1,27 @@
+<section class="footer" [ngClass]="{'sticky-footer': isLegalPage}">
+    <div class="row">
+      <div class="col-xs-12 col-sm-3">
+        <div class="copyright-container">
+          <span>© Copyright 2017 Vidbuild.com</span>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="legal-container">
+          <a routerLink="/legal" fragment="about" (click)="onAnchorClick()">About Us</a> <span>|</span>
+          <a routerLink="/legal" fragment="terms" (click)="onAnchorClick()">Terms &amp; Conditions</a> <span>|</span>
+          <a routerLink="/legal" fragment="faqs" (click)="onAnchorClick()">FAQs</a> <span>|</span>
+          <a routerLink="/legal" fragment="license" (click)="onAnchorClick()">End User License</a> <span>|</span>
+          <a routerLink="/legal" fragment="partners" (click)="onAnchorClick()">Partners &amp; Affiliates</a> <span>|</span>
+          <a routerLink="/legal" fragment="careers" (click)="onAnchorClick()">Careers</a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-3">
+        <div class="social-media-container">
+          <a href="#" class="social-link footer-facebook"></a> 
+          <a href="#" class="social-link footer-tweet"></a> 
+          <a href="#" class="social-link footer-youtube"></a>
+          <a routerLink="/contact-us" class="contact-us">Contact Us</a> 
+        </div>
+      </div>
+    </div>
+</section>

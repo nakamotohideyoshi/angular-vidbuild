@@ -1,0 +1,88 @@
+@import './../../../../../styles.scss';
+
+.footer{
+    background-color: $gallery;
+    height: 80px;
+    color: $mine-shaft;
+    font-size: 12px;
+    padding: 32px;
+    .copyright-container{
+        text-align: left;
+    }
+    .legal-container{
+        text-align: center;
+    }
+    .social-media-container{
+        text-align: right;
+
+        .social-link{
+            background-image: url('/assets/social-icons.png');
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+        .footer-facebook{
+            background-position-x: 0px;
+        }
+        .footer-tweet{
+            background-position-x: -30px;
+            margin:0 20px;
+        }
+        .footer-youtube{
+            background-position-x: -60px;
+        }
+        .contact-us{
+            position: relative;
+            vertical-align: top;
+            margin-left: 10px;
+        }
+    }
+    a, span{
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+        color: $mine-shaft;
+        font-weight: 500;
+        text-decoration: none;
+    }
+}
+
+//sticky footer for legal page
+.sticky-footer{
+    position: fixed ;
+    width: 100% ;
+    bottom: 0 ;
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .footer{
+        height: auto;
+        padding: 10px;
+
+        .copyright-container{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .legal-container{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .social-media-container{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 769px) and (max-width : 846px) {
+    
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
