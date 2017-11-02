@@ -4,17 +4,20 @@ import {trigger, state, style, animate, transition,keyframes} from '@angular/ani
 import { PaymentService } from '../../services/payment.service';
 import { environment } from '../../../../../environments/environment';
 import { AuthService } from './../../../auth/providers/auth.service';
+import { ArraySortPipe } from "./../../../shared/pipes/array-sort";
+
 
 @Component({
   selector: 'subscription-payment',
   templateUrl: './subscription-payment.component.html',
-  styleUrls: ['./subscription-payment.component.scss']
+  styleUrls: ['./subscription-payment.component.scss'],
 })
 export class SubscriptionPaymentComponent implements OnInit {
   handler: any;
   planSelected: string;
   monthly: boolean = true;
   dataPlans: any;
+  loggedIn: boolean = false;
   
 
   constructor(
@@ -43,8 +46,9 @@ export class SubscriptionPaymentComponent implements OnInit {
         this.paymentService.processSubscriptionPayment( token, this.planSelected );
       }
     };
-
+    this.loggedIn= false;
     if( this.AuthService.authenticated ){
+      this.loggedIn= true;
       options.email = this.AuthService.currentUser.email;
     } 
     

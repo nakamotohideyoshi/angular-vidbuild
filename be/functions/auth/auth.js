@@ -1,20 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-exports.createUserEntities = functions.auth.user().onCreate(event => {
-  const user = event.data;
-  const updates = {};
-  updates[`/users-current-project/${user.uid}`] = {
-    projectId: 0,
-    projectData: {},
-    type: '',
-    created: 0,
-    status: ''
-  };
-
-  return admin.database().ref().update(updates);
-});
-
 exports.validateUserToken = functions.https.onRequest((req, res) => {
   var idToken = req.header('Authorization');
 
@@ -43,8 +29,7 @@ exports.validateOperation = functions.https.onRequest((req, res) => {
         var projectData =  admin.database().ref(`/users-projects/${uid}/${projectId}`);
       }
 
-      //var availableCoins = admin.database().ref(`/users/${uid}/coins`);
-
+      //var availableCoins = admin.database().ref(`/users/${uid}/credits`);
       //res.json({result: 'valid token', operation: "valid",  code: '1001'})
     }).catch(function (error) {
       // Handle error

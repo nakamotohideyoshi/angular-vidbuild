@@ -8,8 +8,8 @@ import { EditComponent } from './components/edit/edit.component';
 import { ExportComponent } from './components/export/export.component';
 
 const routes: Routes = [
-  { path: 'add-video', component: AddVideosComponent },
-  { path: 'add-audio', component: AddAudiosComponent },
+  { path: 'add-videos', component: AddVideosComponent },
+  { path: 'add-audios', component: AddAudiosComponent },
   { path: 'add-voiceover', component: AddVoiceoverComponent },
   { path: 'edit', component: EditComponent },
   { path: 'export', component: ExportComponent }

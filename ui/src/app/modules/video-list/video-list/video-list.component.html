@@ -1,9 +1,3 @@
 <p>
   video-list works!
 </p>
-<li *ngFor="let video of list; index as i;">
-  <pre>{{i}}/{{video | json}} </pre>
-  {{video.display_sizes[3].uri}}
-  <img [src]="video.display_sizes[3].uri" alt="">
-  <!-- <video controls  [src]="video.display_sizes[0].uri"></video> -->
-</li>

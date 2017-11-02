@@ -1,3 +1,9 @@
-<p>
-  add-audios works!
-</p>
+<div class="spinner" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId == 0">
+  Please wait, we are setting up your project configuration...
+</div>
+
+<div *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
+  <h2>Audio Step</h2>
+
+  <a class="btn btn-primary" routerLink="/editor/add-voiceover">NEXT STEP</a>
+</div>

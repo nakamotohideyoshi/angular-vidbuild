@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~flexboxgrid/dist/flexboxgrid.min.css";
-@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Muli');
 
 
 * {
@@ -33,10 +33,10 @@ $ripe-lemon: #F3E61B;
 
 
 /*Fonts family*/
-$font-muli-light: 'Muli Light', sans-serif;
-$font-muli-regular: 'Muli Regular', sans-serif;
-$font-muli-bold: 'Muli Bold', sans-serif;
-$font-muli-black: 'Muli Black', sans-serif;
+$font-muli-light: 'Muli-Light', sans-serif;
+$font-muli-regular: 'Muli-Regular', sans-serif;
+$font-muli-bold: 'Muli-Bold', sans-serif;
+$font-muli-black: 'Muli-Black', sans-serif;
 
 /* Font Sizes */
 $font-12: 12px;
@@ -109,6 +109,7 @@ h1{
   font-size: 32px;
   text-align: center;
   font-family: $font-muli-black;
+  font-weight: 700;
 }
 
 h2{

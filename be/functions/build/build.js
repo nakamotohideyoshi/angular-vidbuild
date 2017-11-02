@@ -5,7 +5,7 @@ const _ = require('lodash')
 
 getUserCredits = function (userId) {
     return admin.database()
-        .ref('/users/' + userId + '/coins')
+        .ref('/users/' + userId + '/credits')
         .once('value')
         .then(snapshot => snapshot.val())
 }
@@ -13,6 +13,8 @@ getUserCredits = function (userId) {
 let calculateProjectCredits = new Promise((resolve, reject) => {
     resolve(10);
 });
+
+//clearQueue 
 
 //Validate Processs 
 exports.validateProcessType = functions.database.ref('/users-current-project/{userId}').onWrite(event => {
@@ -47,22 +49,12 @@ exports.validateProcessType = functions.database.ref('/users-current-project/{us
 //Generate Project Files Queue
 exports.generateQueue = functions.database.ref('/users-current-project/{userId}').onWrite(event => {
     let userId = event.params.userId;
-    const snapshot = event.resource;
+    const snapshot = event;
     const val = snapshot.val();
-    if (val.status == 'valid' && val.type == "preview") {
-        let files = admin.database().ref('/users-current-project/{userId}/projectData/files').snapshot().val();
+    if (val.status == 'valid') {
         let updates = [];
-        files.forEach((element) => {
-            updates[`/users-files-queue/${userId}/files`] = { src: 'fileUrlPreview', clipIdToReplace: '', status: 'pending', projectId: val.projectId };
-        });
-        return admin.database().ref().update(updates);
-    }
-
-    if (val.status == 'valid' && val.type == "preview") {
-        let files = admin.database().ref('/users-current-project/{userId}/projectData/files').snapshot().val();
-        let updates = [];
-        files.forEach((element) => {
-            updates[`/users-files-queue/${userId}/files`] = { src: 'fileUrlHighQuality', clipIdToReplace: '', status: 'pending', projectId: val.projectId };
+        val.files.forEach((element) => {
+            updates[`/users-files-queue/${userId}/files`] = { src: 'fileUrlPreview', clipIdToReplace: '', status: 'pending', type: "new || update", projectId: val.projectId };
         });
         return admin.database().ref().update(updates);
     }
@@ -70,10 +62,10 @@ exports.generateQueue = functions.database.ref('/users-current-project/{userId}'
 
 
 // Run Queue
-exports.generateQueue = functions.database.ref('/users-files-queue/{userId}/files/{fileId}').onWrite(event => {
+exports.runQueue = functions.database.ref('/users-files-queue/{userId}/files/{fileId}').onWrite(event => {
     let userId = event.params.userId;
     let fileId = event.params.fileId;
-    const snapshot = event.resource;
+    const snapshot = event;
     const val = snapshot.val();
     let updates = [];
 
@@ -81,12 +73,16 @@ exports.generateQueue = functions.database.ref('/users-files-queue/{userId}/file
     ///            iterate all records for find if all are downloaded...         ///
     ///////////////////////////////////////////////////////////////////////////////
 
+    // const purchases = event.data.val();
+    // const lastPurchaseKey = _.last(_.keys(purchases));
+    // const purchase = _.pick(purchases, [lastPurchaseKey]);
+
     // IF //
     //  /users-purchases/{userId}/builds.update()
-    if (false) {
-        return admin.database().ref(`users-purchases/${userId}/builds`)
-            .push({ timestamp: date(), projectId: val.projectId, amount: coins });
-    }
+    // if (false) {
+    //     return admin.database().ref(`users-purchases/${userId}/builds`)
+    //         .push({ timestamp: date(), projectId: val.projectId, amount: credits });
+    // }
     // ELSE //
 
     ///////////////////////////
@@ -95,10 +91,10 @@ exports.generateQueue = functions.database.ref('/users-files-queue/{userId}/file
 
     //check status
     if (val.status == "pending" || val.status == "fail") {
-        if (val.clipIdToReplace === null) {
+        if (val.type === 'new') {
             var options = {
                 method: 'POST',
-                uri: 'http://api.posttestserver.com/post',
+                uri: 'https://dev-api.vidbuild.com/files',
                 body: {
                     project: val.projectId,
                     src: val.src
@@ -108,10 +104,9 @@ exports.generateQueue = functions.database.ref('/users-files-queue/{userId}/file
         } else {
             var options = {
                 method: 'PUT',
-                uri: 'http://api.posttestserver.com/post',
+                uri: 'https://dev-api.vidbuild.com/files/' + val.videoId,
                 body: {
                     project: val.projectId,
-                    clip: val.clipIdToReplace,
                     src: val.src
                 },
                 json: true // Automatically stringifies the body to JSON
@@ -122,7 +117,7 @@ exports.generateQueue = functions.database.ref('/users-files-queue/{userId}/file
         rp(options)
             .then((parsedBody) => {
                 // POST succeeded...
-                updates[`/users-files-queue/${userId}/files/${fileId}`] = { status: 'donwloaded' };
+                updates[`/users-files-queue/${userId}/files/${fileId}`] = { status: 'uploaded' };
                 return admin.database().ref().update(updates);
 
             })
@@ -131,6 +126,69 @@ exports.generateQueue = functions.database.ref('/users-files-queue/{userId}/file
                 updates[`/users-files-queue/${userId}/files/${fileId}`] = { status: 'fail' };
                 return admin.database().ref().update(updates);
             });
-
     }
 });
+
+
+
+
+// get request project exporting status (projectID)
+exports.validateCompleteQueue = functions.database.ref('/users-files-queue/{userId}/files').onUpdate(event => {
+    const snapshot = event;
+    const files = snapshot.val();
+    let allCompleted = true;
+
+    const setExportResolution = (resolution) => {
+        return new Promise((resolve, reject) => {
+            // call openshot to set resolution
+            if (true) {
+                resolve("Stuff worked!");
+            } else {
+                reject(Error("It broke"));
+            }
+        });
+    }
+
+    const callOpenshotExport = (projectId) => {
+        return new Promise((resolve, reject) => {
+            // call openshot to export
+            if (true) {
+                resolve("Stuff worked!");
+            } else {
+                reject(Error("It broke"));
+            }
+        });
+    }
+
+    const validateAllCompleted = ()=>{
+        return files.some((file)=>{file.status !== 'uploaded'});
+    }
+
+    if (validateAllCompleted()) {
+        let project = admin.database().ref(`/users-current-project/${userId}`).snapshot.val();
+
+        if (project.type === "preview") {
+            //set resolution 360
+            setExportResolution(360).then(() => {
+                callOpenshotExport(project.projectId).then((res) => {
+                    console.log(res);
+                })
+            })
+        } else {
+            //set resolution to project.exportResolution
+            setExportResolution(project.exportResolution)
+            .then(() => {
+                callOpenshotExport(project.projectId).then((res) => {
+                    console.log(res);
+                })
+            })
+        }
+    }
+})
+
+// request -> openshot export () -> if status completed, progress 100% -> output -> url
+
+// result -> fileURL -> lambda(fileURL) -> move to s3 -> result -> s3URL
+
+// users - files - queue / uid / files.empty
+// users - current - builds / uid / buildId.delete

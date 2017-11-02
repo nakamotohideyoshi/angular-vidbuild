@@ -1,0 +1,178 @@
+// Imports
+@import './../../../../styles.scss';
+
+// Varibles
+$primary-color: #57e2b2;
+$light-gray: #f8f8f8;
+$main-font-color: #808080;
+$main-font-weight: 300;
+$border-card: #f0f5f4;
+$background-container: #f0f5f4;
+$background-credit-container: #f2f2f2;
+
+.my-account{
+    .title-page{
+        margin:30px 0px;
+    }
+    .cards-container{
+        background-color: $background-container;
+        padding: 40px 20px;
+
+        .card{
+            padding: 30px 20px;
+            height: 100%;
+            margin: 0 20px;
+
+            .account-subtitle{
+                margin-bottom: 30px;
+            }
+            .save-account-details-btn-container{
+                text-align: right;
+                .btn-save-account-details{
+                    width:150px;
+                    height: 50px;
+                    font-weight: bold;
+                }
+            }
+            
+            .card-header{
+                background: none;
+                border: none;
+
+                .pricing-plan{
+                    font-size: 3.5rem;
+                    letter-spacing: -0.2rem;
+                    & .currency {
+                    font-size: 3.5rem;
+                    position: relative;
+                    font-weight: $main-font-weight + 100;
+                    letter-spacing: 0px;
+                    }
+                    & .bolder{
+                    font-weight: bolder;
+                    }
+                    & .period {
+                    font-size: 1rem;
+                    color: lighten($main-font-color, 20%);
+                    letter-spacing: 0px;
+                    display: block;
+                    position: relative;
+                    top: -15px;
+                    }
+                }
+            }
+            .card-block {
+                font-size: $font-14;
+                padding-top: 0;
+
+                .txt-card-description{
+                display:block; 
+                margin-bottom:10px;
+                }
+                .btn-change-plan{
+                    width: 215px;
+                    margin: 30px 0 25px;
+                    padding: 15px 0;
+                }
+                .pricing-plan{
+                    font-size: 3.5rem;
+                    letter-spacing: -0.2rem;
+                    & .currency {
+                        font-size: 3.5rem;
+                        position: relative;
+                        font-weight: $main-font-weight + 100;
+                        letter-spacing: 0px;
+                    }
+                    & .bolder{
+                        font-weight: bolder;
+                    }
+                    & .period {
+                        font-size: 1rem;
+                        color: lighten($main-font-color, 20%);
+                        letter-spacing: 0px;
+                        display: block;
+                        position: relative;
+                        top: -15px;
+                    }
+                }
+            }
+        }
+    }
+    .credit-container{
+        background-color: $background-credit-container;
+        width: 100%;
+        border-radius: 25px;
+        padding: 10px;
+        margin-bottom:10px;
+        position: relative;
+        .credit-amount{
+            margin-left: 15px;
+        }
+        .btn-get-credit{
+            position: absolute;
+            width: 65px;
+            height: 44px;
+            text-align: center;
+            right: 0px;
+            top: 0;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .my-account{
+        .cards-container{
+            .middle-card{
+                margin:40px 0;
+            }
+            .card{
+                .save-account-details-btn-container{
+                    text-align: center;
+                    .btn-save-account-details{
+                        width:120px;
+                        font-weight: bold;
+                    }
+                }
+                .card-block {
+                    .btn-change-plan{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 769px) and (max-width : 1024px) {
+    .my-account{
+        .cards-container{
+            .card{
+                .save-account-details-btn-container{
+                    text-align: center;
+                    .btn-save-account-details{
+                        width:120px;
+                        font-weight: bold;
+                    }
+                }
+                .card-header{
+                    .pricing-plan{
+                        & .currency {
+                            font-size: 3.0rem;
+                        }
+                    }
+                }
+                .card-block {
+                    .btn-change-plan{
+                        width: 100%;
+                    }
+                    .btn-cancel-subscription{
+                        font-size: 14px;
+                        text-align: center;
+                        margin-left: -30px;
+                    }
+                }
+            }
+        }
+    }
+}

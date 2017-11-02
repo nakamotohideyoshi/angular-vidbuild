@@ -1,13 +1,13 @@
 <section class="header">
   <div class="row">
     <div class="col-sm-2 col-xs-4">
-      <div class="btn-logo" routerLink="/home">My Logo</div>
+      <div class="btn-logo" routerLink="/home"><img alt="Vid Build Logo" src="assets/vidBuildLogo.png"/></div>
     </div>
     <div class="col-sm-1 hidden-sm-less" >
       <button class="btn btn-secondary btn-pricing" routerLink="/pricing">Pricing</button>
     </div>
     <div class="col-sm-2 hidden-sm-less">
-      <button class="btn btn-primary btn-new-advert hidden-sm" routerLink="/dashboard" >New advert</button>
+      <button class="btn btn-primary btn-new-advert hidden-sm" routerLink="/editor/add-videos" >New advert</button>
     </div>
     <div class="col-sm-7 col-xs-8 txt-right">
       <button class="btn btn-secondary btn-signin" *ngIf="!authService.authState"  routerLink="/login"> Login </button>
@@ -18,7 +18,7 @@
       <!--<button class="btn btn-secondary btn-login-create" ><span class="account-icon"></span><span class="hidden-sm-less">Sign In / Create Account</span></button>-->
       
       <button class="btn btn-secondary btn-my-account" *ngIf="authService.authState" routerLink="/account"><span class="account-icon"></span><span class="hidden-sm-less">My Account</span></button>
-      <button class="btn btn-secondary btn-my-library hidden-sm-less" *ngIf="authService.authState"><span class="account-icon"></span>My Library</button>
+      <button class="btn btn-secondary btn-my-library hidden-sm-less" *ngIf="authService.authState" routerLink="/library"><span class="account-icon"></span>My Library</button>
     </div>
   </div>
 </section>

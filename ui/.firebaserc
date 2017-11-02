@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "vidbuild-61b8e",
-    "staging": "vidbuild-61b8e",
+    "dev": "vidbuild-61b8e",
+    "prod": "vidbuild-prod-6fbe5",
     "qa": "vidbuild-qa-63edb"
   }
 }

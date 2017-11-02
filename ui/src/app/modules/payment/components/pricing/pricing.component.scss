@@ -6,85 +6,91 @@ $footer-pricing-txt: #a5a5a5;
 .pricing{
  padding: 20px 0;
 
- .plan-container{
-     padding: 15px 20px 0 0;
+    .plan-container{
+        padding: 15px 20px 0 0;
 
-     .pricing-icon{
-        display:inline-block;
-        background-image: url('/assets/pricing-icons.png');
-        height: 32px;
-        width: 32px;          
-     }
-     .video-logo{
-         background-position-x: 0;
-     }
-     .audio-logo{
-         background-position-x: -32px;
-     }
-     .standard-premium-txt{
-         display:inline-block;
-         text-align: left;
-         font-size:14px;
-     }
- }
+        .pricing-icon{
+            display:inline-block;
+            background-image: url('/assets/pricing-icons.png');
+            height: 32px;
+            width: 32px;          
+        }
+        .video-logo{
+            background-position-x: 0;
+        }
+        .audio-logo{
+            background-position-x: -32px;
+        }
+        .standard-premium-txt{
+            display:inline-block;
+            text-align: left;
+            font-size:14px;
 
-.subscription-payment{
-    background-color: $subscription-color-background;
-    margin:20px 0;
-    padding: 30px;
-}
-
-.options-license-plan{
-    text-align: center;
-    margin: 50px 0;
-    .agency-agreement-title{
-        margin:15px 0;
+            .standard-premium-title{
+                font-family: $font-muli-black;
+                font-weight: $bold;
+            }
+        }
     }
-    .license-txt-1{
-        display:block;
-        font-size:14px;
+
+    .subscription-payment{
+        background-color: $subscription-color-background;
         margin:20px 0;
+        padding: 30px;
     }
-    .license-link-1{
-        display:block;
-        font-size:14px; 
-        margin:10px 0;
-    }
-    .license-txt-2{
-        display:block;
-        font-weight:bold; 
-        font-size:24px; 
-        margin:20px 0;
-    }
-    .license-txt-3{
-        display:block; 
-        font-size:12px; 
-        margin:10px 0;
-    }
-}
 
-.up-your-plan-container{
-    text-align: center; 
-    margin: 50px 0;
-    .up-your-plan-title{
-        margin:15px 0;
+    .options-license-plan{
+        text-align: center;
+        margin: 50px 0;
+        .btn-purchase-extended{
+            padding: 15px 35px;
+        }
+        .agency-agreement-title{
+            margin:15px 0;
+        }
+        .license-txt-1{
+            display:block;
+            font-size:14px;
+            margin:20px 0;
+        }
+        .license-link-1{
+            display:block;
+            font-size:14px; 
+            margin:10px 0;
+        }
+        .license-txt-2{
+            display:block;
+            font-weight:bold; 
+            font-size:24px; 
+            margin:20px 0;
+        }
+        .license-txt-3{
+            display:block; 
+            font-size:12px; 
+            margin:10px 0;
+        }
     }
-    .up-your-plan-subtitle{
-        display:block;
-        font-size:14px; 
-        margin:0 0 20px 0;
+
+    .up-your-plan-container{
+        text-align: center; 
+        margin: 50px 0;
+        .up-your-plan-title{
+            margin:15px 0;
+        }
+        .up-your-plan-subtitle{
+            display:block;
+            font-size:14px; 
+            margin:0 0 20px 0;
+        }
+        .credit-txt{
+            display:block;
+        }
     }
-    .credit-txt{
-        display:block;
+
+    .footer-pricing{
+        margin:30px;
+        color: $footer-pricing-txt;
     }
-}
-
-
-.footer-pricing{
-    margin:30px;
-    color: $footer-pricing-txt;
-}
-
 
 
 }
@@ -93,7 +99,7 @@ $footer-pricing-txt: #a5a5a5;
 @media (max-width: 768px) {
     .pricing{
         .plan-container{
-            text-align: center;
+            text-align: center !important;
         }
     }
 }

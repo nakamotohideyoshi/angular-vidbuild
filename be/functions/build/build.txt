@@ -1,7 +1,7 @@
 
 /users-current-proyect/uid/ = object({
     projectId,
-    projectData:
+    files:
     type: export || preview
     created:timestrap,
     status: validating | / valid / downloading assets / assets downloaded/ processing / exporting

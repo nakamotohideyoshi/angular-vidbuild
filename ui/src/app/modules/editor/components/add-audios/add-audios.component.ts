@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EditorService } from './../../services/editor.service';
 
 @Component({
   selector: 'app-add-audios',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddAudiosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public editorService: EditorService
+  ) { }
 
   ngOnInit() {
   }

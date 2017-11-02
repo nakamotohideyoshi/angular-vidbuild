@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 
 import { LayoutModule } from './modules/layout/layout.module';
-import { CoreModule } from './modules/core/core.module';
+import { CoreModule } from './core/core.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
@@ -27,7 +27,7 @@ import { LibraryFiltersComponent } from './modules/library/components/library-fi
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { AuthGuard, SubscriptionGuard } from './modules/auth/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,7 @@ import { AuthGuard } from './modules/auth/guards/auth.guard';
     HttpModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, SubscriptionGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

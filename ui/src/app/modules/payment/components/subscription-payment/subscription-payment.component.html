@@ -2,21 +2,20 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="btns-monthly-annual">
-        <button  (click)="monthly = true" class="btn btn-primary btn-left-radius">Monthly Pricing</button>
-        <button (click)="monthly = false" class="btn btn-primary btn-right-radius">Annual Pricing</button>
+        <button  (click)="monthly = true" class="btn btn-primary btn-left-radius monthly-pricing">Monthly Pricing</button>
+        <button (click)="monthly = false" class="btn btn-primary btn-right-radius annual-pricing"><span class="txt-annual-pricing">Annual Pricing</span><span class="txt-save-10">Save 10%</span> </button>
       </div>
     </div>
   </div>
   <div *ngIf="monthly">
     <div class="row">
-
-      <!--*ngIf="plan.frequency == 'month'"-->
-      <div *ngFor="let plan of paymentService.plans">
-       
-        <div class="card-container" *ngIf="plan.frequency == 'month'">
+       <div *ngFor="let plan of paymentService.plans; let current = index"  [ngClass]="{'card-container':plan.frequency === 'month'}">
+        <div  *ngIf="plan.frequency == 'month'">
           <div   class="card text-xs-center" (click)="openHandler(plan.name, plan.description, plan.stripePrice, plan.plan)">
+            <div *ngIf="current === 4" class="most-popular">Most Popular</div>
+            <div *ngIf="current === 8" class="recommend-for-agencies">Recommend for Agencies</div>
             <div class="card-header">
-              <div class="pricing-plan"><span class="currency">£</span>{{plan.price}}<span class="period">per {{plan.frequency}}</span></div>
+              <div class="pricing-plan"><span [ngStyle]="{'font-weight':current === 4 ? 'bold' : 'normal' }"><span class="currency" [ngStyle]="{'font-weight':current === 4 ? 'bold' : 'normal' }">£</span>{{plan.price}}</span><span class="period">per {{plan.frequency}}</span></div>
             </div>
             <div class="card-block">
               <div>
@@ -24,16 +23,42 @@
                 <span class="txt-card-description">You can upload <b>{{plan.storage}}GB</b> of data to your library.</span>
                 <span class="txt-card-description">Create unlimited videos*</span>
               </div>
-              <button class="btn btn-primary btn-purchase">Purchase</button>
+              <button *ngIf="!loggedIn" class="btn btn-primary btn-purchase">Purchase</button>
+              <button *ngIf="loggedIn" class="btn btn-primary btn-purchase">Update</button>
             </div>
           </div>
         </div>
-        
       </div>
+    </div>
+  </div>
+  <div *ngIf="!monthly">
+      <div class="row" >
+        <div *ngFor="let plan of paymentService.plans; let current = index"  [ngClass]="{'card-container':plan.frequency === 'year'}">
+            <div  *ngIf="plan.frequency == 'year'">
+              <div   class="card text-xs-center" (click)="openHandler(plan.name, plan.description, plan.stripePrice, plan.plan)">
+                <div *ngIf="current === 5" class="most-popular">Most Popular</div>
+                <div *ngIf="current === 9" class="recommend-for-agencies">Recommend for Agencies</div>
+                <div class="card-header">
+                  <div class="pricing-plan"><span [ngStyle]="{'font-weight':current === 5 ? 'bold' : 'normal' }"><span class="currency" [ngStyle]="{'font-weight':current === 5 ? 'bold' : 'normal' }">£</span>{{plan.price}}</span><span class="period">per {{plan.frequency}}</span></div>
+                </div>
+                <div class="card-block">
+                  <div>
+                    <span class="txt-card-description"><b>{{plan.credits}}</b> clip credits per {{plan.frequency}}</span>
+                    <span class="txt-card-description">You can upload <b>{{plan.storage}}GB</b> of data to your library.</span>
+                    <span class="txt-card-description">Create unlimited videos*</span>
+                  </div>
+                  <button class="btn btn-primary btn-purchase">Purchase</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
 
 
 
 
+<!--Monthly-->
       <!--<div class="card-container">
         <div class="card text-xs-center" (click)="openHandler('Starter', 'Starter Plan', 1900, 'starter')">
           <div class="card-header">
@@ -115,12 +140,13 @@
             </div>
           </div>-->
   
-    </div>
-  </div>
+    
 
-  <div *ngIf="!monthly">
-    <div class="row" >
-      <div class="card-container">
+  
+
+
+<!--Year-->
+      <!--<div class="card-container">
         <div class="card text-xs-center" (click)="openHandler('Starter', 'Starter Plan', 1900, 'starter-year')">
           <div class="card-header">
             <div class="pricing-plan"><span class="currency">£</span>17.1<span class="period">per year</span></div>
@@ -199,10 +225,9 @@
                 <button class="btn btn-primary btn-purchase">Purchase</button>
               </div>
             </div>
-          </div>
+          </div>-->
   
-    </div>
-  </div>
+    
 
 
    
