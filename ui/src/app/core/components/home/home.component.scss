@@ -8,7 +8,7 @@ $arrow-services: #fcfcfc;
     .video-container{
         position: relative;
         text-align: center;
-        margin-bottom: 35px;
+        overflow: hidden;
 
         .video-content {
             position: relative;
@@ -55,7 +55,9 @@ $arrow-services: #fcfcfc;
         }
         
     }
-
+    .anchor-videos{
+        height: 35px;
+    }
     .services-container{
         position: relative;
         margin-bottom: 40px;
@@ -151,8 +153,5 @@ $arrow-services: #fcfcfc;
                 padding: 40px 20px;
             }
         } 
-        .arrow-sevices{
-            display:none;
-        }
     }
 }
