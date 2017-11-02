@@ -13,7 +13,7 @@ export class PaymentService {
     status: 'inactive',
     plan: ''
   };
-  myplan: any;
+  myplan: any = { plan: "", name: "", description: "", stripePrice: 0, credits: 0, storage: 0, frequency: '', price: '' };
   plans: any;
 
   constructor(
@@ -21,9 +21,16 @@ export class PaymentService {
     private afAuth: AngularFireAuth,
     public AuthService: AuthService
   ) {
-    this.AuthService.currentUserObservable.subscribe(user => {
-      if (user) {
-        this.userId = user.uid;
+    this.afAuth.authState
+    .map(authState => !!authState)
+    .do(authenticated => {
+      if (!authenticated) {
+        this.membership = {
+          status: 'inactive',
+          plan: ''
+        };
+        this.myplan = { plan: "", name: "", description: "", stripePrice: 0, credits: 0, storage: 0, frequency: '', price: '' };
+      } else {
         this.db.object(`users/${this.AuthService.authState.uid}/membership`).valueChanges().subscribe(data => {
           if (data) {
             this.membership = data;
@@ -31,7 +38,8 @@ export class PaymentService {
           }
         })
       }
-    })
+    }).subscribe();
+
     this.getPlansInfo()
   }
 
@@ -39,8 +47,6 @@ export class PaymentService {
     this.db.list(`plans`).valueChanges().subscribe(data => {
       if (data) {
         this.plans = data;
-        console.log('in Payment Service');
-        console.log(this.plans);
       }
     })
   }
@@ -78,13 +84,12 @@ export class PaymentService {
       .push({ amount: coins });
   }
 
-  // getSusbcription() {
-  //   this.db.object(`users/${this.AuthService.authState.uid}/pro-membership`)
-  //   .valueChanges()
-  //   .subscribe((data)=>{
-  //     console.log(data)
-  //     this.membership = data
-  //   })
-  // }
+  get hasSubscription(): boolean {
+    if(this.membership.status !== 'inactive'){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 }

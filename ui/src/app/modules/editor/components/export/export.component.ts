@@ -8,14 +8,10 @@ import { EditorService } from './../../services/editor.service'
 export class ExportComponent implements OnInit {
 
   constructor(
-    private editorService: EditorService
+    public editorService: EditorService
   ) {}
 
   ngOnInit() {
-  }
-
-  addFile(type,url){
-    this.editorService.addFile(type, url);
   }
 
   build(type){

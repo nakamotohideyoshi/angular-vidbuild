@@ -1,3 +1,11 @@
-<p>
-  edit works!
-</p>
+<div class="spinner" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId == 0">
+  Please wait, we are setting up your project configuration...
+</div>
+
+<div *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
+  <h2>Compose Step</h2>
+
+  <button class="btn btn-primary" (click)="build('preview')">Call Preview</button>
+  
+  <a class="btn btn-primary" routerLink="/editor/export">NEXT STEP</a>
+</div>

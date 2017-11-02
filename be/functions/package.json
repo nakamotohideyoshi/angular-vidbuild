@@ -14,6 +14,11 @@
     "stripe": "^4.25.0"
   },
   "scripts": {
-    "deploy": "firebase deploy --only functions"
+    "deploy-dev": "firebase use dev && npm run set-dev-env-var && firebase deploy --only functions",
+    "deploy-qa": "firebase use qa && npm run set-qa-env-var && firebase deploy --only functions",
+    "deploy-prod": "firebase use prod && npm run set-prod-env-var && firebase deploy --only functions",
+    "set-dev-env-var": "firebase functions:config:set env.baseurl=https://dev.us-central1-vidbuild.cloudfunctions.net",
+    "set-qa-env-var": "firebase functions:config:set env.baseurl=https://qa.us-central1-vidbuild.cloudfunctions.net",
+    "set-prod-env-var": "firebase functions:config:set env.baseurl=https://us-central1-vidbuild.cloudfunctions.net"
   }
 }

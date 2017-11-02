@@ -7,8 +7,8 @@ import { AddAudiosComponent } from './components/add-audios/add-audios.component
 import { AddVoiceoverComponent } from './components/add-voiceover/add-voiceover.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ExportComponent } from './components/export/export.component';
+import { EditorService } from './../../modules/editor/services/editor.service';
 
-import { EditorService } from './services/editor.service';
 
 @NgModule({
   imports: [

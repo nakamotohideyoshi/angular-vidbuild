@@ -10,7 +10,6 @@ import { AuthModule } from './../../modules/auth/auth.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { LegalComponent } from './components/legal/legal.component';
 
@@ -24,6 +23,6 @@ import { LegalComponent } from './components/legal/legal.component';
   ],
   providers:[],
   exports: [BaseLayoutComponent],
-  declarations: [HeaderComponent, BaseLayoutComponent, FooterComponent, SidebarComponent, ModalComponent, DashboardComponent, LegalComponent]
+  declarations: [HeaderComponent, BaseLayoutComponent, FooterComponent, SidebarComponent, ModalComponent, LegalComponent]
 })
 export class LayoutModule { }
