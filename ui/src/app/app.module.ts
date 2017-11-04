@@ -28,6 +28,9 @@ import { LibraryFiltersComponent } from './modules/library/components/library-fi
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthGuard, SubscriptionGuard } from './modules/auth/guards/auth.guard';
+import {moviesReducer} from './modules/shared/store/movies.reducer';
+import {MoviesEffects} from './modules/shared/store/movies.effects';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,15 +44,18 @@ import { AuthGuard, SubscriptionGuard } from './modules/auth/guards/auth.guard';
     BrowserModule,
     LayoutModule,
     HttpModule,
+    HttpClientModule,
     AuthModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(debug, { metaReducers }),
+    StoreModule.forRoot({ movies: moviesReducer }),
+
     // Note that you must instrument after importing StoreModule
     StoreDevtoolsModule.instrument({
       maxAge: 10 //  Retains last 25 states
     }),
     StoreRouterConnectingModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([MoviesEffects]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

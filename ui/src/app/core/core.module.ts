@@ -11,7 +11,8 @@ import { UserComponent } from './components/user/user.component';
 import { PaymentService } from '../modules/payment/services/payment.service';
 import { ComponentMapComponent } from './components/component-map/component-map.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -20,6 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     RouterModule,
     SharedModule,
+    InfiniteScrollModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     HomeComponent,

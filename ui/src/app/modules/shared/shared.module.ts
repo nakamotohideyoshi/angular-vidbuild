@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpModule, XHRBackend, RequestOptions } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GettyService } from './services/getty.service';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HttpModule, XHRBackend, RequestOptions} from '@angular/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {GettyService} from './services/getty.service';
+import {EditorService} from '../editor/services/editor.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -12,8 +14,9 @@ import { GettyService } from './services/getty.service';
     NgbModule
   ],
   providers: [
-    GettyService
+    GettyService, EditorService
   ],
   declarations: []
 })
-export class SharedModule { }
+export class SharedModule {
+}
