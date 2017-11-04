@@ -27,15 +27,13 @@ export class EditorService {
             })
     }
 
-    addFile(type, file){
-        alert('video added' + this.AuthService.currentUserId);
-        return this.db.list(`users-current-project/${this.AuthService.currentUserId}/projectData/files`)
-        .push({ type: type, file: file });
-        
+    addFile(type, file) {
+      alert('video added' + this.AuthService.currentUserId);
+      return this.db.list(`users-current-project/${this.AuthService.currentUserId}/projectData/files`)
+        .push({type: type, file: file});
     }
-    
     // removeFile(type, file){
-    //     this.db.list(`users-current-project/${this.userId}/projectData/files`).remove()   
+    //     this.db.list(`users-current-project/${this.userId}/projectData/files`).remove()
     // }
 
     build(type) {
