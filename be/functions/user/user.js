@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 let rp = require('request-promise');
 
-const openshotUrl = 'http://35.176.151.11/';
+const openshotUrl = 'http://34.248.157.129/';
 
 exports.createOpenShotProject = functions.database.ref('/users-current-project/{userId}').onCreate(event => {
     let userId = event.params.userId;
@@ -23,12 +23,9 @@ exports.createOpenShotProject = functions.database.ref('/users-current-project/{
     rp
     .post(options)
     .then((res)=>{
-        console.log(res.body)
-        console.log(updates)
         return admin.database().ref(`/users-current-project/${userId}`).update({ OpenSId: res.body.id });
     })
     .catch((err) => {
-        console.log(err)
         return err;
     })
 });

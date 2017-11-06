@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const stripe = require('stripe')('sk_test_dktidDoEiKIl0rRRibYLbI5N'); //functions.config().stripe.testkey
 
-exports.createStripeCustomer = functions.auth.user().onCreate(event => {
+ exports.createStripeCustomer = functions.auth.user().onCreate(event => {
     // user auth data
     const user = event.data;
     // register Stripe user

@@ -1,11 +1,11 @@
 //POST[]
-exports.create = []
+exports.create = [];
 
 //PUT[id]
-exports.update = []
+exports.update = [];
 
 //DELETE[id]
-exports.delete = []
+exports.delete = [];
 
 //GET[id]
-exports.get = []
+exports.get = [];

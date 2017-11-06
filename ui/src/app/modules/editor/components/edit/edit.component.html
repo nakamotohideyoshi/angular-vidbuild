@@ -5,6 +5,7 @@
 <div *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
   <h2>Compose Step</h2>
 
+  <pre>{{editorService.currentProject | json}}</pre>
   <button class="btn btn-primary" (click)="build('preview')">Call Preview</button>
   
   <a class="btn btn-primary" routerLink="/editor/export">NEXT STEP</a>

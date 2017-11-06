@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const _ = require('lodash')
+const _ = require('lodash');
 
 exports.addCreditsForSubscription = functions.database.ref('/users/{userId}/membership/timestamp').onWrite(event => {
     let userId = event.params.userId;
@@ -56,7 +56,7 @@ exports.addCreditsOnDemand = functions.database.ref('/users-purchases/{userId}/c
             let currentCredits = user.credits;
             purchaseAmount = purchase[lastPurchaseKey].amount;
             let userPlanStatus = user.membership.status;
-            if (userPlanStatus == 'active') {
+            if (userPlanStatus === 'active') {
                 switch (purchaseAmount) {
                     case '1coin':
                         newCredits = 1;
@@ -98,7 +98,7 @@ exports.removeCreditsOnDemand = functions.database.ref('/users-purchases/{userId
         .then(user => {
             let updates = {};
             let currentCredits = user.credits;
-            purchaseAmount = purchase[lastPurchaseKey].amount;
+            const purchaseAmount = purchase[lastPurchaseKey].amount;
             if (currentCredits - purchaseAmount < 0) {
                 throw Error('Insuficient Credits');
             } else {
