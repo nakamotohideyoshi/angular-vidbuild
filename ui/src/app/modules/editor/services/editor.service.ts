@@ -15,22 +15,26 @@ export class EditorService {
         private afAuth: AngularFireAuth,
         public AuthService: AuthService
     ) {
-        this.getCurrentProyect(this.AuthService.currentUserId);
+        this.AuthService.currentUserObservable.subscribe(()=>{
+            this.getCurrentProyect(this.AuthService.currentUserId);
+        })
     }
 
 
     getCurrentProyect(userId) {
-        return this.db.object(`users-current-project/${this.AuthService.currentUserId}`)
+        return this.db.object(`users-current-project/${this.AuthService.currentUserId}/`)
             .valueChanges()
             .subscribe((data) => {
+                console.log(data)
                 this.currentProject = data;
             })
     }
 
-    addFile(type, file) {
-      alert('video added' + this.AuthService.currentUserId);
-      return this.db.list(`users-current-project/${this.AuthService.currentUserId}/projectData/files`)
-        .push({type: type, file: file});
+    addFile(type, file){
+        console.log('video added' + this.AuthService.currentUserId);
+        console.log(this.currentProject);
+        return this.db.list(`users-current-project/${this.AuthService.currentUserId}/projectData/files`)
+        .push({ type: type, file: file });
     }
     // removeFile(type, file){
     //     this.db.list(`users-current-project/${this.userId}/projectData/files`).remove()

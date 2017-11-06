@@ -52,7 +52,7 @@ export class BaseLayoutComponent implements OnInit {
     let promise = new Promise((res, rej) => {
       let secret = localStorage.getItem('secretPassword');
       if (secret === null) {
-        secret = prompt('Tell me a lie');
+        secret = prompt();
       }
       res(secret);
     });
