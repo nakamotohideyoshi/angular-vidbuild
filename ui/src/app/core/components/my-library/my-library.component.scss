@@ -1,0 +1,64 @@
+@import '../../styles/core-mixins';
+
+.search-container {
+  .search-input, select {
+    height: 50px;
+    line-height: 25px;
+    color: rgb(145, 145, 145);
+  }
+  .input-group {
+    .input-group-addon {
+      @include border-left-radius(60px);
+      padding: 0 20px;
+      span {
+        &.fa {
+          color: #1dbec4;
+          font-size: 20px;
+        }
+      }
+    }
+    input {
+      @include border-right-radius(60px);
+    }
+  }
+  select {
+    @include appareance-prefix(none);
+    @include border-radius-all(60px);
+    outline: 0;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, .15);
+    width: 100%;
+    padding: 0 0 0 20px;
+    margin: 0;
+    cursor: pointer;
+    background-color: white;
+    &::-ms-expand {
+      display: none;
+    }
+  }
+  .select {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background-color: white;
+    &:hover{
+      &::after{
+        color: #1dbec4;
+      }
+    }
+    &::after {
+      content: '\25BC';
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      bottom: 0;
+      pointer-events: none;
+      font-size: 12px;
+      color: rgb(145, 145, 145);
+      -webkit-transition: .25s all ease;
+      -o-transition: .25s all ease;
+      transition: .25s all ease;
+    }
+  }
+}
+

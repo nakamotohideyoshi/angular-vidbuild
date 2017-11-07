@@ -2,15 +2,20 @@
   <h1 class="text-center">My library</h1>
   <div class="row">
     <div class="col">
-      <label for="header"></label>
-      <select name="header" id="header" (change)="sort($event.target.value)">
-        <option value="collection_code">Sort by: collection_code</option>
-        <option value="collection_name">Sort by: collection_name</option>
-        <option value="asset_family">Sort by: asset_family</option>
-      </select>
+      <div class="select">
+        <select name="header" id="header" (change)="sort($event.target.value)">
+          <option value="collection_code">Sort by: collection_code</option>
+          <option value="collection_name">Sort by: collection_name</option>
+          <option value="asset_family">Sort by: asset_family</option>
+        </select>
+        <label for="header"></label>
+      </div>
     </div>
-    <div class="col-6">
-      <input type="text" class="form-control search-input" [(ngModel)]="search">
+    <div class="col-6 ">
+      <div class="input-group">
+        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <input type="text" class="form-control search-input" [(ngModel)]="search">
+      </div>
     </div>
     <div class="col"></div>
   </div>
@@ -63,18 +68,18 @@
 <!-- -->
 
 <!--<div class="spinner" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId == 0">-->
-  <!--Please wait, we are setting up your project configuration...-->
+<!--Please wait, we are setting up your project configuration...-->
 <!--</div>-->
 
 <!--<div *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">-->
-  <!--<h2>Videos Step</h2>-->
+<!--<h2>Videos Step</h2>-->
 
-  <!--<ul class="row">-->
-    <!--<h4 *ngIf="!list.length">Loading videos</h4>-->
-    <!--<li class="col col-xs-2 col-sm-3" *ngFor="let video of list; index as i;">-->
-      <!--<img [src]="video.display_sizes[3].uri" alt="" (click)="addVideo('video', video)">-->
-    <!--</li>-->
-  <!--</ul>-->
+<!--<ul class="row">-->
+<!--<h4 *ngIf="!list.length">Loading videos</h4>-->
+<!--<li class="col col-xs-2 col-sm-3" *ngFor="let video of list; index as i;">-->
+<!--<img [src]="video.display_sizes[3].uri" alt="" (click)="addVideo('video', video)">-->
+<!--</li>-->
+<!--</ul>-->
 
-  <!--<a class="btn btn-primary" routerLink="/editor/add-audios">NEXT STEP</a>-->
+<!--<a class="btn btn-primary" routerLink="/editor/add-audios">NEXT STEP</a>-->
 <!--</div>-->
