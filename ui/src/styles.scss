@@ -40,6 +40,7 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
+
 /*     ---- Style Guide ------  */
 
 /*Colors*/  /*According http://chir.ag/projects/name-that-color*/
@@ -366,9 +367,9 @@ $color_dark: #3c4a50;
     float: left;
     overflow: hidden;
     margin: 1px;
-    min-width: 320px;
-    max-width: 480px;
-    max-height: 360px;
+    // min-width: 320px;
+    // max-width: 480px;
+    // max-height: 360px;
     width: 100%;
     text-align: center;
     cursor: pointer;
