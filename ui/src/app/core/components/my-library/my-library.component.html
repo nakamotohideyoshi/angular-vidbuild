@@ -17,14 +17,19 @@
         <input type="text" class="form-control search-input" [(ngModel)]="search">
       </div>
     </div>
-    <div class="col"></div>
+    <div class="col button-group-columns">
+      
+        <button type="button" class="form-control column-button" (click)="on2Columns()">2Columns</button>
+        <button type="button" class="form-control column-button" (click)="on4Columns()">4Columns</button>
+      
+    </div>
   </div>
 </div>
 
 <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="10" (scrolled)="onScroll($event)"
      class="bg-section">
   <div class="row no-gutters">
-    <div *ngFor="let i of (post$ | async) | filter: search" class="container-img col-md-3 col-lg-3">
+    <div *ngFor="let i of (post$ | async) | filter: search" ngClass="{{columns}}">
       <div class="" *ngFor="let it of i.display_sizes">
         <figure class="effect-image" *ngIf="it.name === 'thumb'">
           <img [src]="it.uri" alt="{{it.name}}"/>
