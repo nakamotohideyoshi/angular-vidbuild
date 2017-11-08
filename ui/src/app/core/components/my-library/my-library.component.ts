@@ -17,6 +17,7 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
   finished = false;
   sum = 5;
   total = 0;
+  columns: String = 'container-img col-md-3 col-lg-3';
 
   constructor(private gettyService: GettyService,
               public editorService: EditorService,
@@ -49,6 +50,14 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
 
   sort(sort) {
     this.gettyService.sort(sort);
+  }
+
+  on2Columns() {
+    this.columns = 'container-img col-md-6 col-lg-6';
+  }
+
+  on4Columns() {
+    this.columns = 'container-img col-md-3 col-lg-3';
   }
 
 }

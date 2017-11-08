@@ -22,7 +22,19 @@ body {
   margin-right: 0;
 }
 
+.button-group-columns {
+  display: flex;
+  justify-content: space-evenly;
+}
 
+.column-button {
+  height: 50px;
+  line-height: 25px;
+  color: #ffffff;
+  width: 46%;
+  background-color: #1dbec4;
+  border-radius: 25px;
+}
 /*     ---- Style Guide ------  */
 
 /*Colors*/  /*According http://chir.ag/projects/name-that-color*/
