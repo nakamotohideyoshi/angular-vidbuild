@@ -1,0 +1,15 @@
+.search-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+.search-item{
+  padding: 5px 5px 5px 10px;
+  list-style-type: none;
+  border: 2px solid #1dbec4;
+  font-size: 14px;
+  margin-left: 5px;
+  margin: 5px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}

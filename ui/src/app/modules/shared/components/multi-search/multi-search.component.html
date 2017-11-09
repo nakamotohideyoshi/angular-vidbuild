@@ -1,0 +1,12 @@
+<div class="input-group">
+  <div class="input-group-addon"><span class="fa fa-search"></span></div>
+  <input type="text" class="form-control search-input" (keyup)="keyEvent($event)" [(ngModel)]="searchItem">  
+</div>
+<ul class="search-list">
+    <li *ngFor="let item of searchItemList ; let i=index" class="search-item">
+      <span class="word">{{item}}</span>
+      <span (click)="deleteSearchItem(item)">
+        <i class="fa fa-times"></i>
+      </span>
+    </li>
+</ul>
