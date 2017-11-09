@@ -1,22 +1,32 @@
 import {NgModule} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {HttpModule, XHRBackend, RequestOptions} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GettyService} from './services/getty.service';
 import {EditorService} from '../editor/services/editor.service';
+import {MultiSearchComponent} from './components/multi-search/multi-search.component';
+import {MultiSearchSerivice} from './services/multi-search.service';
+import {MultiSearchFilter} from './pipes/multi-search-filter.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     NgbModule
   ],
   exports: [
-    NgbModule
+    NgbModule,
+    MultiSearchComponent,
+    MultiSearchFilter
   ],
   providers: [
-    GettyService, EditorService
+    GettyService, EditorService, MultiSearchSerivice
   ],
-  declarations: []
+  declarations: [
+    MultiSearchComponent,
+    MultiSearchFilter
+  ]
 })
 export class SharedModule {
 }
