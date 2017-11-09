@@ -12,10 +12,23 @@
       </div>
     </div>
     <div class="col-6 ">
-      <div class="input-group">
+      <!-- <app-multi-search></app-multi-search> -->
+      <!-- <div class="input-group">
         <div class="input-group-addon"><span class="fa fa-search"></span></div>
         <input type="text" class="form-control search-input" [(ngModel)]="search">
-      </div>
+      </div> -->
+      <div class="input-group">
+          <div class="input-group-addon"><span class="fa fa-search"></span></div>
+          <input type="text" class="form-control search-input" (keyup)="keyEvent($event)" [(ngModel)]="searchItem">  
+        </div>
+        <ul class="search-list">
+            <li *ngFor="let item of multiSearchService.searchItemList ; let i=index" class="search-item">
+              <span class="word">{{item}}</span>
+              <span (click)="onDelete(item)">
+                <i class="fa fa-times"></i>
+              </span>
+            </li>
+        </ul>
     </div>
     <div class="col button-group-columns">
       
@@ -29,7 +42,8 @@
 <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="10" (scrolled)="onScroll($event)"
      class="bg-section">
   <div class="row no-gutters">
-    <div *ngFor="let i of (post$ | async) | filter: search" ngClass="{{columns}}">
+    <div *ngFor="let i of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}">
+    <!-- <div *ngFor="let i of temp" ngClass="{{columns}}"> -->
       <div class="" *ngFor="let it of i.display_sizes">
         <figure class="effect-image" *ngIf="it.name === 'thumb'">
           <img [src]="it.uri" alt="{{it.name}}"/>
