@@ -10,7 +10,7 @@ export class MultiSearchSerivice {
   constructor() { }
 
   addSearchItem(item) {
-    if (item.length && this.searchItemList.length !== 5) {
+    if (item.length && this.searchItemList.length !== 5 && !this.searchItemList.find(x => x === item)) {
       this.searchItemList.push(item);
     }
   }
