@@ -24,7 +24,7 @@
         <ul class="search-list">
             <li *ngFor="let item of multiSearchService.searchItemList ; let i=index" class="search-item">
               <span class="word">{{item}}</span>
-              <span (click)="onDelete(item)">
+              <span (click)="onDelete(i)">
                 <i class="fa fa-times"></i>
               </span>
             </li>
