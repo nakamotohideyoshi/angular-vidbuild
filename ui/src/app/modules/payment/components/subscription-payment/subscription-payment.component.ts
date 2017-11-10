@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {trigger, state, style, animate, transition,keyframes} from '@angular/animations';
+import {trigger, state, style, animate, transition, keyframes} from '@angular/animations';
 import { PaymentService } from '../../services/payment.service';
 import { environment } from '../../../../../environments/environment';
 import { AuthService } from './../../../auth/providers/auth.service';
-import { ArraySortPipe } from "./../../../shared/pipes/array-sort";
+import { ArraySortPipe } from './../../../shared/pipes/array-sort';
+import { OrderBy } from './../../../shared/pipes/plan-card-sort.pipe';
+
 
 
 @Component({
   selector: 'subscription-payment',
   templateUrl: './subscription-payment.component.html',
   styleUrls: ['./subscription-payment.component.scss'],
+  providers: [
+    OrderBy
+  ]
 })
 export class SubscriptionPaymentComponent implements OnInit {
   handler: any;
   planSelected: string;
-  monthly: boolean = true;
+  monthly: Boolean = true;
   dataPlans: any;
-  loggedIn: boolean = false;
+  loggedIn: Boolean = false;
+  plans: any = [];
   
 
   constructor(
@@ -54,10 +60,14 @@ export class SubscriptionPaymentComponent implements OnInit {
     
     this.handler = StripeCheckout.configure(options);
     this.dataPlans = this.paymentService.getPlansInfo();
+    // if (this.paymentService.plans.length !== 0) {
+    //   this.plans = Array.from(new Set((this.paymentService.plans).map(itemInArray => itemInArray.price))).sort();
+    // }
+    
     
     console.log('this.paymentService.plans');
     console.log('this.getPlansInfo()');
-    console.log(this.paymentService.getPlansInfo());
+    // console.log(this.paymentService.getPlansInfo());
     console.log(this.paymentService.plans);
   }
 

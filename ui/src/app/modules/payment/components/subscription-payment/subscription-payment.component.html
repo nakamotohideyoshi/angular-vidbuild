@@ -1,4 +1,4 @@
-<div class="subscription-payment">
+<div class="subscription-payment" >
   <div class="row">
     <div class="col-sm-12">
       <div class="btns-monthly-annual">
@@ -8,8 +8,8 @@
     </div>
   </div>
   <div *ngIf="monthly">
-    <div class="row">
-       <div *ngFor="let plan of paymentService.plans; let current = index"  [ngClass]="{'card-container':plan.frequency === 'month'}">
+    <div class="row" *ngIf="paymentService.plans">
+       <div *ngFor="let plan of paymentService.plans | orderBy; let current = index"  [ngClass]="{'card-container':plan.frequency === 'month'}">
         <div  *ngIf="plan.frequency == 'month'">
           <div   class="card text-xs-center" (click)="openHandler(plan.name, plan.description, plan.stripePrice, plan.plan)">
             <div *ngIf="current === 4" class="most-popular">Most Popular</div>
@@ -32,8 +32,8 @@
     </div>
   </div>
   <div *ngIf="!monthly">
-      <div class="row" >
-        <div *ngFor="let plan of paymentService.plans; let current = index"  [ngClass]="{'card-container':plan.frequency === 'year'}">
+      <div class="row" *ngIf="paymentService.plans">
+        <div *ngFor="let plan of paymentService.plans | orderBy; let current = index"  [ngClass]="{'card-container':plan.frequency === 'year'}">
             <div  *ngIf="plan.frequency == 'year'">
               <div   class="card text-xs-center" (click)="openHandler(plan.name, plan.description, plan.stripePrice, plan.plan)">
                 <div *ngIf="current === 5" class="most-popular">Most Popular</div>

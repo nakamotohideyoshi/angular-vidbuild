@@ -8,6 +8,7 @@ import {EditorService} from '../editor/services/editor.service';
 import {MultiSearchComponent} from './components/multi-search/multi-search.component';
 import {MultiSearchSerivice} from './services/multi-search.service';
 import {MultiSearchFilter} from './pipes/multi-search-filter.pipe';
+import {OrderBy} from './pipes/plan-card-sort.pipe';
 
 @NgModule({
   imports: [
@@ -18,14 +19,16 @@ import {MultiSearchFilter} from './pipes/multi-search-filter.pipe';
   exports: [
     NgbModule,
     MultiSearchComponent,
-    MultiSearchFilter
+    MultiSearchFilter,
+    OrderBy
   ],
   providers: [
     GettyService, EditorService, MultiSearchSerivice
   ],
   declarations: [
     MultiSearchComponent,
-    MultiSearchFilter
+    MultiSearchFilter,
+    OrderBy
   ]
 })
 export class SharedModule {
