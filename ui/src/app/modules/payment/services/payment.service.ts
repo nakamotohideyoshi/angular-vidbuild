@@ -29,7 +29,7 @@ export class PaymentService {
           status: 'inactive',
           plan: ''
         };
-        this.myplan = { plan: "", name: "", description: "", stripePrice: 0, credits: 0, storage: 0, frequency: '', price: '' };
+        this.myplan = { plan: '', name: '', description: '', stripePrice: 0, credits: 0, storage: 0, frequency: '', price: '' };
       } else {
         this.db.object(`users/${this.AuthService.authState.uid}/membership`).valueChanges().subscribe(data => {
           if (data) {
