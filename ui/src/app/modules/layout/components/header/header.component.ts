@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
   auth$: Observable<any>;
   authSubcription: Subscription;
   authData: any;
+  navToggle: String = '';
+  navActive: String = '';
 
   constructor(
     private store: Store<any>,
@@ -40,6 +42,16 @@ export class HeaderComponent implements OnInit {
     this.authService.signOut();
     this.store.dispatch(new AuthActions.LogoutAction());
   }
+  toggleNav() {
+    if (this.navToggle !== '') {
+      this.navToggle = '';
+      this.navActive = '';
+    } else {
+      this.navToggle = 'toggled';
+      this.navActive = 'active';
+    }
+  }
+
 
   // checkSession() {
   //   this.authService.authState.subscribe((data) => {

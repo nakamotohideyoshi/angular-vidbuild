@@ -21,4 +21,43 @@
       <button class="btn btn-secondary btn-my-library hidden-sm-less" *ngIf="authService.authState" routerLink="/library"><span class="account-icon"></span>My Library</button>
     </div>
   </div>
+  <div id="toggle" (click)="toggleNav()" ngClass={{navToggle}}>
+    <ul>
+      <li>
+          <span class="line l1"></span>
+          <span class="line l2"></span>
+          <span class="line l3"></span>
+      </li>
+    </ul>
+  </div>  
 </section>
+<section id="full-screen-nav" class="menu-panel {{navActive}}">
+    <nav id="nav">
+      <ul>
+        <li>
+          <a href="pricing">Pricing
+          </a>
+        </li>
+        <li>
+          <a href="editor/add-videos">New advert
+          </a>
+        </li>
+        <li>
+          <a href="login" *ngIf="!authService.authState">Login
+          </a>
+        </li>
+        <li *ngIf="authService.authState">
+          <a (click)="logout()">Log Out
+          </a>
+        </li>
+        <li *ngIf="authService.authState">
+          <a href="account">My Account
+          </a>
+        </li>
+        <li *ngIf="authService.authState">
+          <a href="library">My Library
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </section>
