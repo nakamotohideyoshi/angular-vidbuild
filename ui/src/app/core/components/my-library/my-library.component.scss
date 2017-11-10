@@ -3,26 +3,35 @@
 .search-list{
   display: flex;
   flex-wrap: wrap;
+  -webkit-padding-start: 0px;
+  margin-bottom: 0px;
 }
 .search-item{
-  padding: 5px 5px 5px 10px;
+  padding: 4px 5px 0px 10px;
   list-style-type: none;
   border: 2px solid #1dbec4;
   font-size: 14px;
-  margin-left: 5px;
   margin: 5px;
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
+  height: 30px;
 }
 
 .search-container {
   .search-input, select {
-    height: 50px;
+    height: 60px;
     line-height: 25px;
-    color: rgb(145, 145, 145);
+    color: rgb(145, 145, 145);    
+  }
+  .search-group {
+    border-bottom-right-radius: 60px;
+    border-top-right-radius: 60px;
+    display: flex;
+    flex-wrap: wrap;
   }
   .input-group {
+    padding: 0 0 10px 0;
     .input-group-addon {
       @include border-left-radius(60px);
       padding: 0 20px;
@@ -34,7 +43,12 @@
       }
     }
     input {
-      @include border-right-radius(60px);
+      max-width: 100%;
+      box-sizing:border-box;
+      height: 40px;
+      background-color: transparent;
+      border: none;
+      // @include border-right-radius(60px);
     }
   }
   select {
@@ -65,7 +79,7 @@
     &::after {
       content: '\25BC';
       position: absolute;
-      top: 15px;
+      top: 22px;
       right: 15px;
       bottom: 0;
       pointer-events: none;
