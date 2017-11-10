@@ -37,6 +37,7 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.gettyService.searchVideos('futbol argentina').subscribe((res: any) => {
       this.list = JSON.parse(res._body).videos;
+      console.log(this.list);
     });
 
     this.gettyService.loadMovies(0, 10);

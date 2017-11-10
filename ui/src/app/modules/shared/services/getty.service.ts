@@ -19,7 +19,9 @@ export class GettyService {
   }
 
   public searchVideos(params) {
+    console.log(environment.getty.baseUrl);
     const url = `${environment.getty.baseUrl}v3/search/videos?phrase=${params}`;
+    console.log(url);
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
     return this.http.get(url, {
