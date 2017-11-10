@@ -46,8 +46,8 @@
 
 <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="10" (scrolled)="onScroll($event)"
      class="bg-section">
-  <div class="row no-gutters">
-    <div *ngFor="let i of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}">
+  <div class="row no-gutters" *ngIf="list">
+    <div *ngFor="let i of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}">
     <!-- <div *ngFor="let i of temp" ngClass="{{columns}}"> -->
       <div class="" *ngFor="let it of i.display_sizes">
         <figure class="effect-image" *ngIf="it.name === 'thumb'">
