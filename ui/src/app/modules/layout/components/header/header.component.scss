@@ -1,60 +1,203 @@
 @import './../../../../../styles.scss';
 
 .header{
-    position: fixed;
-    width: 100%;
-    background: $mine-shaft;
-    height: 73px;
-    padding: 6px 25px;
-    font-size: 200%;
-    color: $white;
-    z-index: 9;
+  position: fixed;
+  width: 100%;
+  background: $mine-shaft;
+  height: 73px;
+  padding: 6px 25px;
+  font-size: 200%;
+  color: $white;
+  z-index: 9;
 
-    .btn-logo{
-        cursor: pointer;
-        text-decoration: none;
-        outline: none;
-        padding: 5px 0 -1px;
-    }
-    .txt-right{
-        text-align: right
-    }
-    .btn-my-account, .btn-my-library, .btn-signin, .btn-logout{
-        padding: 10px 0;
-        text-align: center;
-        display: inline-block;
-        width: 130px;
-        margin: 0 auto;
+  .btn-logo{
+      cursor: pointer;
+      text-decoration: none;
+      outline: none;
+      padding: 5px 0 -1px;
+  }
+  .txt-right{
+      text-align: right
+  }
+  .btn-my-account, .btn-my-library, .btn-signin, .btn-logout{
+      padding: 10px 0;
+      text-align: center;
+      display: inline-block;
+      width: 130px;
+      margin: 0 auto;
 
-        .account-icon{
-            width: 26px;
-            position: relative;
-            height: 26px;
-            background-image: url(/assets/account-library.jpg);
-            display: inline-block;
-            top: 6px;
-            margin-right: 5px;
+      .account-icon{
+          width: 26px;
+          position: relative;
+          height: 26px;
+          background-image: url(/assets/account-library.jpg);
+          display: inline-block;
+          top: 6px;
+          margin-right: 5px;
+      }
+  }
+  .btn-my-account, .btn-my-library, .btn-signin, .btn-logout{
+      color: $regent-grey;
+  }
+  .btn-logout, .btn-pricing{
+      margin-top: 10px;
+  }
+  .btn-my-library{
+      .account-icon{
+          background-position-x: 26px;
+      }
+  }
+  .btn-new-advert{
+      margin: 6px 0 0 20px;
+      padding: 13px;
+      width: 200px;
+      height: 49px;
+  }
+  #toggle{
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 30px;
+    height: 30px;
+    z-index: 150;
+  }
+  
+  #toggle ul{
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    width: 17px;
+    height: 50px;
+  }
+  
+  #toggle ul li{
+    position: relative;
+    width: 17px;
+    height: 12px;
+    cursor: pointer;
+  }
+  
+  #toggle ul li a{
+      display: block;
+      width: 100%;
+      height: 100%;
+  }
+  
+  #toggle ul li a:hover span{
+      transition: all .4s ease;
+      background-color: #fff;
+  }
+  
+  #toggle.toggled ul li a span{
+      background-color: #444;
+  }
+  
+  
+  #toggle ul li span{
+    position: absolute;
+    left: 0px;
+    width: 17px;
+    height: 2px;
+    background-color: #999;
+    &.line.l2{
+      top: 50%;
+    }
+    &.line.l3{
+      top: 100%;
+    }
+  }
+  
+  #toggle ul li span.line {
+      transition: all .4s ease;
+  }
+  
+  #toggle.toggled ul li span.l1 {
+      transform: translateY(6px) translateX(0px) rotate(45deg);
+  }
+  
+  #toggle.toggled ul li span.l2 {
+    opacity: 0
+  }
+  
+  #toggle.toggled ul li span.l3 {
+    transform: translateY(-6px) translateX(0px) rotate(-45deg);
+  }
+
+}
+
+section.menu-panel#full-screen-nav{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  opacity: 0;
+  transition: all 800ms;
+  pointer-events: none;
+  z-index: 8;
+  &.active{
+    opacity: 1;
+    pointer-events: auto;
+    nav#nav{
+      ul li{
+        opacity: 1;
+        transform:translateY(0px);
+        transition: all .5s ease;
+        &:nth-child(2){
+          transition-delay: .2s;
         }
-    }
-    .btn-my-account, .btn-my-library, .btn-signin, .btn-logout{
-        color: $regent-grey;
-    }
-    .btn-logout, .btn-pricing{
-        margin-top: 10px;
-    }
-    .btn-my-library{
-        .account-icon{
-            background-position-x: 26px;
+        &:nth-child(3){
+          transition-delay: .4s;
         }
+        &:nth-child(4){
+          transition-delay: .6s;
+        }
+        &:nth-child(5){
+          transition-delay: .8s;
+        }
+      }
     }
-    .btn-new-advert{
-        margin: 6px 0 0 20px;
-        padding: 13px;
-        width: 200px;
-        height: 49px;
+  }
+}
+
+nav#nav{
+  position: relative;
+  height: 100%;
+  overflow: scroll;
+  ul{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    li{
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 25px;
+      opacity: 0;
+      transform:translateY(-20px);
+      &:not(:first-child){
+        padding-top: 25px;
+      }
+      a{
+        color: #444;
+        font-weight: 700;
+        font-size: 32px;
+        span{
+          display: block;
+          font-size: 16px;
+          color: #777;
+          font-weight: 300;
+          transition: all .2s ease;
+        }
+        &:hover{
+          color: #dd727d;
+          span{
+            color: #444;
+          }
+        }
+      }
     }
-
-
+  }
 }
 
 /* Small Devices, Tablets */
@@ -70,6 +213,13 @@
         .btn-logout{
             width: 85px
         }
+        .txt-right{
+          display: none;
+        }
+        #toggle{          
+          top: 30px;          
+        }
+        
     }
 }
 
@@ -85,10 +235,27 @@
         .btn-logout{
             width: 85px
         }
+        #toggle{          
+          top: -130px;          
+        }
+    }
+    section.menu-panel#full-screen-nav{
+      &.active{
+        opacity: 0;
+      }
     }
 }
 
 /* Large Devices, Wide Screens */
-@media only screen and (min-width : 1200px) {
-
+@media only screen and (min-width : 1025px) {
+  .header{
+    #toggle{          
+      top: -130px;          
+    }
+  }
+  section.menu-panel#full-screen-nav{
+    &.active{
+      opacity: 0;
+    }
+  }
 }
