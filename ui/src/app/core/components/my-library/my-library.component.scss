@@ -1,4 +1,13 @@
 @import '../../styles/core-mixins';
+p{
+  &.col_description{
+    margin-bottom: 0;
+    height: 60px;
+    padding-top: 18px;
+    padding: 18px 5px 18px 0;
+    font-size: 13px;
+  }
+}
 
 .search-list{
   display: flex;
@@ -16,6 +25,33 @@
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   height: 30px;
+}
+
+.column{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 36px;
+  height: 36px;
+  margin: 12px 0px;
+  .cell_2{
+    width: 16px;
+    height: 16px;
+    margin: 1px;
+    background-color: #8a8f90;
+    &.active {
+      background-color: #1dbec4;
+    }
+  }
+  .cell_4{
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    background-color: #8a8f90;
+    &.active {
+      background-color: #1dbec4;
+    }
+  }
 }
 
 .search-container {

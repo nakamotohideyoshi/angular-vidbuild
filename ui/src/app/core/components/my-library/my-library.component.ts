@@ -26,6 +26,8 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
   columns: String = 'container-img col-sm-6 col-md-3 col-lg-3';
   searchItem: String = '';
   itemList: any = [];
+  columns2: String = '';
+  columns4: String = 'active';
 
   constructor(private gettyService: GettyService,
               public editorService: EditorService,
@@ -43,8 +45,8 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
     this.post$ = this.gettyService.movies();
     this.gettyService.total().subscribe((total) => {
     this.total = total;
-    this.bindList();
     });
+    this.bindList();
   }
 
   ngOnDestroy(): void {}
@@ -65,10 +67,14 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
 
   on2Columns() {
     this.columns = 'container-img col-sm-6 col-md-6 col-lg-6';
+    this.columns2 = 'active';
+    this.columns4 = '';
   }
 
   on4Columns() {
     this.columns = 'container-img col-sm-6 col-md-3 col-lg-3';
+    this.columns2 = '';
+    this.columns4 = 'active';
   }
 
 
