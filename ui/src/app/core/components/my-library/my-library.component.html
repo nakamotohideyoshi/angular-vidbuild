@@ -1,7 +1,7 @@
 <div class="container search-container">
   <h1 class="text-center">My library</h1>
   <div class="row">
-    <div class="col-12 col-sm col-md">
+    <div class="col-12 col-sm-6 col-md-2">
       <div class="select">
         <select name="header" id="header" (change)="sort($event.target.value)">
           <option value="collection_code">Sort by: collection_code</option>
@@ -11,7 +11,26 @@
         <label for="header"></label>
       </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-6">
+    <div class="col-12 col-sm-6 col-md-2 button-group-columns">
+      <div class="column" (click)="on2Columns()">
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+        </div>
+        <div class="column" (click)="on4Columns()">
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>        
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-5">
       <!-- <app-multi-search></app-multi-search> -->
       <!-- <div class="input-group">
         <div class="input-group-addon"><span class="fa fa-search"></span></div>
@@ -35,12 +54,12 @@
         </div>
         
     </div>
-    <div class="col-12 col-sm col-md button-group-columns">
-      
-        <button type="button" class="form-control column-button" (click)="on2Columns()">2Columns</button>
-        <button type="button" class="form-control column-button" (click)="on4Columns()">4Columns</button>
-      
-    </div>
+    <div class="col-12 col-sm-6 col-md-3 button-group-columns">
+      <p class="col_description" >Your selected clips 4</p>
+      <button type="button" class="form-control column-button" >Build Ad</button>
+
+    </div>  
+    
   </div>
 </div>
 
@@ -48,7 +67,7 @@
      class="bg-section">
   <div class="row no-gutters" *ngIf="list">
     <div *ngFor="let i of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}">
-    <!-- <div *ngFor="let i of temp" ngClass="{{columns}}"> -->
+    <!-- <div *ngFor="let i of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}"> -->
       <div class="" *ngFor="let it of i.display_sizes">
         <figure class="effect-image" *ngIf="it.name === 'thumb'">
           <img [src]="it.uri" alt="{{it.name}}"/>
