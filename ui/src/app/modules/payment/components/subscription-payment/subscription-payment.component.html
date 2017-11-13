@@ -12,8 +12,8 @@
        <div *ngFor="let plan of paymentService.plans | orderBy; let current = index"  [ngClass]="{'card-container':plan.frequency === 'month'}">
         <div  *ngIf="plan.frequency == 'month'">
           <div   class="card text-xs-center" (click)="openHandler(plan.name, plan.description, plan.stripePrice, plan.plan)">
-            <div *ngIf="current === 4" class="most-popular">Most Popular</div>
-            <div *ngIf="current === 8" class="recommend-for-agencies">Recommend for Agencies</div>
+            <div *ngIf="current === 5" class="most-popular">Most Popular</div>
+            <div *ngIf="current === 9" class="recommend-for-agencies">Recommend for Agencies</div>
             <div class="card-header">
               <div class="pricing-plan"><span [ngStyle]="{'font-weight':current === 4 ? 'bold' : 'normal' }"><span class="currency" [ngStyle]="{'font-weight':current === 4 ? 'bold' : 'normal' }">£</span>{{plan.price}}</span><span class="period">per {{plan.frequency}}</span></div>
             </div>
@@ -36,8 +36,8 @@
         <div *ngFor="let plan of paymentService.plans | orderBy; let current = index"  [ngClass]="{'card-container':plan.frequency === 'year'}">
             <div  *ngIf="plan.frequency == 'year'">
               <div   class="card text-xs-center" (click)="openHandler(plan.name, plan.description, plan.stripePrice, plan.plan)">
-                <div *ngIf="current === 5" class="most-popular">Most Popular</div>
-                <div *ngIf="current === 9" class="recommend-for-agencies">Recommend for Agencies</div>
+                <div *ngIf="current === 4" class="most-popular">Most Popular</div>
+                <div *ngIf="current === 8" class="recommend-for-agencies">Recommend for Agencies</div>
                 <div class="card-header">
                   <div class="pricing-plan"><span [ngStyle]="{'font-weight':current === 5 ? 'bold' : 'normal' }"><span class="currency" [ngStyle]="{'font-weight':current === 5 ? 'bold' : 'normal' }">£</span>{{plan.price}}</span><span class="period">per {{plan.frequency}}</span></div>
                 </div>

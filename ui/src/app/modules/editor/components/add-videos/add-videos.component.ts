@@ -18,7 +18,7 @@ export class AddVideosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.gettyService.searchVideos('futbol argentina').subscribe((res: any)=>{
+    this.gettyService.searchVideos('luxury cars').subscribe((res: any)=>{
       this.list = JSON.parse(res._body).videos;
     })
   }

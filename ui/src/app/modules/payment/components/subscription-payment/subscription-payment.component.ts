@@ -4,7 +4,6 @@ import {trigger, state, style, animate, transition, keyframes} from '@angular/an
 import { PaymentService } from '../../services/payment.service';
 import { environment } from '../../../../../environments/environment';
 import { AuthService } from './../../../auth/providers/auth.service';
-import { ArraySortPipe } from './../../../shared/pipes/array-sort';
 import { OrderBy } from './../../../shared/pipes/plan-card-sort.pipe';
 
 
