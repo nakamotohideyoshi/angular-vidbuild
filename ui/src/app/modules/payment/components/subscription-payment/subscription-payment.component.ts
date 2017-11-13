@@ -23,7 +23,6 @@ export class SubscriptionPaymentComponent implements OnInit {
   dataPlans: any;
   loggedIn: Boolean = false;
   plans: any = [];
-  
 
   constructor(
     public paymentService: PaymentService,
@@ -33,17 +32,15 @@ export class SubscriptionPaymentComponent implements OnInit {
 
   ngOnInit() {
     this.configHandler();
-    
   }
 
-  public toggleElement(){
-     this.monthly=!this.monthly;
+  public toggleElement() {
+     this.monthly = !this.monthly;
   }
-
 
   private configHandler() {
 
-    let options: any = {
+    const options: any = {
       key: environment.stripeKey,
       image: '',
       locale: 'auto',
@@ -51,23 +48,14 @@ export class SubscriptionPaymentComponent implements OnInit {
         this.paymentService.processSubscriptionPayment( token, this.planSelected );
       }
     };
-    this.loggedIn= false;
-    if( this.AuthService.authenticated ){
-      this.loggedIn= true;
+    this.loggedIn = false;
+    if (this.AuthService.authenticated) {
+      this.loggedIn = true;
       options.email = this.AuthService.currentUser.email;
-    } 
-    
+    }
+
     this.handler = StripeCheckout.configure(options);
     this.dataPlans = this.paymentService.getPlansInfo();
-    // if (this.paymentService.plans.length !== 0) {
-    //   this.plans = Array.from(new Set((this.paymentService.plans).map(itemInArray => itemInArray.price))).sort();
-    // }
-    
-    
-    console.log('this.paymentService.plans');
-    console.log('this.getPlansInfo()');
-    // console.log(this.paymentService.getPlansInfo());
-    console.log(this.paymentService.plans);
   }
 
   clearPlan() {
@@ -75,11 +63,11 @@ export class SubscriptionPaymentComponent implements OnInit {
   }
 
   openHandler(name, description, amount, plan) {
-    if(!this.AuthService.authenticated){
+    if (!this.AuthService.authenticated) {
       this.router.navigate(['/login']);
       return false;
     }
-    if (this.paymentService.membership.status === "inactive") {
+    if (this.paymentService.membership.status === 'inactive') {
       this.planSelected = plan;
       this.handler.open({
         name: name,
@@ -87,7 +75,7 @@ export class SubscriptionPaymentComponent implements OnInit {
         amount: amount
       });
     } else {
-      alert('Change your plan in user profile page')
+      alert('Change your plan in user profile page');
     }
   }
 }

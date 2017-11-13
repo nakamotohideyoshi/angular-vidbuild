@@ -5,8 +5,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class MultiSearchFilter implements PipeTransform {
     transform(items: any[], parameter1: String, parameter2: String, parameter3: String, parameter4: String, parameter5: String): any {
-      console.log(items);
-      console.log(parameter1, parameter2, parameter3, parameter4, parameter5);
 
       if (parameter1) {
         parameter1.toLowerCase();
