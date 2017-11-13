@@ -1,12 +1,53 @@
-<div class="spinner" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId == 0">
+
+<div class="spinner" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId == 0 || editorService.currentProject && editorService.currentProject.status != 'upload finished' ||  editorService.currentProject && editorService.currentProject.status != 'exported preview'">
   Please wait, we are setting up your project configuration...
+  {{editorService.currentProject.status}} - 
+  <b>{{editorService.currentProject.exportStatus}}</b>
 </div>
 
-<div *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
+<div *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0 && editorService.currentProject.status == 'upload finished' ||  editorService.currentProject && editorService.currentProject.status == 'exported preview'">
   <h2>Compose Step</h2>
 
+  <div *ngIf="editorService.currentProject.status == 'exported preview'">Preview:
+    <video controls [src]="editorService.currentProject.outputUrl" type="video/mp4"></video>
+  </div>
+   <h4>Create Clip</h4>
+  <input [(ngModel)]="editorService.currentProject.OpenSId" type="text" placeholder="Project ID">
+  <input [(ngModel)]="currentClip.fileId" type="text" placeholder="File ID">
+  <input [(ngModel)]="currentClip.timelinePos" type="number" placeholder="Position (in secs)">
+  <input [(ngModel)]="currentClip.clipStartAt" type="number" placeholder="Start (in secs)">
+  <input [(ngModel)]="currentClip.clipEndAt" type="number" placeholder="End (in secs)">
+  <input [(ngModel)]="currentClip.layer" type="number" placeholder="Layer (num)">
+  <button type="button" (click)="onCreateClip()">Create Clip</button>
+  <hr>
+
+  <pre>{{editorService.clips | json}}</pre>
+
+  <ul>
+    <li *ngFor="let clip of editorService.clips">
+      <input [(ngModel)]="clip.projectId" type="hidden" placeholder="Project ID">
+      <input [(ngModel)]="clip.fileId" type="text" placeholder="File ID">
+      <input [(ngModel)]="clip.OpenSClipId" type="hidden" placeholder="OpenSClipId">
+      <input [(ngModel)]="clip.timelinePos" type="number" placeholder="Position (in secs)">
+      <input [(ngModel)]="clip.clipStartAt" type="number" placeholder="Start (in secs)">
+      <input [(ngModel)]="clip.clipEndAt" type="number" placeholder="End (in secs)">
+      <input [(ngModel)]="clip.layer" type="number" placeholder="Layer (num)">
+      <input [(ngModel)]="clip.currentClipId" type="hidden" placeholder="ClipId">
+      <button type="button" (click)="onUpdateClip(clip.fkey)">Update Clip</button>
+    </li>
+  </ul>
+
+ 
+
+
+  <h4>Project</h4>
   <pre>{{editorService.currentProject | json}}</pre>
-  <button class="btn btn-primary" (click)="build('preview')">Call Preview</button>
+  <h4>Queue</h4>
+  <pre>{{editorService.currentProjectQueue | json}}</pre>
   
+  <button class="btn btn-primary" (click)="upload()">Upload Resources</button>
+  <button class="btn btn-primary" (click)="build('preview')">Export Preview</button>
+  <button class="btn btn-primary" (click)="build('export')">Export Build</button>
+
   <a class="btn btn-primary" routerLink="/editor/export">NEXT STEP</a>
 </div>

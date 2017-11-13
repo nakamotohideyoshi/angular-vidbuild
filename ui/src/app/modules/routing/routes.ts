@@ -24,6 +24,5 @@ export const routes: Routes = [
   { path: 'account', component: MyAccountComponent, canActivate: [AuthGuard, SubscriptionGuard] },
   { path: 'pricing', loadChildren: './../payment/payment.module#PaymentModule'},
   { path: 'editor', loadChildren: './../editor/editor.module#EditorModule'},
-  { path: 'backoffice', loadChildren: './../backoffice/backoffice.module#BackofficeModule' },
   { path: '**', component: HomeComponent },
 ];

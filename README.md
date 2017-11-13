@@ -1,12 +1,19 @@
-Video List Component
+# VidBuild
 
-- To run de application in vidAngular4\ui:
-npm install
-npm start
+##How to install the enviroment on Windows
+
+-install node 8 (at the moments its not working with node 9)
+-install python
+-install .net framework 2.0 SDK
+
+-open a terminal
+
+`npm install -g @angular/cli`
+`npm install -g firebase-tools`
+
+`git clone https://github.com/vidbuild/firebase`
+`cd firebase/ui && npm install`
+`cd firebase/be/functions && npm install`
 
 
-In the folder vidAngular4\ui\src\app
 
-In modules the development of the Video list compoenent should be in the module
-
-video-list   (app\modules\video-list)

@@ -1,13 +1,14 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-const auth = require('./auth/auth')
+const auth = require('./auth/auth');
 const stripe = require('./payments/stripe');
 const credits = require('./payments/credits');
 const plans = require('./seeds/plans');
 const build = require('./build/build');
 const wrapper = require('./openshot/wrapper');
 const user = require('./user/user');
+const clips = require('./openshot/clips');
 
 admin.initializeApp(functions.config().firebase);
 plans.setPlanResetWorker();
@@ -33,10 +34,10 @@ exports.addCreditsOnDemand = credits.addCreditsOnDemand;
 exports.planResetWorkers = plans.planResetWorkers;
 
 //build
-exports.validateProcessType = build.validateProcessType;
-exports.generateQueue = build.generateQueue;
-exports.runQueue = build.runQueue;
-exports.validateProcessType = build.validateProcessType;
+exports.checkStatus = build.checkStatus;
+exports.validateCompleteQueue = build.validateCompleteQueue;
+exports.createClip = clips.create;
+exports.updateClip = clips.update;
 
 //wrapper
 exports.project = wrapper.project;
