@@ -1,9 +1,32 @@
-<!-- <section class="panel">
-  <img src="/assets/sidebar/side1.jpg" alt="">
-</section> -->
-<!-- <section class="panel">
-  <img src="/assets/sidebar/goal.jpg" alt="">
-</section> -->
-<!-- <section class="panel">
-  <img src="/assets/sidebar/field.jpg" alt="">
-</section> -->
+<div id="left-panel">
+  <nav>
+    <ul class='side-bar'>
+        <li routerLinkActive="active" ngClass="{{isAddVideo}}">
+            <a routerLink="/editor/add-videos" title="Dashboard"> <span
+              class="menu-item-parent">ADD VIDEO</span></a>
+              <p> Find the perfect video clips</p>
+        </li>
+        <li routerLinkActive="active"  ngClass="{{isAddMusic}}">
+            <a routerLink="/editor/add-audios" title="Dashboard"> <span
+              class="menu-item-parent">ADD MUSIC</span></a>
+              <p>Select your track</p>
+        </li>
+        <li routerLinkActive="active"  ngClass="{{isAddVoice}}">
+            <a routerLink="/editor/add-voiceover" title="Dashboard"> <span
+              class="menu-item-parent">ADD VOICEOVER</span></a>
+              <p>Create your own voiceover</p>
+        </li>
+        <li routerLinkActive="active" ngClass="{{isEdit}}">
+            <a routerLink="/editor/edit-ad" title="Dashboard"> <span
+              class="menu-item-parent">EDIT</span></a>
+              <p>Add text and edit your advert</p>
+        </li>  
+        <li routerLinkActive="active" ngClass="{{isBuild}}">
+            <a routerLink="/editor/export" title="Dashboard"> <span
+              class="menu-item-parent">BUILD</span></a>
+              <p>Publish your advert</p>
+        </li>      
+
+    </ul>
+  </nav>
+</div>

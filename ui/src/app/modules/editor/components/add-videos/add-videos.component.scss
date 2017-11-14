@@ -6,6 +6,7 @@ p{
     padding-top: 18px;
     padding: 18px 5px 18px 0;
     font-size: 13px;
+    text-align: center;
   }
 }
 
@@ -134,7 +135,7 @@ p{
   display: flex;
   
   .tab{
-    margin: 0 15px 0 15px;
+    margin: 0 25px 0 25px;
   }
   .active{
     color: #1dbec4;
@@ -145,7 +146,7 @@ p{
   display: flex;
   justify-content: flex-end;
   label{
-    margin: 0 10px 0 10px;
+    margin: 0 20px 0 20px;
   }
   input:checked ~ .checkmark {
     color: #1dbec4;

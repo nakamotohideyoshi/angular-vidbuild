@@ -1,0 +1,48 @@
+#left-panel {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  /* z-index: 904; */
+  padding-top: 0;
+  height: 100%;
+  width: 225px;
+  background-color: #d5f1ec;  
+  box-shadow: 2px 1px 1px grey;
+  nav {
+    display: block;
+    ul {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+      list-style: none;
+      position: relative;
+      li {
+        color: #ffffff;
+        display: list-item;
+        text-align: -webkit-match-parent;
+        height: 100px;
+        padding: 30px 0 0 20px;
+        line-height: 1.5;
+        background-color: #252525;
+        &:hover {
+          background-color: #464646;
+        }
+        a{
+          color: #ffffff;
+          font-size: 20px;
+          &:hover, &:active, &:focus{
+            text-decoration: none; 
+          }
+                  
+        }
+        p {
+          font-size: 12px;
+        }       
+        &.activated{
+          background-color: #19b2ad;
+        }        
+      }
+    }
+  }
+}
