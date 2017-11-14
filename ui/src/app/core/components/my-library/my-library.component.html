@@ -1,7 +1,7 @@
 <div class="container search-container">
   <h1 class="text-center">My library</h1>
   <div class="row">
-    <div class="col-12 col-sm-6 col-md-2">
+    <div class="col-12 col-sm-6 col-md">
       <div class="select">
         <select name="header" id="header" (change)="sort($event.target.value)">
           <option value="collection_code">Sort by: collection_code</option>
@@ -11,7 +11,7 @@
         <label for="header"></label>
       </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-2 button-group-columns">
+    <div class="col-12 col-sm-6 col-md button-group-columns">
       <div class="column" (click)="on2Columns()">
           <div class = "cell_2 {{columns2}}"></div>
           <div class = "cell_2 {{columns2}}"></div>
@@ -30,7 +30,7 @@
             <div class = "cell_4 {{columns4}}"></div>        
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-5">
+    <div class="col-12 col-sm-12 col-md-6">
       <!-- <app-multi-search></app-multi-search> -->
       <!-- <div class="input-group">
         <div class="input-group-addon"><span class="fa fa-search"></span></div>
@@ -54,11 +54,6 @@
         </div>
         
     </div>
-    <div class="col-12 col-sm-6 col-md-3 button-group-columns">
-      <p class="col_description" >Your selected clips 4</p>
-      <button type="button" class="form-control column-button" >Build Ad</button>
-
-    </div>  
     
   </div>
 </div>
