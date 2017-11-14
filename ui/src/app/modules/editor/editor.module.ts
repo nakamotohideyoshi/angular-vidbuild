@@ -9,13 +9,17 @@ import { EditComponent } from './components/edit/edit.component';
 import { ExportComponent } from './components/export/export.component';
 import { EditorService } from './services/editor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { SharedModule } from './../shared/shared.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     editorRouting,
-    FormsModule      
+    FormsModule,
+    InfiniteScrollModule,
+    SharedModule
   ],
   declarations: [
     AddVideosComponent,
