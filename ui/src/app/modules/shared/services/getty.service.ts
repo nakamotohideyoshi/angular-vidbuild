@@ -1,6 +1,6 @@
 import { GetMovies, SortMovies } from '../store/movies.actions';
 import { Injectable } from '@angular/core';
-import { ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Http, Headers } from "@angular/http";
+import { ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { environment } from '../../../../environments/environment';
 import {Store} from '@ngrx/store';
@@ -19,10 +19,8 @@ export class GettyService {
   }
 
   public searchVideos(params) {
-    console.log(environment.getty.baseUrl);
-    const url = `${environment.getty.baseUrl}v3/search/videos?phrase=${params}`;
-    console.log(url);
-    let headers = new Headers();
+    const url = `${environment.getty.baseUrl}v3/search/videos?phrase=${params}&page_size=100`;
+    const headers = new Headers();
     this.createAuthorizationHeader(headers);
     return this.http.get(url, {
       headers: headers
@@ -34,8 +32,8 @@ export class GettyService {
     return this.store.select('movies').map(values => values.movies);
   }
 
-  loadMovies(from: number, size: number) {
-    this.store.dispatch(new GetMovies(from, size));
+  loadMovies(params: String, from: number, size: number) {
+    this.store.dispatch(new GetMovies(params, from, size));
   }
 
   total() {

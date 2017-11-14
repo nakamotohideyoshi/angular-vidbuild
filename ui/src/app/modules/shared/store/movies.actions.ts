@@ -6,7 +6,7 @@ export const SORT = '[MOVIES] SORT';
 export const SORTED = '[MOVIES] SORTED';
 export class GetMovies implements Action {
   readonly type = GET;
-  constructor(public from: number, public size: number) { }
+  constructor(public params: String, public from: number, public size: number) { }
 }
 
 export class MoviesGathered implements Action {
