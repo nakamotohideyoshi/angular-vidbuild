@@ -5,3 +5,11 @@
         margin-left: 225px;
     }
 }
+
+@media only screen and (max-width : 768px) {
+    .panel {
+        &.activated{
+            margin-left: 0;
+        }
+    }
+  }
