@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'add-videos', component: AddVideosComponent },
   { path: 'add-audios', component: AddAudiosComponent },
   { path: 'add-voiceover', component: AddVoiceoverComponent },
-  { path: 'edit', component: EditComponent },
+  { path: 'edit-ad', component: EditComponent },
   { path: 'export', component: ExportComponent }
 ];
 
