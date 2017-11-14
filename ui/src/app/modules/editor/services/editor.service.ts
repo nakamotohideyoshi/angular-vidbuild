@@ -68,7 +68,7 @@ export class EditorService {
         console.log('video added' + this.AuthService.currentUserId);
         console.log(this.currentProject);
         return this.db.list(`users-current-project/${this.AuthService.currentUserId}/files`)
-            .push({ type: type, file: file });
+            .push({ type: type, file: file, status: "pending" });
 
     }
 
