@@ -24,7 +24,7 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
   sum = 50;
   page= 1;
   total = 0;
-  columns: String = 'container-img col-sm-6 col-md-3 col-lg-3';
+  columns: String = 'container-img col-sm-3 col-md-3 col-lg-3';
   searchItem: String = '';
   itemList: any = [];
   columns2: String = '';
@@ -76,7 +76,7 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
   }
 
   on4Columns() {
-    this.columns = 'container-img col-sm-6 col-md-3 col-lg-3';
+    this.columns = 'container-img col-sm-3 col-md-3 col-lg-3';
     this.columns2 = '';
     this.columns4 = 'active';
   }
