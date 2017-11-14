@@ -10,6 +10,8 @@ export class BaseLayoutComponent implements OnInit {
   public loadLayout: boolean = false;
   public isLoading: boolean = false;
   public loadingContainerClass: string = '';
+  public isEditor: Boolean = false;
+  public sidePanel: String = '';
 
   constructor(private router: Router) {
     this.router.events
@@ -18,6 +20,13 @@ export class BaseLayoutComponent implements OnInit {
       if (event instanceof NavigationStart) {
         this.isLoading = true;
         this.loadingContainerClass = 'fadeIn animated';
+        if (event.url.indexOf('editor') !== -1) {
+          this.isEditor = true;
+          this.sidePanel = 'activated';
+        } else {
+          this.isEditor = false;
+          this.sidePanel = '';
+        }
       }
       if (event instanceof NavigationEnd) {
         setTimeout( () => {

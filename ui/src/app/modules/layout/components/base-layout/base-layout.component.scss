@@ -1,3 +1,6 @@
 .panel{
     margin-top: 73px;
+    &.activated{
+        margin-left: 225px;
+    }
 }

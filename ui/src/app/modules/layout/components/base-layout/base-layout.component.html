@@ -5,8 +5,11 @@
 </div>
 
 <div class="row" *ngIf="loadLayout">
-    <div class="col-xs-12">
-        <section class="panel">
+    
+    <app-sidebar *ngIf="isEditor"></app-sidebar>
+    
+    <div class="col-xs-12">        
+        <section class="panel" ngClass="{{sidePanel}}">
             <router-outlet></router-outlet>
         </section>
     </div>
