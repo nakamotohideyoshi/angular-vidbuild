@@ -114,12 +114,12 @@ export class AddVideosComponent implements OnInit {
 
   countSelectedVid(i) {
     this.selectedVidCount++;
-    document.getElementById('id' + i).className += ' selected';
+    document.getElementById('id' + i).classList.add('selected');
   }
 
   disCountSelectedVid(i) {
     this.selectedVidCount--;
-    document.getElementById('id' + i).className = 'effect-image';
+    document.getElementById('id' + i).classList.remove('selected');
   }
 
 }
