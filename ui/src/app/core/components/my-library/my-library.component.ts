@@ -39,10 +39,10 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.gettyService.searchVideos(this.params).subscribe((res: any) => {
-      this.list = JSON.parse(res._body).videos;
-      console.log (JSON.parse(res._body).result_count);
-    });
+    // this.gettyService.searchVideos(this.params).subscribe((res: any) => {
+    //   this.list = JSON.parse(res._body).videos;
+    //   console.log (JSON.parse(res._body).result_count);
+    // });
     this.page = 1;
 
     this.gettyService.loadMovies(this.params, this.page, this.sum);
@@ -56,7 +56,8 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {}
 
   onScroll(event) {
-    const start = this.page++;
+    console.log(this.page);
+    const start = ++this.page;
     const totalPage =  this.total % this.sum ? (1 + Math.floor(this.total / this.sum)) : Math.floor(this.total / this.sum);
      if ( start < totalPage + 1 ) {
        this.gettyService.loadMovies(this.params, start, this.sum);

@@ -399,8 +399,28 @@ $color_dark: #3c4a50;
   }
 }
 figure.effect-image {
+  &.selected{
+    border: solid 4px #1dbec4;
+    .right-bottom-link-plus, figcaption{
+      display: none;
+    }
+    .right-bottom-link-check{
+      display: block;
+    }
+  }
   img{
     height: 100%; width: 100%; background-size: cover
+  }
+  .right-bottom-link-plus, .right-bottom-link-check{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 20px;
+    padding: 20px;
+    color: white;
+  }
+  .right-bottom-link-check{
+    display: none;
   }
   figcaption {
     top: auto;

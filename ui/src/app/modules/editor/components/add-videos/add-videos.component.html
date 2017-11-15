@@ -67,7 +67,7 @@
           
       </div>
       <div class="col-12 col-sm-6 col-md-3 button-group-columns">
-        <p class="col_description" (click)="on2Columns()">Your selected clips 4</p>
+        <p class="col_description" >Your selected clips {{selectedVidCount}}</p>
         <button type="button" class="form-control column-button" (click)="on4Columns()">Build Ad</button>
   
       </div>      
@@ -97,35 +97,34 @@
     </div>
   </div>
   
-  <div infiniteScroll [infiniteScrollDistance]="20" [infiniteScrollThrottle]="300" (scrolled)="onScroll($event)"
+  <div infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="500" (scrolled)="onScroll($event)"
        class="bg-section">
-    <div class="row no-gutters" *ngIf="list">
+    <div class="row no-gutters" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
       <!-- <div *ngFor="let i of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}"> -->
-      <div *ngFor="let i of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}">
-        <div class="" *ngFor="let it of i.display_sizes">
-          <figure class="effect-image" *ngIf="it.name === 'thumb'">
-            <img [src]="it.uri" alt="{{it.name}}"/>
-            <figcaption>
-              <div class="left-top-link">
-                <i class="fa fa-download"></i>
-              </div>
+      <div *ngFor="let video of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">
+        <div class="" *ngFor="let it of video.display_sizes">
+          <figure id="id{{i}}" class="effect-image" *ngIf="it.name === 'thumb'">            
+            <img [src]="it.uri" alt="{{it.name}}" (click)="addVideo('video', video)"/>
+            <div class="right-bottom-link-plus">
+              <i class="fa fa-plus"></i>
+            </div>
+            <div class="right-bottom-link-check">
+              <i class="fa fa-check"></i>
+            </div>
+            <figcaption>              
               <div class="right-top-link">
-                <i class="fa fa-trash-o"></i>
+                <i class="fa fa-star-o"></i>
               </div>
               <div class="left-bottom-link">
-                <i class="fa fa-trash-o"></i>
-                <span>date created</span>
+                <span>Artist Name</span>
               </div>
               <div class="right-bottom-link">
-                <i class="fa fa-trash-o"></i>
+                <i class="fa fa-plus" (click)="countSelectedVid(i)"></i>
               </div>
               <div class="icon-links">
                 <a href="#" class="btn btn-lg btn-primary">
-                  <span>Edit</span>
-                </a>
-                <a href="#" class="btn btn-succes-clone btn-lg">
-                  <span>Clone & edit</span>
-                </a>
+                  <span>Build Ad</span>
+                </a>                
               </div>
             </figcaption>
           </figure>
