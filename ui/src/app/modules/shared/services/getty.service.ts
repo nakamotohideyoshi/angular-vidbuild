@@ -13,19 +13,19 @@ export class GettyService {
 
   constructor(private http: Http, private store: Store<any>) { }
 
-  private createAuthorizationHeader(headers: Headers) {
-    headers.append('Api-Key', 'pj3ke3sdtqseuf2wqmpszqft ');
-    headers.append('Content-Type', 'application/json');
-  }
+  // private createAuthorizationHeader(headers: Headers) {
+  //   headers.append('Api-Key', 'pj3ke3sdtqseuf2wqmpszqft ');
+  //   headers.append('Content-Type', 'application/json');
+  // }
 
-  public searchVideos(params) {
-    const url = `${environment.getty.baseUrl}v3/search/videos?phrase=${params}&page_size=100`;
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
-    return this.http.get(url, {
-      headers: headers
-    });
-  }
+  // public searchVideos(params) {
+  //   const url = `${environment.getty.baseUrl}v3/search/videos?phrase=${params}&page_size=100`;
+  //   const headers = new Headers();
+  //   this.createAuthorizationHeader(headers);
+  //   return this.http.get(url, {
+  //     headers: headers
+  //   });
+  // }
 
   //
   movies() {

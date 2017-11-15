@@ -16,7 +16,7 @@ export class AddVideosComponent implements OnInit {
   post$: Observable<Array<any>>;
   finished = false;
   sum = 50;
-  page= 1;
+  page = 1;
   total = 0;
   columns: String = 'container-img col-sm-6 col-md-3 col-lg-3';
   searchItem: String = '';
@@ -24,6 +24,7 @@ export class AddVideosComponent implements OnInit {
   columns2: String = '';
   columns4: String = 'active';
   params: String = 'luxury cars';
+  selectedVidCount = 0;
 
 
   constructor(
@@ -33,11 +34,11 @@ export class AddVideosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.gettyService.searchVideos(this.params).subscribe((res: any)=>{
-      this.list = JSON.parse(res._body).videos;
-      console.log(this.list);
-      console.log(this.editorService.currentProject);
-    });
+    // this.gettyService.searchVideos(this.params).subscribe((res: any)=>{
+    //   this.list = JSON.parse(res._body).videos;
+    //   console.log(this.list);
+    //   console.log(this.editorService.currentProject);
+    // });
     this.page = 1;
 
     this.gettyService.loadMovies(this.params, this.page, this.sum);
@@ -56,7 +57,7 @@ export class AddVideosComponent implements OnInit {
   }
 
   onScroll(event) {
-    const start = this.page++;
+    const start = ++this.page;
    const totalPage =  this.total % this.sum ? (1 + Math.floor(this.total / this.sum)) : Math.floor(this.total / this.sum);
     if ( start < totalPage + 1 ) {
       this.gettyService.loadMovies(this.params, start, this.sum);
@@ -109,6 +110,11 @@ export class AddVideosComponent implements OnInit {
         this.itemList[index] = '';
       }
     }
+  }
+
+  countSelectedVid(i) {
+    this.selectedVidCount++;
+    document.getElementById('id' + i).className += ' selected';
   }
 
 }
