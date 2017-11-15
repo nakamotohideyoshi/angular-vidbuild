@@ -108,7 +108,7 @@
             <div class="right-bottom-link-plus">
               <i class="fa fa-plus"></i>
             </div>
-            <div class="right-bottom-link-check">
+            <div class="right-bottom-link-check" (click)="disCountSelectedVid(i)">
               <i class="fa fa-check"></i>
             </div>
             <figcaption>              
@@ -118,8 +118,8 @@
               <div class="left-bottom-link">
                 <span>Artist Name</span>
               </div>
-              <div class="right-bottom-link">
-                <i class="fa fa-plus" (click)="countSelectedVid(i)"></i>
+              <div class="right-bottom-link" (click)="countSelectedVid(i)">
+                <i class="fa fa-plus"></i>
               </div>
               <div class="icon-links">
                 <a href="#" class="btn btn-lg btn-primary">
