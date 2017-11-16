@@ -54,8 +54,11 @@ p{
     }
   }
 }
-
-.search-container {
+.search-container-mobile{
+  display: none;
+}
+.search-container, .search-container-mobile {
+  padding: 40px 15px;
   .search-input, select {
     height: 60px;
     line-height: 25px;
@@ -153,6 +156,82 @@ p{
   }
   input[type=radio]:checked ~ .check::before{
     border-color: #0DFF92;
+  }
+}
+
+.nav-group {
+  display: none;
+}
+
+@media only screen and (max-width : 768px) {
+  .container {
+    &.search-container{
+      display: none;
+    }
+    &.search-container-mobile{
+      display: block;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      .input-group{
+        padding: 10px 20px;
+      }
+    }
+   
+  }
+
+  .tab-group{
+    padding: 12px 0;
+    justify-content: flex-start;   
+    .tab{
+      margin: 0 20px;
+    }
+    .active{
+      color: #1dbec4;
+    }
+  }
+
+  .button-group-columns{
+    justify-content: flex-end;
+  }
+
+  .nav-group {
+    display: flex;
+    width: 100%;
+    height: 80px;
+    background-color: #dae0df;
+    margin-bottom: 20px;
+    .mobile-btn{
+      padding: 10px 0;
+      text-align: center;
+      display: inline-block;
+      width: 130px;
+      margin: 0 auto;
+      .btn-library{
+        width: 31px;
+        position: relative;
+        height: 31px;
+        background-image: url(/assets/pricing-icons.png);
+        display: inline-block;
+        top: 6px;
+        margin-right: 5px;
+      }
+      .btn-video, .btn-music{
+        width: 31px;
+        position: relative;
+        height: 31px;
+        background-image: url(/assets/pricing-icons.png);
+        display: inline-block;
+        top: 6px;
+        margin-right: 5px;
+      }
+      .btn-music{
+        background-position-x: 31px;
+      }
+      
+    }
+    
   }
 }
 

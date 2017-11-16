@@ -344,6 +344,7 @@ $color_dark: #3c4a50;
 }
 
 .bg-section, .infos {
+  margin-top: 10px;
   padding: 40px;
   background-color: $color_gray;
   .no-gutters>.col, .no-gutters>[class*=col-] {
@@ -351,7 +352,7 @@ $color_dark: #3c4a50;
     padding-left: 1px;
   }
 }
-.search-container {
+.search-container, .search-container-mobile {
   padding: 40px 0;
 }
 .search-input {
