@@ -59,6 +59,7 @@ p{
 }
 .search-container, .search-container-mobile {
   padding: 40px 15px;
+  width: 100%;
   .search-input, select {
     height: 60px;
     line-height: 25px;
@@ -173,7 +174,7 @@ p{
       padding: 0;
       margin-left: 0;
       margin-right: 0;
-      width: 100%;
+      max-width: 100%;
       .input-group{
         padding: 10px 20px;
       }
