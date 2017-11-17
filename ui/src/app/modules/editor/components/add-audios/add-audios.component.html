@@ -1,4 +1,4 @@
-<div class="spinner" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId == 0">
+<!-- <div class="spinner" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId == 0">
   Please wait, we are setting up your project configuration...
 </div>
 
@@ -6,4 +6,178 @@
   <h2>Audio Step</h2>
 
   <a class="btn btn-primary" routerLink="/editor/add-voiceover">NEXT STEP</a>
+</div> -->
+
+
+<div class="container search-container-mobile">  
+  <div class="row">
+    <div class="col-12 col-sm-12 nav-group">
+        <button class="mobile-btn video col" routerLink="/editor/add-videos">
+          <div class="btn-video"></div>
+          <div class="description">Video</div>
+        </button>
+        <button class="mobile-btn music col" routerLink="/editor/add-audios">
+          <div class="btn-music"></div>
+          <div class="description">Music</div>
+        </button>
+        <button class="mobile-btn library col" routerLink="/library">
+          <div class="btn-library"></div>
+          <div class="description">My Library</div>
+        </button>
+    </div>
+
+    <div class="input-group">
+      <div class="input-group-addon"><span class="fa fa-search"></span></div>
+      <div class="form-control search-group">
+        <div class="search-list">
+            <div *ngFor="let item of multiSearchService.searchItemList ; let i=index" class="search-item">
+              <span class="word">{{item}}</span>
+              <span (click)="onDelete(i)">
+                <i class="fa fa-times"></i>
+              </span>
+            </div>
+            <input type="text" class="form-control search-input" (keyup)="keyEvent($event)" [(ngModel)]="searchItem">
+          </div>          
+      </div>      
+    </div>
+
+    <div class="col-7 col-sm-7 tab-group">
+      <div class="tab active">
+          <span>Browse</span>
+        </div>
+        <div class="tab">
+          <span>Favourite</span>
+        </div>
+    </div>
+
+    <div class="col-5 col-sm-5 button-group-columns">      
+      <!-- <button type="button" class="form-control column-button" (click)="on4Columns()">Build Ad</button> -->
+    </div>
+
+  </div>  
+</div>
+
+
+<div class="container search-container">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-2 select-group">
+      <div class="select">
+        <select name="header" id="header" (change)="sort($event.target.value)">
+          <option value="collection_code">Sort by: collection_code</option>
+          <option value="collection_name">Sort by: collection_name</option>
+          <option value="asset_family">Sort by: asset_family</option>
+        </select>
+        <label for="header"></label>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-2 button-group-columns">
+      <div class="column" (click)="on2Columns()">
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+        </div>
+        <div class="column" (click)="on4Columns()">
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>        
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-5">
+      <div class="input-group">
+          <div class="input-group-addon"><span class="fa fa-search"></span></div>
+          <div class="form-control search-group">
+            <div class="search-list">
+                <div *ngFor="let item of multiSearchService.searchItemList ; let i=index" class="search-item">
+                  <span class="word">{{item}}</span>
+                  <span (click)="onDelete(i)">
+                    <i class="fa fa-times"></i>
+                  </span>
+                </div>
+                <input type="text" class="form-control search-input" (keyup)="keyEvent($event)" [(ngModel)]="searchItem">
+              </div>
+              
+          </div>
+          
+        </div>
+        
+    </div>
+    <div class="col-12 col-sm-12 col-md-3 button-group-columns">
+      <!-- <p class="col_description" >Your selected clips {{selectedVidCount}}</p> -->
+      <!-- <button type="button" class="form-control column-button" (click)="on4Columns()">Build Ad</button> -->
+
+    </div>      
+  </div>
+  <div class="row">
+    <div class="tab-group col-12 col-sm-12 col-md-6">
+      <div class="tab active">
+        <span>Browse</span>
+      </div>
+      <div class="tab">
+        <span>Favourite</span>
+      </div>
+      <div class="tab">
+        <span>My Uploads</span>
+      </div>
+    </div>
+    <div class="radio-group col-12 col-sm-12 col-md-6">
+        <label class="radio-container">
+          <input type="radio" checked="checked" name="radio">
+          <span class="checkmark">Standard</span>
+        </label>
+        <label class="radio-container">
+          <input type="radio" name="radio">
+          <span class="checkmark">Premium</span>
+        </label>
+    </div>
+  </div>
+</div>
+  
+<div infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="500" (scrolled)="onScroll($event)"
+      class="bg-section">
+  <div class="row no-gutters" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
+    <!-- <div *ngFor="let i of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}"> -->
+    <div *ngFor="let audio of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">
+        <figure id="id{{i}}" class="effect-image {{isBlockView}}" *ngIf="audio.display_sizes[2].name === 'preview' && audio.display_sizes[3].name === 'thumb'" (mouseenter)="videoPlay(i)" (mouseleave)="videoLoad(i)">
+          <!-- <img [src]="it.uri" alt="{{it.name}}" (click)="addVideo('video', video)"/> -->
+          <div class="audio-thumb-container">
+            <video id="audio{{i}}" loop poster="{{audio.display_sizes[3].uri}}">
+              <source src="{{audio.display_sizes[2].uri}}" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+          </div>          
+          <div class="right-bottom-link-check" (click)="disCountSelectedVid(i)">
+            <i class="fa fa-check"></i>
+          </div>
+          <figcaption  (click)="addVideo('video', audio)">              
+            <div class="right-top-link">
+              <i class="fa fa-star-o"></i>
+            </div>
+            <div class="left-bottom-link">
+              <p>Artist Name</p>
+              <p>Song Name</p>
+            </div>
+            <div class="right-bottom-link" (click)="countSelectedVid(i)">
+                <a class="btn btn-lg btn-primary">
+                  <span>Add</span>
+                </a>
+            </div>            
+          </figcaption>
+        </figure>
+    </div>
+  </div>
+</div>
+<div class="d-block infos">
+  <div *ngIf="!finished" class="text-center">
+    Loading ...
+  </div>
+  <div *ngIf="finished" class="text-center">
+    End of database...
+  </div>
 </div>
