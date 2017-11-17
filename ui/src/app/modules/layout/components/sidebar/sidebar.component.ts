@@ -7,7 +7,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  public isAddVideo: String = '';
+  public isAddVideo: String = 'activated';
   public isAddMusic: String = '';
   public isAddVoice: String = '';
   public isEdit: String = '';
