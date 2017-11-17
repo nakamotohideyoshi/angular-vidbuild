@@ -140,6 +140,9 @@ p{
   
   .tab{
     margin: 0 25px 0 25px;
+    &:hover{
+      color: #1dbec4;
+    }
   }
   .active{
     color: #1dbec4;
