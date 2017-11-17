@@ -412,14 +412,6 @@ figure.effect-image {
   img{
     height: 100%; width: 100%; background-size: cover
   }
-  .right-bottom-link-plus, .right-bottom-link-check{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: 20px;
-    padding: 20px;
-    color: white;
-  }
   .right-bottom-link-check{
     display: none;
   }
@@ -434,7 +426,9 @@ figure.effect-image {
     .icon-links {
       position: relative;
       top: 50%;
-      margin: 0 auto;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
     }
     [class^="right-"], [class^="left-"]{
       color: black;
@@ -444,33 +438,26 @@ figure.effect-image {
         line-height: 16px;
       }
     }
-    .right-top-link {
+    .right-top-link, .left-top-link, .left-bottom-link, .right-bottom-link, .right-bottom-link-plus, .right-bottom-link-check{
       position: absolute;
+      font-size: 20px;
+      padding: 10px;
+    }
+    .right-top-link,{
       right: 0;
       top: 0;
-      font-size: 20px;
-      padding: 20px;
     }
     .left-top-link {
-      position: absolute;
       left: 0;
       top: 0;
-      font-size: 20px;
-      padding: 20px;
     }
     .left-bottom-link {
-      position: absolute;
       left: 0;
       bottom: 0;
-      font-size: 20px;
-      padding: 20px;
     }
-    .right-bottom-link {
-      position: absolute;
+    .right-bottom-link, .right-bottom-link-plus, .right-bottom-link-check {
       right: 0;
       bottom: 0;
-      font-size: 20px;
-      padding: 20px;
     }
   }
   p {
