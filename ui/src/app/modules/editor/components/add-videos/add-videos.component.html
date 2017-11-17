@@ -150,16 +150,21 @@
     <div class="row no-gutters" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
       <!-- <div *ngFor="let i of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}"> -->
       <div *ngFor="let video of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">
-        <div class="" *ngFor="let it of video.display_sizes">
-          <figure id="id{{i}}" class="effect-image" *ngIf="it.name === 'thumb'">            
-            <img [src]="it.uri" alt="{{it.name}}" (click)="addVideo('video', video)"/>
+          <figure id="id{{i}}" class="effect-image" *ngIf="video.display_sizes[2].name === 'preview' && video.display_sizes[3].name === 'thumb'" (mouseenter)="videoPlay(i)" (mouseleave)="videoLoad(i)">
+            <!-- <img [src]="it.uri" alt="{{it.name}}" (click)="addVideo('video', video)"/> -->
+            <div class="video-thumb-container">
+                <video id="video{{i}}" loop poster="{{video.display_sizes[3].uri}}">
+                  <source src="{{video.display_sizes[2].uri}}" type="video/mp4" />
+                  Your browser does not support HTML5 video.
+                </video>
+              </div>
             <div class="right-bottom-link-plus">
               <i class="fa fa-plus"></i>
             </div>
             <div class="right-bottom-link-check" (click)="disCountSelectedVid(i)">
               <i class="fa fa-check"></i>
             </div>
-            <figcaption>              
+            <figcaption  (click)="addVideo('video', video)">              
               <div class="right-top-link">
                 <i class="fa fa-star-o"></i>
               </div>
@@ -176,7 +181,6 @@
               </div>
             </figcaption>
           </figure>
-        </div>
       </div>
     </div>
   </div>
