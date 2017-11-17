@@ -203,6 +203,16 @@ figure.effect-image {
   }  
 }
 
+.video-thumb-container{
+  width: 100%;
+
+  video {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+  }
+}
+
 @media only screen and (max-width : 768px) {
   .container {
     &.search-container{

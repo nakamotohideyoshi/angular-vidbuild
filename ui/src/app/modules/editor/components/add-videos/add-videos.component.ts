@@ -25,6 +25,7 @@ export class AddVideosComponent implements OnInit {
   columns4: String = 'active';
   params: String = 'luxury cars';
   selectedVidCount = 0;
+  videoElement: HTMLVideoElement;
 
 
   constructor(
@@ -39,10 +40,11 @@ export class AddVideosComponent implements OnInit {
     //   console.log(this.list);
     //   console.log(this.editorService.currentProject);
     // });
-    this.page = 1;
+    // this.page = 1;
 
     this.gettyService.loadMovies(this.params, this.page, this.sum);
     this.post$ = this.gettyService.movies();
+    console.log(this.post$);
     this.gettyService.total().subscribe((total) => {
     this.total = total;
     });
@@ -120,6 +122,22 @@ export class AddVideosComponent implements OnInit {
   disCountSelectedVid(i) {
     this.selectedVidCount--;
     document.getElementById('id' + i).classList.remove('selected');
+  }
+
+  videoPlay(i) {
+    this.videoElement = document.getElementById('video' + i) as HTMLVideoElement;
+    this.videoElement.play()
+    .then(_ => {
+      console.log('playing...');
+    })
+    .catch(e => {
+      console.log('loading...');
+    });
+  }
+
+  videoLoad(i) {
+    this.videoElement = document.getElementById('video' + i) as HTMLVideoElement;
+    this.videoElement.load();
   }
 
 }
