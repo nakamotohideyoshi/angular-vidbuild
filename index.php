@@ -10,7 +10,7 @@ $resource = '/api/v1/stock-items/search/';
 $keyword = 'preflight';
 $hmac = hash_hmac('sha256', $resource, $privateKey . $time);
 // echo $hmac;
-$url = 'https://api.videoblocks.com'.$resource.'?APIKEY='.$publicKey.'&HMAC'.$hmac.'&EXPIRES='.$time.'&keywords='.$keyword;
+$url = 'https://api.videoblocks.com'.$resource.'?APIKEY='.$publicKey.'&HMAC='.$hmac.'&EXPIRES='.$time.'&keywords='.$keyword;
 echo $url;
 echo '<br>';
 $session = curl_init();
