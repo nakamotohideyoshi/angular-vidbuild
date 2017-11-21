@@ -1,4 +1,4 @@
-import { GetMovies, SortMovies } from '../store/movies.actions';
+import { GetMovies, SortMovies } from '../store/movies/movies.actions';
 import { Injectable } from '@angular/core';
 import { ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
