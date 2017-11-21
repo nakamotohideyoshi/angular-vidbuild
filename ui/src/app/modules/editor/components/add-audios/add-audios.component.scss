@@ -230,6 +230,80 @@ figure.effect-image {
   }
 }
 
+.audio-list{
+  display: none;
+  padding: 0;
+  flex-wrap: wrap;
+  // background-color: #0DFF92;
+  &.active{
+    display: flex;
+  }
+  .audio-detail{
+    display: flex;
+    width: 100%;
+    
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    .thumb-img{
+      // background-color: #0DFF92;
+      display: flex;
+      text-align: left;
+      padding: 0;
+      img{
+        width: 70px;
+        height: 70px;
+      }
+      .detail{
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .center-icons{
+        position: absolute;
+        top: 33px;
+        left: 29px;
+        &.pause-icon{
+          display: none;
+        }
+      }
+    }
+    .wave-form{
+      background-color: #8a8f90;
+    }
+    .options{
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0 0 20px;
+      span{
+        padding: 23px 0;
+      }
+      i{
+        padding: 27px 0;
+        &:hover{
+          color: #1dbec4;
+        }
+      }
+      a{
+        margin: 14px 0;
+        border: solid 2px #1dbec4;
+        background-color: transparent;
+        color: #1dbec4;
+        &:hover{
+          background-color: #1dbec4;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  .audio-border{
+    width: 100%;
+    height: 2px;
+    border: solid 1px #8a8f90;
+  }
+}
+
 @media only screen and (max-width : 768px) {
   .container {
     &.search-container{

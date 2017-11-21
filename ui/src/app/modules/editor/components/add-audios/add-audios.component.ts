@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EditorService } from './../../services/editor.service';
 import { Response } from '@angular/http';
-import { GettyService } from '../../../shared/services/getty.service';
+import { AudioService } from '../../../shared/services/audio.service';
 import { Observable } from 'rxjs/Observable';
 import {MultiSearchSerivice} from './../../../shared/services/multi-search.service';
 
@@ -15,7 +15,7 @@ export class AddAudiosComponent implements OnInit {
   list: any = [];
   post$: Observable<Array<any>>;
   finished = false;
-  sum = 50;
+  sum = 30;
   page = 1;
   total = 0;
   columns: String = 'container-img col-sm-6 col-md-3 col-lg-3';
@@ -25,21 +25,21 @@ export class AddAudiosComponent implements OnInit {
   columns4: String = 'active';
   params: String = 'luxury cars';
   selectedVidCount = 0;
-  videoElement: HTMLVideoElement;
+  audioElement: HTMLAudioElement;
   isBlockView: String = 'active';
   isListView: String = '';
 
   constructor(
     public editorService: EditorService,
-    private gettyService: GettyService,
+    private audioService: AudioService,
     public multiSearchService: MultiSearchSerivice
   ) { }
 
   ngOnInit() {
-    this.gettyService.loadMovies(this.params, this.page, this.sum);
-    this.post$ = this.gettyService.movies();
+    this.audioService.loadAudios(0, 30);
+    this.post$ = this.audioService.audios();
     console.log(this.post$);
-    this.gettyService.total().subscribe((total) => {
+    this.audioService.total().subscribe((total) => {
     this.total = total;
     });
     this.bindList();
@@ -53,17 +53,18 @@ export class AddAudiosComponent implements OnInit {
   }
 
   onScroll(event) {
-    const start = ++this.page;
-   const totalPage =  this.total % this.sum ? (1 + Math.floor(this.total / this.sum)) : Math.floor(this.total / this.sum);
-    if ( start < totalPage + 1 ) {
-      this.gettyService.loadMovies(this.params, start, this.sum);
+    const start = this.sum;
+    this.sum += 10;
+    if (start < this.total) {
+      this.audioService.loadAudios(start, 10);
     } else {
       this.finished = true;
     }
+
   }
 
   sort(sort) {
-    this.gettyService.sort(sort);
+    this.audioService.sort(sort);
   }
 
   on2Columns() {
@@ -122,9 +123,9 @@ export class AddAudiosComponent implements OnInit {
     document.getElementById('id' + i).classList.remove('selected');
   }
 
-  videoPlay(i) {
-    this.videoElement = document.getElementById('audio' + i) as HTMLVideoElement;
-    this.videoElement.play()
+  audioPlay(i) {
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    this.audioElement.play()
     .then(_ => {
       console.log('playing...');
     })
@@ -133,9 +134,9 @@ export class AddAudiosComponent implements OnInit {
     });
   }
 
-  videoLoad(i) {
-    this.videoElement = document.getElementById('audio' + i) as HTMLVideoElement;
-    this.videoElement.load();
+  audioLoad(i) {
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    this.audioElement.pause();
   }
 
 }
