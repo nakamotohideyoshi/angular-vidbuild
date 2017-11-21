@@ -28,8 +28,10 @@ import { LibraryFiltersComponent } from './modules/library/components/library-fi
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthGuard, SubscriptionGuard } from './modules/auth/guards/auth.guard';
-import {moviesReducer} from './modules/shared/store/movies.reducer';
-import {MoviesEffects} from './modules/shared/store/movies.effects';
+import {moviesReducer} from './modules/shared/store/movies/movies.reducer';
+import {MoviesEffects} from './modules/shared/store/movies/movies.effects';
+import {audiosReducer} from './modules/shared/store/audios/audios.reducer';
+import {AudiosEffects} from './modules/shared/store/audios/audios.effects';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -48,14 +50,14 @@ import {HttpClientModule} from '@angular/common/http';
     AuthModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(debug, { metaReducers }),
-    StoreModule.forRoot({ movies: moviesReducer }),
+    StoreModule.forRoot({ movies: moviesReducer, audios: audiosReducer }),
 
     // Note that you must instrument after importing StoreModule
     StoreDevtoolsModule.instrument({
       maxAge: 10 //  Retains last 25 states
     }),
     StoreRouterConnectingModule,
-    EffectsModule.forRoot([MoviesEffects]),
+    EffectsModule.forRoot([AudiosEffects, MoviesEffects]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

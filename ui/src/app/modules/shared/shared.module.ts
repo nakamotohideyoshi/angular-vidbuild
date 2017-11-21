@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {HttpModule, XHRBackend, RequestOptions} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GettyService} from './services/getty.service';
+import {AudioService} from './services/audio.service';
 import {EditorService} from '../editor/services/editor.service';
 import {MultiSearchComponent} from './components/multi-search/multi-search.component';
 import {MultiSearchSerivice} from './services/multi-search.service';
@@ -23,7 +24,7 @@ import {OrderBy} from './pipes/plan-card-sort.pipe';
     OrderBy
   ],
   providers: [
-    GettyService, EditorService, MultiSearchSerivice
+    GettyService, AudioService, EditorService, MultiSearchSerivice
   ],
   declarations: [
     MultiSearchComponent,

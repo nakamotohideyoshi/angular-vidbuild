@@ -1,5 +1,5 @@
 import { GetMovies, MoviesGathered, GET, SORT, SortMovies, MoviesSorted } from './movies.actions';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
