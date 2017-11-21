@@ -25,7 +25,7 @@ export const environment = {
     apiKey: "pj3ke3sdtqseuf2wqmpszqft"
   },
   audioblocks: {
-    baseUrl: 'https://api.audioblocks.com/'
+    baseUrl: 'https://api.audioblocks.com'
   },
   BASE_OPENSHOT_URL: 'http://35.176.151.11', // 'http://cloud.openshot.org', // 'http://35.176.183.215',
   BASE_OPENSHOT_PROXY: 'openshot'

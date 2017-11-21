@@ -11,44 +11,33 @@ import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 export class AudioService {
-  // private_key = 'LC5kUXrHjFx8djxa1Xfy700WeHLYiemMpFMHngkV8eLhH6xBcs0AKPQCDqtqHNS3';
-  // api_key = 'p0QltE6gCkv0TdTtlOilmrMDo66EcJtAHllmrnEjlNTq8j60Qlb7qdWzfKCfOy8u';
-  // resource = '/api/v1/stock-items/search/';
-  // videoBlocksUrl = 'https://api.videoblocks.com' + this.resource;
+  private_key = 'LC5kUXrHjFx8djxa1Xfy700WeHLYiemMpFMHngkV8eLhH6xBcs0AKPQCDqtqHNS3';
+  api_key = 'p0QltE6gCkv0TdTtlOilmrMDo66EcJtAHllmrnEjINTq8j60Qlb7qdWzfKCfOy8u';
+  resource = '/api/v1/stock-items/search/';
+  audioBlocksUrl = environment.audioblocks.baseUrl + this.resource;
 
   constructor(private http: Http, private store: Store<any>) { }
 
-  // private createAuthorizationHeader(headers: Headers) {
-  //   const unixTimeInSeconds = Math.floor(​ Date.now() / 1000);
-  //   console.log(this.private_key.length);
-  //   console.log(this.private_key + unixTimeInSeconds);
-  //   const encrypted = CryptoJS.SHA256(this.resource, this.private_key + unixTimeInSeconds);
-  //   const hex = CryptoJS.enc.Hex.stringify(encrypted);
-  //   console.log(encrypted.key);
-  //   console.log(this.resource);
-  //   console.log(unixTimeInSeconds);
-  //   console.log(hex);
-  //   // headers.append('EXPIRES', '' + unixTimeInSeconds);
-  //   // headers.append('APIKEY', this.api_key);
-  //   // headers.append('HMAC', hex);
-  //   headers.append('Access-Control-Allow-Origin', '*');
-  //   headers.append('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Content-Length,Authorization');
-  //   headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  //   headers.append('Access-Control-Allow-Credentials', 'true');
-  //   headers.append('Content-Type', 'application/json');
-  //   this.videoBlocksUrl += '?APIKEY='+ this.api_key+'&HMAC='+hex+'&EXPIRES='+unixTimeInSeconds+'&keywords='+'plane';
-  //   console.log(this.videoBlocksUrl);
-  // }
+  private createAuthorizationHeader(headers: Headers) {
+    const unixTimeInSeconds = Math.floor(​ Date.now() / 1000);
+    console.log(this.private_key + unixTimeInSeconds);
+    const encrypted = CryptoJS.HmacSHA256(this.resource, this.private_key + unixTimeInSeconds);
+    const hex = CryptoJS.enc.Hex.stringify(encrypted);
+    console.log(unixTimeInSeconds);
+    console.log(hex);
+    headers.append('Content-Type', 'application/json');
+    this.audioBlocksUrl += '?APIKEY=' + this.api_key + '&HMAC=' + hex + '&EXPIRES=' + unixTimeInSeconds + '&keywords=';
+  }
 
-  // public searchVideos(params) {
-  //   console.log(this.videoBlocksUrl);
-  //   const headers = new Headers();
-  //   this.createAuthorizationHeader(headers);
-  //   const url = this.videoBlocksUrl;
-  //   return this.http.get(url, {
-  //     headers: headers
-  //   });
-  // }
+  public searchAudios(params) {
+    const headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    const url = this.audioBlocksUrl + params;
+    console.log(url);
+    return this.http.get(url, {
+      headers: headers
+    });
+  }
 
 
   audios() {
