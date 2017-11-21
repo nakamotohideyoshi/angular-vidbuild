@@ -23,7 +23,7 @@ export class AddAudiosComponent implements OnInit {
   itemList: any = [];
   columns2: String = '';
   columns4: String = 'active';
-  params: String = 'luxury cars';
+  params: String = 'preflight';
   selectedVidCount = 0;
   audioElement: HTMLAudioElement;
   isBlockView: String = 'active';
@@ -36,6 +36,11 @@ export class AddAudiosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.audioService.searchAudios(this.params).subscribe((res: any)=>{
+      this.list = JSON.parse(res._body).info;
+      console.log(this.list);
+      console.log(this.editorService.currentProject);
+    });
     this.audioService.loadAudios(0, 30);
     this.post$ = this.audioService.audios();
     console.log(this.post$);
