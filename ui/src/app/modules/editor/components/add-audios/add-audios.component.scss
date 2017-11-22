@@ -1,4 +1,12 @@
 @import '../../../../core/styles/core-mixins';
+.bg-section{
+  background-color: transparent;
+}
+.d-block{
+  &.infos{
+    background-color: transparent;
+  }
+}
 p{
   &.col_description{
     margin-bottom: 0;
@@ -171,6 +179,7 @@ p{
 
 figure.effect-image {
   display: none;
+  background-color: rgba(0, 0, 0, 0.15);
   &.active{
     display: block;
   }
