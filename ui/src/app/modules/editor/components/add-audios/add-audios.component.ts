@@ -25,12 +25,13 @@ export class AddAudiosComponent implements OnInit {
   columns4: String = 'active';
   params: String = 'preflight';
   selectedVidCount = 0;
-  audioElement: HTMLAudioElement;
   isBlockView: String = 'active';
   isListView: String = '';
   intervalId: any;
-  progress: any;
+  progress = '0%';
   previousIndex = 0;
+  audioElement: HTMLAudioElement;
+  htmlElement: HTMLElement;
 
   constructor(
     public editorService: EditorService,
@@ -39,13 +40,13 @@ export class AddAudiosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.audioService.searchAudios(this.params).subscribe((res: any)=>{
-      this.list = JSON.parse(res._body).info;
-      console.log(this.editorService.currentProject);
-    });
+    // this.audioService.searchAudios(this.params).subscribe((res: any)=>{
+    //   this.list = JSON.parse(res._body).info;
+    //   console.log(this.editorService.currentProject);
+    // });
     this.audioService.loadAudios(0, 30);
     this.post$ = this.audioService.audios();
-    console.log(this.post$);
+    // console.log(this.post$);
     this.audioService.total().subscribe((total) => {
     this.total = total;
     });
@@ -106,6 +107,7 @@ export class AddAudiosComponent implements OnInit {
     this.multiSearchService.deleteSearchItem(item);
     this.bindList();
   }
+
   onAdd() {
     this.multiSearchService.addSearchItem(this.searchItem);
     this.bindList();
@@ -160,12 +162,34 @@ export class AddAudiosComponent implements OnInit {
     this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
     this.audioElement.load();
     clearInterval(this.intervalId);
-    this.progress = '0%';
   }
 
   playInit() {
     if (this.audioElement) {
       this.audioLoad(this.previousIndex);
+    }
+    this.progress = '0%';
+  }
+
+  blockOnClick($event, i) {
+    if ((document.getElementById('audio' + i) as HTMLAudioElement).currentTime !== 0) {
+      this.htmlElement = document.getElementById('id' + i);
+      const rect = this.htmlElement.getBoundingClientRect();
+      this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+      this.audioElement.currentTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
+    } else {
+      (document.getElementById('audio' + i) as HTMLAudioElement).currentTime = 0;
+    }
+  }
+
+  listOnClick($event, i) {
+    if ((document.getElementById('audio' + i) as HTMLAudioElement).currentTime !== 0) {
+      this.htmlElement = document.getElementById('waveform' + i);
+      const rect = this.htmlElement.getBoundingClientRect();
+      this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+      this.audioElement.currentTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
+    } else {
+      (document.getElementById('audio' + i) as HTMLAudioElement).currentTime = 0;
     }
   }
 
