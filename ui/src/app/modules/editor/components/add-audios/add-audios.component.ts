@@ -28,6 +28,9 @@ export class AddAudiosComponent implements OnInit {
   audioElement: HTMLAudioElement;
   isBlockView: String = 'active';
   isListView: String = '';
+  intervalId: any;
+  progress: any;
+  previousIndex: any;
 
   constructor(
     public editorService: EditorService,
@@ -38,7 +41,6 @@ export class AddAudiosComponent implements OnInit {
   ngOnInit() {
     this.audioService.searchAudios(this.params).subscribe((res: any)=>{
       this.list = JSON.parse(res._body).info;
-      console.log(this.list);
       console.log(this.editorService.currentProject);
     });
     this.audioService.loadAudios(0, 30);
@@ -78,6 +80,7 @@ export class AddAudiosComponent implements OnInit {
     this.columns4 = '';
     this.isBlockView = '';
     this.isListView = 'active';
+    this.playInit();
   }
 
   on4Columns() {
@@ -86,6 +89,7 @@ export class AddAudiosComponent implements OnInit {
     this.columns4 = 'active';
     this.isBlockView = 'active';
     this.isListView = '';
+    this.playInit();
   }
 
 
@@ -129,6 +133,12 @@ export class AddAudiosComponent implements OnInit {
   }
 
   audioPlay(i) {
+    this.playInit();
+    this.previousIndex = i;
+    document.getElementById('playicon' + i).classList.remove('active');
+    document.getElementById('pauseicon' + i).classList.add('active');
+    document.getElementById('progress' + i).classList.add('active');
+    document.getElementById('progress1' + i).classList.add('active');
     this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
     this.audioElement.play()
     .then(_ => {
@@ -137,11 +147,26 @@ export class AddAudiosComponent implements OnInit {
     .catch(e => {
       console.log('loading...');
     });
+    this.intervalId = setInterval(() => {
+      this.progress = Math.floor(this.audioElement.currentTime * 100 / this.audioElement.duration) + '%';
+    }, 100);
   }
 
   audioLoad(i) {
+    document.getElementById('pauseicon' + i).classList.remove('active');
+    document.getElementById('playicon' + i).classList.add('active');
+    document.getElementById('progress' + i).classList.remove('active');
+    document.getElementById('progress1' + i).classList.remove('active');
     this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
-    this.audioElement.pause();
+    this.audioElement.load();
+    clearInterval(this.intervalId);
+    this.progress = '0%';
+  }
+
+  playInit() {
+    if (this.audioElement) {
+      this.audioLoad(this.previousIndex);
+    }
   }
 
 }
