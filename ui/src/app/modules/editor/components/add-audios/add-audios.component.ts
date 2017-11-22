@@ -30,7 +30,7 @@ export class AddAudiosComponent implements OnInit {
   isListView: String = '';
   intervalId: any;
   progress: any;
-  previousIndex: any;
+  previousIndex = 0;
 
   constructor(
     public editorService: EditorService,
@@ -137,8 +137,8 @@ export class AddAudiosComponent implements OnInit {
     this.previousIndex = i;
     document.getElementById('playicon' + i).classList.remove('active');
     document.getElementById('pauseicon' + i).classList.add('active');
+    document.getElementById('fprogress' + i).classList.add('active');
     document.getElementById('progress' + i).classList.add('active');
-    document.getElementById('progress1' + i).classList.add('active');
     this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
     this.audioElement.play()
     .then(_ => {
@@ -155,8 +155,8 @@ export class AddAudiosComponent implements OnInit {
   audioLoad(i) {
     document.getElementById('pauseicon' + i).classList.remove('active');
     document.getElementById('playicon' + i).classList.add('active');
+    document.getElementById('fprogress' + i).classList.remove('active');
     document.getElementById('progress' + i).classList.remove('active');
-    document.getElementById('progress1' + i).classList.remove('active');
     this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
     this.audioElement.load();
     clearInterval(this.intervalId);

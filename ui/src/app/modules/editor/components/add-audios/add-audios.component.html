@@ -146,7 +146,7 @@
     <div *ngFor="let audio of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">
         <figure id="id{{i}}" class="effect-image {{isBlockView}}" *ngIf="audio.thumbnail_url" (mouseenter)="audioPlay(i)" (mouseleave)="audioLoad(i)">
           <img [src]="audio.thumbnail_url" alt="{{audio.title}}" (click)="addVideo('audio', audio)"/>
-          <div id="progress1{{i}}" class="progress-gray" [style.width]="progress">                
+          <div id="fprogress{{i}}" class="progress-gray" [style.width]="progress">                
           </div>
           <div class="audio-thumb-container">
             <audio id="audio{{i}}" loop >
