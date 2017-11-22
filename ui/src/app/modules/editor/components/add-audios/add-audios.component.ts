@@ -151,6 +151,9 @@ export class AddAudiosComponent implements OnInit {
     });
     this.intervalId = setInterval(() => {
       this.progress = Math.floor(this.audioElement.currentTime * 100 / this.audioElement.duration) + '%';
+      if (this.audioElement.ended) {
+        this.audioLoad(i);
+      }
     }, 100);
   }
 
