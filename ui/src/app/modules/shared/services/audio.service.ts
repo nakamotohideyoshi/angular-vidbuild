@@ -25,6 +25,8 @@ export class AudioService {
     const hex = CryptoJS.enc.Hex.stringify(encrypted);
     console.log(unixTimeInSeconds);
     console.log(hex);
+    headers.append('Access-Control-Allow-Origin', '*');
+    // headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Content-Type', 'application/json');
     this.audioBlocksUrl += '?APIKEY=' + this.api_key + '&HMAC=' + hex + '&EXPIRES=' + unixTimeInSeconds + '&keywords=';
   }
@@ -32,7 +34,7 @@ export class AudioService {
   public searchAudios(params) {
     const headers = new Headers();
     this.createAuthorizationHeader(headers);
-    const url = this.audioBlocksUrl + params;
+    const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks';
     console.log(url);
     return this.http.get(url, {
       headers: headers

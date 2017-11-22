@@ -186,6 +186,16 @@ figure.effect-image {
   img{
     height: 100%; width: 100%; background-size: cover
   }
+  .progress-gray{
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
   .right-bottom-link-plus, .right-bottom-link-check{
     position: absolute;
     right: 0;
@@ -198,7 +208,7 @@ figure.effect-image {
     display: none;
   }
   figcaption {
-    background: transparent;      
+    background: rgba(0, 0, 0, 0.05);     
     [class^="right-"], [class^="left-"]{
       color: white;
       span{
@@ -250,6 +260,20 @@ figure.effect-image {
       display: flex;
       text-align: left;
       padding: 0;
+      &:hover{
+        .center-icons{
+          &.play-icon{
+            &.active{
+              display: block;
+            }
+          }
+          &.pause-icon{
+            &.active{
+              display: block;
+            }
+          }
+        }
+      }
       img{
         width: 70px;
         height: 70px;
@@ -264,13 +288,23 @@ figure.effect-image {
         position: absolute;
         top: 33px;
         left: 29px;
-        &.pause-icon{
-          display: none;
-        }
+        color: #ffffff;
+        display: none;
       }
     }
     .wave-form{
-      background-color: #8a8f90;
+      background-color: transparent;
+      padding: 0;
+      .progress-gray{        
+        position: relative;
+        height: 100%;
+        width: 0%;
+        background-color: rgba(0, 0, 0, 0.25);
+        display: none;
+        &.active{
+          display: block;
+        }
+      }
     }
     .options{
       display: flex;
