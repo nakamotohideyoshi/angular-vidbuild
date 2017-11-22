@@ -146,6 +146,8 @@
     <div *ngFor="let audio of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">
         <figure id="id{{i}}" class="effect-image {{isBlockView}}" *ngIf="audio.thumbnail_url" (mouseenter)="audioPlay(i)" (mouseleave)="audioLoad(i)">
           <img [src]="audio.thumbnail_url" alt="{{audio.title}}" (click)="addVideo('audio', audio)"/>
+          <div id="progress1{{i}}" class="progress-gray" [style.width]="progress">                
+          </div>
           <div class="audio-thumb-container">
             <audio id="audio{{i}}" loop >
               <source src="{{audio.preview_url}}" type="audio/mp3" />
@@ -178,20 +180,22 @@
                 <span>Song Name</span>
                 <span>Artist Name</span>
               </div>
-              <div class="center-icons play-icon">
+              <div class="center-icons play-icon active" (click)="audioPlay(i)" id="playicon{{i}}">
                 <i class="fa fa-play"></i>
               </div>
-              <div class="center-icons pause-icon">
+              <div class="center-icons pause-icon" (click)="audioLoad(i)" id="pauseicon{{i}}">
                 <i class="fa fa-pause"></i>
               </div>
             </div>
-            <div class="wave-form col-xs-6">
-              
+            <div class="wave-form col-xs-6" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%'}">                           
+              <div id="progress{{i}}" class="progress-gray" [style.width]="progress">                
+              </div>
+                  
             </div>
             <div class="options col-xs-3">
               <span>2:39</span>
               <i class="fa fa-star-o"></i>
-              <a class="btn btn-lg btn-primary">
+              <a class="btn btn-lg btn-primary" (click)="addVideo('audio', audio)">
                 <span>Add</span>
               </a>
             </div>
