@@ -175,7 +175,7 @@
         <div class="container audio-list col-xs-12 {{isListView}}">
           <div class="audio-detail col-xs-12">
             <div class="thumb-img col-xs-3">
-              <img [src]="audio.thumbnail_url" alt="{{audio.title}}">
+              <div class="thumbnail" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%', 'background-color': 'rgba(0, 0, 0, 0.6)'}"></div>
               <div class="detail">
                 <span class="title">{{audio.title}}</span>
                 <span class="type">{{audio.type}}</span>
