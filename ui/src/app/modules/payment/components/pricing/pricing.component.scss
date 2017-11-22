@@ -6,33 +6,6 @@ $footer-pricing-txt: #a5a5a5;
 .pricing{
  padding: 20px 0;
 
-    .plan-container{
-        padding: 5px 20px 0 0;
-
-        .pricing-icon{
-            display:inline-block;
-            background-image: url('/assets/pricing-icons.png');
-            height: 32px;
-            width: 32px;          
-        }
-        .video-logo{
-            background-position-x: 0;
-        }
-        .audio-logo{
-            background-position-x: -32px;
-        }
-        .standard-premium-txt{
-            display:inline-block;
-            text-align: left;
-            font-size:13px;
-
-            .standard-premium-title{
-                font-family: $font-muli-black;
-                font-weight: $bold;
-            }
-        }
-    }
-
     .subscription-payment{
         background-color: $subscription-color-background;
         margin:10px 0;
