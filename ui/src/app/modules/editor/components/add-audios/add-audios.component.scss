@@ -221,9 +221,13 @@ figure.effect-image {
       padding: 0 5px 10px 0;
     }
     .left-bottom-link{
+      text-align: left;
       p{
         font-size: 12px;
         margin: 0;
+        &.title{
+          font-weight: bold;
+        }
       }
     }  
   }  
@@ -283,6 +287,13 @@ figure.effect-image {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        .title{
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .type{
+          font-size: 12px;
+        }
       }
       .center-icons{
         position: absolute;

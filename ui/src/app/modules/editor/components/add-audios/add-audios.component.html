@@ -157,13 +157,13 @@
           <div class="right-bottom-link-check" (click)="disCountSelectedVid(i)">
             <i class="fa fa-check"></i>
           </div>
-          <figcaption  (click)="addVideo('video', audio)">              
+          <figcaption  (click)="blockOnClick($event, i)">              
             <div class="right-top-link">
               <i class="fa fa-star-o"></i>
             </div>
             <div class="left-bottom-link">
-              <p>Artist Name</p>
-              <p>Song Name</p>
+              <p class="title">{{audio.title}}</p>
+              <p class="type">{{audio.type}}</p>
             </div>
             <div class="right-bottom-link" (click)="countSelectedVid(i)">
                 <a class="btn btn-lg btn-primary">
@@ -177,8 +177,8 @@
             <div class="thumb-img col-xs-3">
               <img [src]="audio.thumbnail_url" alt="{{audio.title}}">
               <div class="detail">
-                <span>Song Name</span>
-                <span>Artist Name</span>
+                <span class="title">{{audio.title}}</span>
+                <span class="type">{{audio.type}}</span>
               </div>
               <div class="center-icons play-icon active" (click)="audioPlay(i)" id="playicon{{i}}">
                 <i class="fa fa-play"></i>
@@ -187,13 +187,13 @@
                 <i class="fa fa-pause"></i>
               </div>
             </div>
-            <div class="wave-form col-xs-6" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%'}">                           
+            <div id="waveform{{i}}" class="wave-form col-xs-6" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%'}" (click)="listOnClick($event, i)">                           
               <div id="progress{{i}}" class="progress-gray" [style.width]="progress">                
               </div>
                   
             </div>
             <div class="options col-xs-3">
-              <span>2:39</span>
+              <span>{{ audio.duration/60-audio.duration%60/60 < 10 ? '0'+(audio.duration/60-audio.duration%60/60) : audio.duration/60-audio.duration%60/60 }}:{{ audio.duration%60 < 10 ? '0'+audio.duration%60 : audio.duration%60 }}</span>
               <i class="fa fa-star-o"></i>
               <a class="btn btn-lg btn-primary" (click)="addVideo('audio', audio)">
                 <span>Add</span>
