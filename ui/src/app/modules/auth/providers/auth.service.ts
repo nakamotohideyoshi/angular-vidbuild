@@ -11,6 +11,7 @@ export class AuthService {
 
   authState: any = null;
   currentCoins: any = 0;
+  token: string;
 
   constructor(private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
@@ -18,10 +19,17 @@ export class AuthService {
     private store: Store<any>
   ) {
 
-    this.afAuth.authState.subscribe((auth) => {
+    this.afAuth.authState.subscribe((auth : any) => {
       this.authState = auth;
-      this.store.dispatch(new AuthActions.LoginSuccessAction(auth));
-      this.setCurrentCoins();
+      if(auth){
+        firebase.auth().currentUser.getToken()
+        .then((val)=>{
+          this.token = val;
+          console.log(val)
+        })
+        this.store.dispatch(new AuthActions.LoginSuccessAction(auth));
+        this.setCurrentCoins();
+      }
     });
   }
 

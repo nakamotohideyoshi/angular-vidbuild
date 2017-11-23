@@ -3,7 +3,8 @@ import { EditorService } from './../../services/editor.service';
 import { Response } from '@angular/http';
 import { AudioService } from '../../../shared/services/audio.service';
 import { Observable } from 'rxjs/Observable';
-import {MultiSearchSerivice} from './../../../shared/services/multi-search.service';
+import { MultiSearchSerivice } from './../../../shared/services/multi-search.service';
+import { AuthService } from '../../../auth/providers/auth.service';
 
 @Component({
   selector: 'app-add-audios',
@@ -38,10 +39,15 @@ export class AddAudiosComponent implements OnInit {
   constructor(
     public editorService: EditorService,
     private audioService: AudioService,
-    public multiSearchService: MultiSearchSerivice
+    public multiSearchService: MultiSearchSerivice,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
+    this.auth.currentUserObservable.subscribe((data) => {
+      console.log(data);
+      this.loadAudio();
+    })
     // this.audioService.searchAudios(this.params).subscribe((res: any)=>{
     //   this.list = JSON.parse(res._body).info;
     //   console.log(this.editorService.currentProject);
@@ -55,6 +61,28 @@ export class AddAudiosComponent implements OnInit {
     this.bindList();
   }
 
+  loadAudio(){
+    console.log("loadAudio")
+    this.audioService
+      .searchAudios(this.params)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.list = res;
+      });
+      // .then((audios)=>{
+      //   this.list = audios;
+      //   console.log("ssss",this.list)
+      // })
+      // .catch(err => console.log(err))
+
+    // this.audioService.loadAudios(0, 30);
+    // this.post$ = this.audioService.audios();
+    this.audioService.total().subscribe((total) => {
+      this.total = total;
+    });
+    this.bindList();
+  }
+  
   addVideo(type, file) {
     this.editorService.addFile(type, file)
     .then((result) => {

@@ -138,11 +138,12 @@
     </div>
   </div>
 </div>
-  
+  {{list | json}}
 <div infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="500" (scrolled)="onScroll($event)"
       class="bg-section">
   <div class="row no-gutters" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
     <!-- <div *ngFor="let i of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}"> -->
+    <!--<div *ngFor="let audio of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">-->
     <div *ngFor="let audio of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">
         <figure id="id{{i}}" class="effect-image {{isBlockView}}" *ngIf="audio.thumbnail_url" (mouseenter)="displayfCursor(i)" (mouseleave)="hidefCursor(i)"(click)="blockOnClick($event, i)">
           <img [src]="audio.thumbnail_url" alt="{{audio.title}}" (click)="addVideo('audio', audio)"/>

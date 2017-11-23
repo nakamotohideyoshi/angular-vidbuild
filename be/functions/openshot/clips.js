@@ -45,14 +45,14 @@ exports.update = functions.database.ref('/users-current-project/{userId}/clips/{
     const clip = snapshot.val();
 
     const options = constants.BASE_OS_DEV_REQUEST;
-    options.url = `${constants.OPENSHOT_URL}projects/${clip.projectId}/clips/${clip.OpenSClipId}?format=json`;
+    options.url = `${constants.OPENSHOT_URL}clips/${clip.OpenSClipId}?format=json`;
     options['formData'] = {
         file: `${constants.OPENSHOT_URL}files/${clip.fileId}/?format=json`,
         project: `${constants.OPENSHOT_URL}projects/${clip.projectId}/?format=json`,
-        position: clip.timelinePos || 0,
-        start: clip.clipStartAt || 0,
-        end: clip.clipEndAt || 10,
-        layer: clip.layer || 1,
+        position: clip.timelinePos,
+        start: clip.clipStartAt,
+        end: clip.clipEndAt,
+        layer: clip.layer,
         json: '{}'
     };
 
@@ -61,9 +61,11 @@ exports.update = functions.database.ref('/users-current-project/{userId}/clips/{
     rp
         .put(options)
         .then((res) => {
-            return admin.database().ref(`/users-current-project/${userId}/clips/${clipId}`).update({ status: "created" });
+            console.log(res.body)
+            return admin.database().ref(`/users-current-project/${userId}/clips/${clipId}`).update({ status: "updated" });
         })
         .catch((err) => {
+            console.log(err)
             return err;
         })
 });
