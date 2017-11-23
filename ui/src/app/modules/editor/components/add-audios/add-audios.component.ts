@@ -28,7 +28,7 @@ export class AddAudiosComponent implements OnInit {
   isBlockView: String = 'active';
   isListView: String = '';
   intervalId: any;
-  progress = '0%';
+  // progress = '0%';
   previousIndex = 0;
   audioElement: HTMLAudioElement;
   htmlElement: HTMLElement;
@@ -139,11 +139,11 @@ export class AddAudiosComponent implements OnInit {
   audioPlay(i) {
     this.playInit();
     this.previousIndex = i;
-    document.getElementById('playicon' + i).classList.remove('active');
-    document.getElementById('pauseicon' + i).classList.add('active');
-    document.getElementById('fprogress' + i).classList.add('active');
-    document.getElementById('progress' + i).classList.add('active');
-    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    if (this.isListView === 'active') {
+      document.getElementById('playicon' + i).classList.remove('active');
+      document.getElementById('pauseicon' + i).classList.add('active');
+    }
+    this.getAudioElement(i);
     this.audioElement.play()
     .then(_ => {
       console.log('playing...');
@@ -153,7 +153,14 @@ export class AddAudiosComponent implements OnInit {
     });
     this.audioElement.currentTime = this.tempTime;
     this.intervalId = setInterval(() => {
-      this.progress = Math.floor(this.audioElement.currentTime * 100 / this.audioElement.duration) + '%';
+      if (this.isBlockView === 'active') {
+        const rect = (document.getElementById('id' + i)).getBoundingClientRect();
+        this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
+      } else {
+        document.getElementById('pointer' + i).classList.add('active');
+        const rect = (document.getElementById('waveform' + i)).getBoundingClientRect();
+        this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
+      }
       if (this.audioElement.ended) {
         this.audioLoad(i);
       }
@@ -161,11 +168,12 @@ export class AddAudiosComponent implements OnInit {
   }
 
   audioLoad(i) {
-    document.getElementById('pauseicon' + i).classList.remove('active');
-    document.getElementById('playicon' + i).classList.add('active');
-    document.getElementById('fprogress' + i).classList.remove('active');
-    document.getElementById('progress' + i).classList.remove('active');
-    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    if (this.isListView === 'active') {
+      document.getElementById('playicon' + i).classList.add('active');
+      document.getElementById('pauseicon' + i).classList.remove('active');
+      document.getElementById('pointer' + i).classList.remove('active');
+    }
+    this.getAudioElement(i);
     this.audioElement.load();
     clearInterval(this.intervalId);
   }
@@ -174,13 +182,12 @@ export class AddAudiosComponent implements OnInit {
     if (this.audioElement) {
       this.audioLoad(this.previousIndex);
     }
-    this.progress = '0%';
   }
 
   blockOnClick($event, i) {
     this.htmlElement = document.getElementById('id' + i);
     const rect = this.htmlElement.getBoundingClientRect();
-    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    this.getAudioElement(i);
     this.tempTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
     this.audioElement.currentTime = this.tempTime;
     if (this.audioElement.played.length === 0) {
@@ -191,7 +198,7 @@ export class AddAudiosComponent implements OnInit {
   listOnClick($event, i) {
     this.htmlElement = document.getElementById('waveform' + i);
     const rect = this.htmlElement.getBoundingClientRect();
-    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    this.getAudioElement(i);
     this.tempTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
     this.audioElement.currentTime = this.tempTime;
     if (this.audioElement.played.length === 0) {
@@ -200,39 +207,39 @@ export class AddAudiosComponent implements OnInit {
   }
 
   displayCursor(i) {
-    document.getElementById('pointer' + i).classList.add('active');
-  }
-  hideCursor(i) {
-    document.getElementById('pointer' + i).classList.remove('active');
-    this.cursorPointer = 0;
     this.tempTime = 0;
+    this.getAudioElement(i);
+    if (this.audioElement.played.length === 0) {
+      this.audioPlay(i);
+    }
   }
 
-  moveCursor($event, i) {
-    const rect = (document.getElementById('waveform' + i)).getBoundingClientRect();
-    this.cursorPointer = $event.clientX - rect.left - 3;
+  hideCursor(i) {
+    this.getAudioElement(i);
+    if (this.audioElement.played.length !== 0) {
+      this.audioLoad(i);
+    }
+    this.tempTime = 0;
   }
 
   displayfCursor(i) {
     document.getElementById('fpointer' + i).classList.add('active');
-    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    this.getAudioElement(i);
     if (this.audioElement.played.length === 0) {
       this.audioPlay(i);
     }
   }
   hidefCursor(i) {
     document.getElementById('fpointer' + i).classList.remove('active');
-    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    this.getAudioElement(i);
     if (this.audioElement.played.length !== 0) {
       this.audioLoad(i);
     }
-    this.cursorPointer = 0;
     this.tempTime = 0;
   }
 
-  movefCursor($event, i) {
-    const rect = (document.getElementById('id' + i)).getBoundingClientRect();
-    this.cursorPointer = $event.clientX - rect.left - 3;
+  getAudioElement(i) {
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
   }
 
 }
