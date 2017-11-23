@@ -144,10 +144,11 @@
   <div class="row no-gutters" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
     <!-- <div *ngFor="let i of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}"> -->
     <div *ngFor="let audio of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">
-        <figure id="id{{i}}" class="effect-image {{isBlockView}}" *ngIf="audio.thumbnail_url" (mouseenter)="audioPlay(i)" (mouseleave)="audioLoad(i)">
+        <figure id="id{{i}}" class="effect-image {{isBlockView}}" *ngIf="audio.thumbnail_url" (mouseenter)="displayfCursor(i)" (mouseleave)="hidefCursor(i)" (mousemove)="movefCursor($event, i)" (click)="blockOnClick($event, i)">
           <img [src]="audio.thumbnail_url" alt="{{audio.title}}" (click)="addVideo('audio', audio)"/>
           <div id="fprogress{{i}}" class="progress-gray" [style.width]="progress">                
           </div>
+          <div id="fpointer{{i}}" class="cursor" [style.left.px]="cursorPointer"></div>
           <div class="audio-thumb-container">
             <audio id="audio{{i}}" >
               <source src="{{audio.preview_url}}" type="audio/mp3" />
@@ -157,7 +158,7 @@
           <div class="right-bottom-link-check" (click)="disCountSelectedVid(i)">
             <i class="fa fa-check"></i>
           </div>
-          <figcaption  (click)="blockOnClick($event, i)">              
+          <figcaption>              
             <div class="right-top-link">
               <i class="fa fa-star-o"></i>
             </div>
@@ -170,12 +171,14 @@
                   <span>Add</span>
                 </a>
             </div>            
-          </figcaption>
+          </figcaption>          
         </figure>
         <div class="container audio-list col-xs-12 {{isListView}}">
           <div class="audio-detail col-xs-12">
             <div class="thumb-img col-xs-3">
-              <div class="thumbnail" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%', 'background-color': 'rgba(0, 0, 0, 0.6)'}"></div>
+              <div class="thumbnail">
+                <img [src]="audio.thumbnail_url" alt="{{audio.title}}">
+              </div>
               <div class="detail">
                 <span class="title">{{audio.title}}</span>
                 <span class="type">{{audio.type}}</span>
@@ -187,9 +190,10 @@
                 <i class="fa fa-pause"></i>
               </div>
             </div>
-            <div id="waveform{{i}}" class="wave-form col-xs-6" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%'}" (click)="listOnClick($event, i)">                           
+            <div id="waveform{{i}}" class="wave-form col-xs-6" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%', 'overflow': 'hidden'}" (click)="listOnClick($event, i)" (mouseenter)="displayCursor(i)" (mouseleave)="hideCursor(i)" (mousemove)="moveCursor($event, i)">                           
               <div id="progress{{i}}" class="progress-gray" [style.width]="progress">                
               </div>
+              <div id="pointer{{i}}" class="cursor" [style.left.px]="cursorPointer"></div>
                   
             </div>
             <div class="options col-xs-3">

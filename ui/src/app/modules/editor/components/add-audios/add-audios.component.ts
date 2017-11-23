@@ -32,6 +32,8 @@ export class AddAudiosComponent implements OnInit {
   previousIndex = 0;
   audioElement: HTMLAudioElement;
   htmlElement: HTMLElement;
+  cursorPointer = 0;
+  tempTime = 0;
 
   constructor(
     public editorService: EditorService,
@@ -149,6 +151,7 @@ export class AddAudiosComponent implements OnInit {
     .catch(e => {
       console.log('loading...');
     });
+    this.audioElement.currentTime = this.tempTime;
     this.intervalId = setInterval(() => {
       this.progress = Math.floor(this.audioElement.currentTime * 100 / this.audioElement.duration) + '%';
       if (this.audioElement.ended) {
@@ -175,25 +178,61 @@ export class AddAudiosComponent implements OnInit {
   }
 
   blockOnClick($event, i) {
-    if ((document.getElementById('audio' + i) as HTMLAudioElement).currentTime !== 0) {
-      this.htmlElement = document.getElementById('id' + i);
-      const rect = this.htmlElement.getBoundingClientRect();
-      this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
-      this.audioElement.currentTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
-    } else {
-      (document.getElementById('audio' + i) as HTMLAudioElement).currentTime = 0;
+    this.htmlElement = document.getElementById('id' + i);
+    const rect = this.htmlElement.getBoundingClientRect();
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    this.tempTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
+    this.audioElement.currentTime = this.tempTime;
+    if (this.audioElement.played.length === 0) {
+      this.audioPlay(i);
     }
   }
 
   listOnClick($event, i) {
-    if ((document.getElementById('audio' + i) as HTMLAudioElement).currentTime !== 0) {
-      this.htmlElement = document.getElementById('waveform' + i);
-      const rect = this.htmlElement.getBoundingClientRect();
-      this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
-      this.audioElement.currentTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
-    } else {
-      (document.getElementById('audio' + i) as HTMLAudioElement).currentTime = 0;
+    this.htmlElement = document.getElementById('waveform' + i);
+    const rect = this.htmlElement.getBoundingClientRect();
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    this.tempTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
+    this.audioElement.currentTime = this.tempTime;
+    if (this.audioElement.played.length === 0) {
+      this.audioPlay(i);
     }
+  }
+
+  displayCursor(i) {
+    document.getElementById('pointer' + i).classList.add('active');
+  }
+  hideCursor(i) {
+    document.getElementById('pointer' + i).classList.remove('active');
+    this.cursorPointer = 0;
+    this.tempTime = 0;
+  }
+
+  moveCursor($event, i) {
+    const rect = (document.getElementById('waveform' + i)).getBoundingClientRect();
+    this.cursorPointer = $event.clientX - rect.left - 3;
+  }
+
+  displayfCursor(i) {
+    document.getElementById('fpointer' + i).classList.add('active');
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    if (this.audioElement.played.length === 0) {
+      this.audioPlay(i);
+    }
+  }
+  hidefCursor(i) {
+    document.getElementById('fpointer' + i).classList.remove('active');
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
+    if (this.audioElement.played.length !== 0) {
+      this.audioLoad(i);
+    }
+    this.cursorPointer = 0;
+    this.tempTime = 0;
+  }
+
+  movefCursor($event, i) {
+    const rect = (document.getElementById('id' + i)).getBoundingClientRect();
+    this.cursorPointer = $event.clientX - rect.left - 3;
   }
 
 }
