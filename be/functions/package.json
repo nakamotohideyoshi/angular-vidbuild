@@ -3,8 +3,10 @@
   "description": "Set of firebase cloud functions",
   "dependencies": {
     "@google-cloud/logging": "^0.7.1",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "crypto": "^1.0.1",
+    "express": "^4.16.2",
     "firebase-admin": "^4.0.5",
     "firebase-functions": "^0.5.1",
     "install": "^0.10.1",
