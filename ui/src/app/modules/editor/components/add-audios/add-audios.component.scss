@@ -239,7 +239,19 @@ figure.effect-image {
         }
       }
     }  
-  }  
+  }
+  .cursor{
+    position: absolute;
+    height: 100%;
+    width: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
 }
 
 .audio-thumb-container{
@@ -275,6 +287,9 @@ figure.effect-image {
       padding: 0;
       &:hover{
         .center-icons{
+          width: 70px;
+          height: 70px;
+          padding: 23px 29px;
           &.play-icon{
             &.active{
               display: block;
@@ -290,6 +305,11 @@ figure.effect-image {
       .thumbnail{
         width: 70px;
         height: 70px;
+        background-color: rgba(0, 0, 0, 0.6);
+        img{
+          width: 70px;
+          height: 70px;
+        }
       }
       .detail{
         margin-left: 10px;
@@ -306,13 +326,12 @@ figure.effect-image {
       }
       .center-icons{
         position: absolute;
-        top: 33px;
-        left: 29px;
         color: #ffffff;
         display: none;
       }
     }
     .wave-form{
+      position: relative;
       background-color: transparent;
       padding: 0;
       .progress-gray{        
@@ -320,6 +339,18 @@ figure.effect-image {
         height: 100%;
         width: 0%;
         background-color: rgba(0, 0, 0, 0.25);
+        display: none;
+        &.active{
+          display: block;
+        }
+      }
+      .cursor{
+        position: absolute;
+        height: 100%;
+        width: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        left: 0;
+        top: 0;
         display: none;
         &.active{
           display: block;
