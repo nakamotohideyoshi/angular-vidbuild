@@ -161,9 +161,10 @@
   <div class="row no-gutters" *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0">
     <!-- <div *ngFor="let i of list | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4]" ngClass="{{columns}}"> -->
     <div *ngFor="let audio of (post$ | async) | multiSearchFilter: itemList[0] : itemList[1] :itemList[2] : itemList[3] : itemList[4] ; let i=index" ngClass="{{columns}}">
-        <figure id="id{{i}}" class="effect-image {{isBlockView}}" *ngIf="audio.thumbnail_url" (mouseenter)="displayfCursor(i)" (mouseleave)="hidefCursor(i)"(click)="blockOnClick($event, i)">
+        <figure id="id{{i}}" class="effect-image {{isBlockView}}" *ngIf="audio.thumbnail_url" (mouseenter)="displayfCursor(i)" (mouseleave)="hidefCursor(i)" (mousemove)="movefCursor($event, i)" (click)="blockOnClick($event, i)">
           <img [src]="audio.thumbnail_url" alt="{{audio.title}}" (click)="addVideo('audio', audio)"/>
-          
+          <div id="fprogress{{i}}" class="progress-gray" [style.width]="progress">                
+          </div>
           <div id="fpointer{{i}}" class="cursor" [style.left.px]="cursorPointer"></div>
           <div class="audio-thumb-container">
             <audio id="audio{{i}}" >
@@ -199,15 +200,16 @@
                 <span class="title">{{audio.title}}</span>
                 <span class="type">{{audio.type}}</span>
               </div>
-              <div class="center-icons play-icon active" (click)="displayCursor(i)" id="playicon{{i}}">
+              <div class="center-icons play-icon active" (click)="onClickPlay(i)" id="playicon{{i}}">
                 <i class="fa fa-play"></i>
               </div>
-              <div class="center-icons pause-icon" (click)="hideCursor(i)" id="pauseicon{{i}}">
+              <div class="center-icons pause-icon" (click)="onClickPause(i)" id="pauseicon{{i}}">
                 <i class="fa fa-pause"></i>
               </div>
             </div>
-            <div id="waveform{{i}}" class="wave-form col-4 col-sm-5 col-md-6 col-lg-7" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%', 'overflow': 'hidden'}" (click)="listOnClick($event, i)">                           
-              
+            <div id="waveform{{i}}" class="wave-form col-4 col-sm-5 col-md-6 col-lg-7" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%', 'overflow': 'hidden'}" (click)="listOnClick($event, i)" (mousemove)="moveCursor($event, i)" (mouseenter)="displayCursor(i)" (mouseleave)="hideCursor(i)">                           
+              <div id="progress{{i}}" class="progress-gray" [style.width]="progress">                
+              </div>
               <div id="pointer{{i}}" class="cursor" [style.left.px]="cursorPointer"></div>
                   
             </div>
