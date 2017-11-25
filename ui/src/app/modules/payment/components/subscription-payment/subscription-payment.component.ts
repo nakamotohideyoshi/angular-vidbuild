@@ -72,7 +72,8 @@ export class SubscriptionPaymentComponent implements OnInit {
       this.handler.open({
         name: name,
         description: description,
-        amount: amount
+        amount: amount,
+        tax_percent: 20
       });
     } else {
       alert('Change your plan in user profile page');

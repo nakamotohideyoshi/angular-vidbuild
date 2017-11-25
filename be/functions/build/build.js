@@ -54,7 +54,6 @@ const validateProcessType = (userId, project, status) => {
 }
 
 const generateQueue = (userId, project, status) => {
-  console.log("generateQueue", userId, project, status)
   admin.database()
     .ref(`/users-current-project/${userId}`)
     .once('value')
@@ -62,170 +61,182 @@ const generateQueue = (userId, project, status) => {
       project = snapshot.val();
 
       //check project files status uploaded
+      changeProjectStatus('generating queue', userId);
+      const updates = {};
+      const projectfiles = project.files;
 
-      if (project.resourcesUploaded) {
-        return changeProjectStatus('creating ' + project.type, userId);
-      } else {
-
-        changeProjectStatus('generating queue', userId);
-        const updates = {};
-        const projectfiles = project.files;
-        const finalFiles = {};
-
-        for (let file in projectfiles) {
-          finalFiles[file] = {
+      for (let file in projectfiles) {
+        if (projectfiles[file] && projectfiles[file].status != "uploaded") {
+          projectfiles[file] = Object.assign({} , projectfiles[file], {
             src: projectfiles[file].file.display_sizes[0].uri,
             replaceSrc: '',
-            status: 'pending',
+            status: projectfiles[file].status,
             type: "new", //new or update
             projectId: project.OpenSId,
             attempts: 0
-          }
-          changeProjectStatus('generated queue', userId);
+          })
         }
-
-        return admin.database().ref(`/users-files-queue/${userId}`).update(finalFiles);
-
       }
+
+      changeProjectStatus('generated queue', userId);
+      return admin.database().ref(`/users-current-project/${userId}/files`).update(projectfiles);
+
 
     })
     .catch(error => console.log('generateQueue error', error))
 }
 
-const checkFilesStatus = (files, userId) => {
-  for (let file in files) {
-    console.log(files[file])
-    if (files[file].attempts < 4 && (files[file].status === 'pending' || files[file].status === 'fail')) {
-      const options = constants.BASE_AWS_DEV_REQUEST;
-      options['method'] = 'POST';
-      options.url = `${constants.AWS_URL}files`;
-      options['body'] = {
-        projectId: files[file].projectId,
-        fileUrl: files[file].src
-      }
+const checkFilesStatus = (userId, project) => {
+  admin.database()
+    .ref(`/users-current-project/${userId}`)
+    .once('value')
+    .then(snapshot => {
+      project = snapshot.val();
 
-      rp(options)
-        .then((parsedBody) => {
-          admin.database().ref(`/users-current-project/${userId}/files/${file}`).update({
-            status: 'uploaded',
-            fileId: parsedBody.body.id
-          });
-          return admin.database().ref(`/users-files-queue/${userId}/${file}`).update({
-            status: 'uploaded',
-            fileId: parsedBody.body.id,
-            type: 'update'
-          });
-        })
-        .catch(function (error) {
-          return admin.database().ref(`/users-files-queue/${userId}/${file}`).update({
-            status: 'fail',
-            attempts: files[file].attempts + 1
-          });
-        });
-    }
-  }
+      let files = project.files;
+      for (let file in files) {
+        console.log(files[file])
+        if (files[file].attempts < 4 && (files[file].status === 'pending' || files[file].status === 'fail')) {
+          
+          const options = constants.BASE_AWS_DEV_REQUEST;
+          options['method'] = 'POST';
+          options.url = `${constants.AWS_URL}files`;
+          options['body'] = {
+            projectId: files[file].projectId,
+            fileUrl: files[file].src
+          }
+
+          rp(options)
+            .then((parsedBody) => {
+              console.log("file updated")
+              return admin.database().ref(`/users-current-project/${userId}/files/${file}`).update({
+                status: 'uploaded',
+                fileId: parsedBody.body.id,
+                type: 'update'
+              });
+              // return admin.database().ref(`/users-files-queue/${userId}/${file}`).update({
+              //   status: 'uploaded',
+              //   fileId: parsedBody.body.id,
+              //   type: 'update'
+              // });
+            })
+            .catch(function (error) {
+              return admin.database().ref(`/users-current-project/${userId}/files/${file}`).update({
+                status: 'fail',
+                attempts: files[file].attempts + 1
+              });
+            });
+        } else {
+          if(project.exporting){
+            return changeProjectStatus(`creating ${project.type}`, userId);
+          } else {
+            return admin
+            .database()
+            .ref(`/users-current-project/${userId}`)
+            .update({ status: 'upload finished', resourcesUploaded: true });
+          }
+        }
+      }
+    });
 }
 
 const runQueue = (userId, project) => {
-  changeProjectStatus('running queue', userId);
+  //changeProjectStatus('running queue', userId);
+  return changeProjectStatus(`checking files`, userId);
 
-  admin.database()
-    .ref(`/users-files-queue/${userId}`)
-    .once('value')
-    .then(snapshot => {
-      files = snapshot.val();
-      return checkFilesStatus(files, userId);
-    });
+  // admin.database()
+  //   .ref(`/users-files-queue/${userId}`)
+  //   .once('value')
+  //   .then(snapshot => {
+  //     files = snapshot.val();
+  //     return changeProjectStatus(`checking files`, userId);
+  //     //return checkFilesStatus(files, userId);
+  //   });
 };
 
 const runExport = (userId, project, type) => {
   const options = constants.BASE_OS_DEV_REQUEST;
 
   admin.database()
-  .ref(`/users-current-project/${userId}`)
-  .once('value')
-  .then(snapshot => {
-    project = snapshot.val();
+    .ref(`/users-current-project/${userId}`)
+    .once('value')
+    .then(snapshot => {
+      project = snapshot.val();
 
-  options.url = `${constants.OPENSHOT_URL}exports/?format=json`;
-  options['formData'] = {
-    // "export_type": "video",
-    // "video_format": "mp4",
-    // "video_codec": "libx264",
-    // "video_bitrate": 15000000,
-    // "audio_codec": "ac3",
-    // "audio_bitrate": 1920000,
-    // "start_frame": 1,
-    // "end_frame": 112,//from UI
-    // "project": `${constants.OPENSHOT_URL}projects/${project.OpenSId}/`,
-    // "json": "{}",
-    project: `${constants.OPENSHOT_URL}projects/${project.OpenSId}/?format=json`,
-    audio_bitrate: 192000,
-    audio_codec: "libmp3lame",
-    end_frame: 112,
-    export_type: "video",
-    start_frame: 1,
-    video_bitrate: 4000000,
-    video_codec: "libx264",
-    video_format: "mp4",
-    json: "{}"
-  };
+      options.url = `${constants.OPENSHOT_URL}exports/?format=json`;
+      options['formData'] = {
+        project: `${constants.OPENSHOT_URL}projects/${project.OpenSId}/?format=json`,
+        audio_bitrate: 192000,
+        audio_codec: "libmp3lame",
+        end_frame: 2012,
+        export_type: "video",
+        start_frame: 1,
+        video_bitrate: 4000000,
+        video_codec: "libx264",
+        video_format: "mp4",
+        json: "{}"
+      };
 
-  return rp
-    .post(options)
-    .then((res) => {
-      console.log(res)
-      return changeProjectStatus(`exporting ${project.type}`, userId);
-    })
-    .catch((err) => {
-      console.log(err)
-      return err;
-    })
+      return rp
+        .post(options)
+        .then((res) => {
+          console.log(res)
+          return changeProjectStatus(`exporting ${project.type}`, userId);
+        })
+        .catch((err) => {
+          console.log(err)
+          return err;
+        })
 
-  });
+    });
 };
 
 const runCheckExportStatus = (userId, project, type) => {
 
   admin.database()
-  .ref(`/users-current-project/${userId}`)
-  .once('value')
-  .then(snapshot => {
-    project = snapshot.val();
+    .ref(`/users-current-project/${userId}`)
+    .once('value')
+    .then(snapshot => {
+      project = snapshot.val();
 
-  const options = constants.BASE_OS_DEV_REQUEST;
-  options.url = `${constants.OPENSHOT_URL}projects/${project.OpenSId}/exports?format=json`;
-  let interval = setInterval(() => {}, 500);
+      const options = constants.BASE_OS_DEV_REQUEST;
+      options.url = `${constants.OPENSHOT_URL}projects/${project.OpenSId}/exports?format=json`;
+      let interval = setInterval(() => { }, 1000);
 
-  rp
-    .get(options)
-    .then((res) => {
-      console.log("then",res.body)
-      if (res.body.results[0].status === "completed") {
-        return admin
-        .database()
-        .ref(`/users-current-project/${userId}`)
-        .update({ exportStatus: res.body.results[0].progress, status: `exported ${project.type}`, outputUrl: res.body.results[res.body.results.length -1].output })
-        .then(()=>{
-          clearInterval(interval);
-        });
-      } else {
-        return admin
-          .database()
-          .ref(`/users-current-project/${userId}`)
-          .update({ exportStatus: res.body.results[0].progress });
+      rp
+        .get(options)
+        .then((res) => {
+          console.log("then", res.body)
+          if (res.body.results[res.body.results.length - 1].status === "completed") {
+            return admin
+              .database()
+              .ref(`/users-current-project/${userId}`)
+              .update({ 
+                exportStatus: res.body.results[res.body.results.length - 1].progress,
+                status: `exported ${project.type}`,
+                outputUrl: res.body.results[res.body.results.length - 1].output,
+                exporting: false
+              })
+              .then(() => {
+                clearInterval(interval);
+              });
+          } else {
+            return admin
+              .database()
+              .ref(`/users-current-project/${userId}`)
+              .update({ exportStatus: res.body.results[res.body.results.length - 1].progress });
 
-        interval = setInterval(() => {
-          runCheckExportStatus(userId, project, type);
-        }, 500)
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-      return err;
-    })
+            interval = setInterval(() => {
+              runCheckExportStatus(userId, project, type);
+            }, 1000)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          return err;
+        })
 
-  });
+    });
 };
 
 const setExportResolution = (resolution) => {
@@ -271,6 +282,10 @@ exports.checkStatus = functions.database.ref('/users-current-project/{userId}/st
         return runQueue(userId, project);
         break;
 
+      case "checking files":
+        return checkFilesStatus(userId, project);
+        break;
+
       case "creating preview":
         return runExport(userId, project, "preview")
         break;
@@ -292,7 +307,7 @@ exports.checkStatus = functions.database.ref('/users-current-project/{userId}/st
     }
   });
 
-exports.validateCompleteQueue = functions.database.ref('/users-files-queue/{userId}').onUpdate(event => {
+exports.validateCompleteQueue = functions.database.ref('/users-current-project/{userId}/files').onUpdate(event => {
   let userId = event.params.userId;
   const snapshot = event.data;
   const files = snapshot.val();
