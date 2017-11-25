@@ -5,10 +5,10 @@ import { Observable } from 'rxjs/Rx';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../auth/providers/auth.service';
 
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-//import * as CryptoJS from 'crypto-js';
+import * as CryptoJS from 'crypto-js';
 
 
 @Injectable()
@@ -19,30 +19,39 @@ export class AudioService {
   audioBlocksUrl = environment.audioblocks.baseUrl + this.resource;
 
   constructor(
-    private http: Http, 
+    private http: Http,
     private store: Store<any>,
     public auth: AuthService
-  ) {
-    
-  }
+  ) { }
 
   private createAuthorizationHeader(headers: Headers) {
-    headers.append('Authorization', this.auth.token);
+    headers.append('Authorization', 'Bearer ' +  this.auth.token);
     headers.append('Content-Type', 'application/json');
   }
 
+  public searchVideos(params) {
+    const url = `${environment.getty.baseUrl}v3/search/videos?phrase=${params}&page_size=100`;
+    const headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.get(url, {
+      headers: headers
+    });
+  }
+
   public searchAudios(params) {
-    console.log('auth . tokennnnnnnn');
-    console.log(this.auth.token);
+    // let promise = new Promise((resolve, reject) => {
+
       if (this.auth.token) {
-        console.log('auth . tokennnnnnnn 2222');
-    console.log(this.auth.token);
         let requestOptions = new RequestOptions();
         const headers = new Headers();
         this.createAuthorizationHeader(headers);
-        const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks?keywords=animals&page=1';
+        const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks/getAudioFromStoryBlocks?keywords=music&page=1';
         return this.http.get(url, {headers: headers})
       }
+      
+    // });
+
+    // return promise;
   }
 
 

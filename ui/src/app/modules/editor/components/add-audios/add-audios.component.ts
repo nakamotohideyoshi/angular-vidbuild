@@ -26,39 +26,28 @@ export class AddAudiosComponent implements OnInit {
   columns4: String = 'active';
   params: String = 'preflight';
   selectedVidCount = 0;
+  audioElement: HTMLAudioElement;
   isBlockView: String = 'active';
   isListView: String = '';
   intervalId: any;
-  // progress = '0%';
-  previousIndex = 0;
-  audioElement: HTMLAudioElement;
-  htmlElement: HTMLElement;
-  cursorPointer = 0;
-  tempTime = 0;
+  progress: any;
+  previousIndex: any;
 
   constructor(
     public editorService: EditorService,
     private audioService: AudioService,
     public multiSearchService: MultiSearchSerivice,
     public auth: AuthService
-  ) { }
+  ) {
+
+
+  }
 
   ngOnInit() {
     this.auth.currentUserObservable.subscribe((data) => {
       console.log(data);
       this.loadAudio();
     })
-    // this.audioService.searchAudios(this.params).subscribe((res: any)=>{
-    //   this.list = JSON.parse(res._body).info;
-    //   console.log(this.editorService.currentProject);
-    // });
-    this.audioService.loadAudios(0, 30);
-    this.post$ = this.audioService.audios();
-    // console.log(this.post$);
-    this.audioService.total().subscribe((total) => {
-    this.total = total;
-    });
-    this.bindList();
   }
 
   loadAudio(){
@@ -67,7 +56,7 @@ export class AddAudiosComponent implements OnInit {
       .searchAudios(this.params)
       .subscribe((res: any) => {
         console.log(res);
-        this.list = res;
+        this.list = JSON.parse(res._body).info;
       });
       // .then((audios)=>{
       //   this.list = audios;
@@ -82,12 +71,12 @@ export class AddAudiosComponent implements OnInit {
     });
     this.bindList();
   }
-  
+
   addVideo(type, file) {
     this.editorService.addFile(type, file)
-    .then((result) => {
-      console.log(result);
-    });
+      .then((result) => {
+        console.log(result);
+      });
   }
 
   onScroll(event) {
@@ -137,7 +126,6 @@ export class AddAudiosComponent implements OnInit {
     this.multiSearchService.deleteSearchItem(item);
     this.bindList();
   }
-
   onAdd() {
     this.multiSearchService.addSearchItem(this.searchItem);
     this.bindList();
@@ -145,7 +133,7 @@ export class AddAudiosComponent implements OnInit {
   }
 
   bindList() {
-    for (let index = 0 ; index < 5 ; index++ ) {
+    for (let index = 0; index < 5; index++) {
       if (this.multiSearchService.searchItemList[index]) {
         this.itemList[index] = this.multiSearchService.searchItemList[index];
       } else {
@@ -167,107 +155,38 @@ export class AddAudiosComponent implements OnInit {
   audioPlay(i) {
     this.playInit();
     this.previousIndex = i;
-    if (this.isListView === 'active') {
-      document.getElementById('playicon' + i).classList.remove('active');
-      document.getElementById('pauseicon' + i).classList.add('active');
-    }
-    this.getAudioElement(i);
+    document.getElementById('playicon' + i).classList.remove('active');
+    document.getElementById('pauseicon' + i).classList.add('active');
+    document.getElementById('progress' + i).classList.add('active');
+    document.getElementById('progress1' + i).classList.add('active');
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
     this.audioElement.play()
-    .then(_ => {
-      console.log('playing...');
-    })
-    .catch(e => {
-      console.log('loading...');
-    });
-    this.audioElement.currentTime = this.tempTime;
+      .then(_ => {
+        console.log('playing...');
+      })
+      .catch(e => {
+        console.log('loading...');
+      });
     this.intervalId = setInterval(() => {
-      if (this.isBlockView === 'active') {
-        const rect = (document.getElementById('id' + i)).getBoundingClientRect();
-        this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
-      } else {
-        document.getElementById('pointer' + i).classList.add('active');
-        const rect = (document.getElementById('waveform' + i)).getBoundingClientRect();
-        this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
-      }
-      if (this.audioElement.ended) {
-        this.audioLoad(i);
-      }
+      this.progress = Math.floor(this.audioElement.currentTime * 100 / this.audioElement.duration) + '%';
     }, 100);
   }
 
   audioLoad(i) {
-    if (this.isListView === 'active') {
-      document.getElementById('playicon' + i).classList.add('active');
-      document.getElementById('pauseicon' + i).classList.remove('active');
-      document.getElementById('pointer' + i).classList.remove('active');
-    }
-    this.getAudioElement(i);
+    document.getElementById('pauseicon' + i).classList.remove('active');
+    document.getElementById('playicon' + i).classList.add('active');
+    document.getElementById('progress' + i).classList.remove('active');
+    document.getElementById('progress1' + i).classList.remove('active');
+    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
     this.audioElement.load();
     clearInterval(this.intervalId);
+    this.progress = '0%';
   }
 
   playInit() {
     if (this.audioElement) {
       this.audioLoad(this.previousIndex);
     }
-  }
-
-  blockOnClick($event, i) {
-    this.htmlElement = document.getElementById('id' + i);
-    const rect = this.htmlElement.getBoundingClientRect();
-    this.getAudioElement(i);
-    this.tempTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
-    this.audioElement.currentTime = this.tempTime;
-    if (this.audioElement.played.length === 0) {
-      this.audioPlay(i);
-    }
-  }
-
-  listOnClick($event, i) {
-    this.htmlElement = document.getElementById('waveform' + i);
-    const rect = this.htmlElement.getBoundingClientRect();
-    this.getAudioElement(i);
-    this.tempTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
-    this.audioElement.currentTime = this.tempTime;
-    if (this.audioElement.played.length === 0) {
-      this.audioPlay(i);
-    }
-  }
-
-  displayCursor(i) {
-    this.tempTime = 0;
-    this.getAudioElement(i);
-    if (this.audioElement.played.length === 0) {
-      this.audioPlay(i);
-    }
-  }
-
-  hideCursor(i) {
-    this.getAudioElement(i);
-    if (this.audioElement.played.length !== 0) {
-      this.audioLoad(i);
-    }
-    this.tempTime = 0;
-  }
-
-  displayfCursor(i) {
-    document.getElementById('fpointer' + i).classList.add('active');
-    this.getAudioElement(i);
-    if (this.audioElement.played.length === 0) {
-      this.audioPlay(i);
-    }
-  }
-  hidefCursor(i) {
-    document.getElementById('fpointer' + i).classList.remove('active');
-    this.getAudioElement(i);
-    if (this.audioElement.played.length !== 0) {
-      this.audioLoad(i);
-    }
-    this.tempTime = 0;
-  }
-
-  getAudioElement(i) {
-    this.audioElement = document.getElementById('audio' + i) as HTMLAudioElement;
   }
 
 }

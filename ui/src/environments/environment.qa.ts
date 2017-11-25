@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   stripeKey: 'pk_test_mAtTgNJm3I2lrS1UOlEU5nrR',
   preventAngularBoostraping: true,
   preventAngularBoostrapingPassword: 'v*2$5X0e41US',

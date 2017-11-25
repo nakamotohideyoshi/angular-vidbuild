@@ -1,12 +1,4 @@
 @import '../../../../core/styles/core-mixins';
-.bg-section{
-  background-color: transparent;
-}
-.d-block{
-  &.infos{
-    background-color: transparent;
-  }
-}
 p{
   &.col_description{
     margin-bottom: 0;
@@ -179,7 +171,6 @@ p{
 
 figure.effect-image {
   display: none;
-  background-color: rgba(0, 0, 0, 0.15);
   &.active{
     display: block;
   }
@@ -230,28 +221,12 @@ figure.effect-image {
       padding: 0 5px 10px 0;
     }
     .left-bottom-link{
-      text-align: left;
       p{
         font-size: 12px;
         margin: 0;
-        &.title{
-          font-weight: bold;
-        }
       }
     }  
-  }
-  .cursor{
-    position: absolute;
-    height: 100%;
-    width: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
-    left: 0;
-    top: 0;
-    display: none;
-    &.active{
-      display: block;
-    }
-  }
+  }  
 }
 
 .audio-thumb-container{
@@ -287,9 +262,6 @@ figure.effect-image {
       padding: 0;
       &:hover{
         .center-icons{
-          width: 70px;
-          height: 70px;
-          padding: 23px 29px;
           &.play-icon{
             &.active{
               display: block;
@@ -302,36 +274,25 @@ figure.effect-image {
           }
         }
       }
-      .thumbnail{
+      img{
         width: 70px;
         height: 70px;
-        background-color: rgba(0, 0, 0, 0.6);
-        img{
-          width: 70px;
-          height: 70px;
-        }
       }
       .detail{
         margin-left: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        .title{
-          font-size: 14px;
-          font-weight: bold;
-        }
-        .type{
-          font-size: 12px;
-        }
       }
       .center-icons{
         position: absolute;
+        top: 33px;
+        left: 29px;
         color: #ffffff;
         display: none;
       }
     }
     .wave-form{
-      position: relative;
       background-color: transparent;
       padding: 0;
       .progress-gray{        
@@ -339,18 +300,6 @@ figure.effect-image {
         height: 100%;
         width: 0%;
         background-color: rgba(0, 0, 0, 0.25);
-        display: none;
-        &.active{
-          display: block;
-        }
-      }
-      .cursor{
-        position: absolute;
-        height: 100%;
-        width: 5px;
-        background-color: rgba(0, 0, 0, 0.5);
-        left: 0;
-        top: 0;
         display: none;
         &.active{
           display: block;
