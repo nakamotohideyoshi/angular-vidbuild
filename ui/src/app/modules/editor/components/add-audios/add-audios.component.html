@@ -52,6 +52,23 @@
 
     <div class="col-5 col-sm-5 button-group-columns">      
       <!-- <button type="button" class="form-control column-button" (click)="on4Columns()">Build Ad</button> -->
+      <div class="column" (click)="on2Columns()">
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+          <div class = "cell_2 {{columns2}}"></div>
+        </div>
+        <div class="column" (click)="on4Columns()">
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>
+            <div class = "cell_4 {{columns4}}"></div>        
+        </div>
     </div>
 
   </div>  
@@ -172,9 +189,9 @@
             </div>            
           </figcaption>          
         </figure>
-        <div class="container audio-list col-xs-12 {{isListView}}">
-          <div class="audio-detail col-xs-12">
-            <div class="thumb-img col-xs-3">
+        <div class="container audio-list col-xl-12 {{isListView}}">
+          <div class="audio-detail col-xl-12">
+            <div class="thumb-img col-4 col-sm-4 col-md-3 col-lg-3">
               <div class="thumbnail">
                 <img [src]="audio.thumbnail_url" alt="{{audio.title}}">
               </div>
@@ -189,12 +206,12 @@
                 <i class="fa fa-pause"></i>
               </div>
             </div>
-            <div id="waveform{{i}}" class="wave-form col-xs-6" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%', 'overflow': 'hidden'}" (click)="listOnClick($event, i)">                           
+            <div id="waveform{{i}}" class="wave-form col-4 col-sm-5 col-md-6 col-lg-7" [ngStyle]="{'background': 'url(' + audio.thumbnail_url + ')', 'background-size': '100% 100%', 'overflow': 'hidden'}" (click)="listOnClick($event, i)">                           
               
               <div id="pointer{{i}}" class="cursor" [style.left.px]="cursorPointer"></div>
                   
             </div>
-            <div class="options col-xs-3">
+            <div class="options col-4 col-sm-3 col-md-3 col-lg-2">
               <span>{{ audio.duration/60-audio.duration%60/60 < 10 ? '0'+(audio.duration/60-audio.duration%60/60) : audio.duration/60-audio.duration%60/60 }}:{{ audio.duration%60 < 10 ? '0'+audio.duration%60 : audio.duration%60 }}</span>
               <i class="fa fa-star-o"></i>
               <a class="btn btn-lg btn-primary" (click)="addVideo('audio', audio)">
@@ -202,7 +219,7 @@
               </a>
             </div>
           </div>
-          <div class="audio-border col-xs-12"></div>
+          <div class="audio-border col-xl-12"></div>
         </div>
     </div>
   </div>

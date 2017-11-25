@@ -18,7 +18,7 @@ export class AddAudiosComponent implements OnInit {
   sum = 30;
   page = 1;
   total = 0;
-  columns: String = 'container-img col-sm-6 col-md-3 col-lg-3';
+  columns: String = 'container-img col-xs-12';
   searchItem: String = '';
   itemList: any = [];
   columns2: String = '';
