@@ -1,6 +1,9 @@
 @import '../../../../core/styles/core-mixins';
 .bg-section{
   background-color: transparent;
+  .container-img{
+    max-width: 1900px;
+  }
 }
 .d-block{
   &.infos{
@@ -268,6 +271,7 @@ figure.effect-image {
 .audio-list{
   display: none;
   padding: 0;
+  width: auto;
   flex-wrap: wrap;
   // background-color: #0DFF92;
   &.active{
@@ -281,6 +285,7 @@ figure.effect-image {
     margin-bottom: 10px;
     padding: 0;
     .thumb-img{
+      height: 70px;
       // background-color: #0DFF92;
       display: flex;
       text-align: left;
@@ -312,6 +317,7 @@ figure.effect-image {
         }
       }
       .detail{
+        height: 70px;
         margin-left: 10px;
         display: flex;
         flex-direction: column;
@@ -331,6 +337,7 @@ figure.effect-image {
       }
     }
     .wave-form{
+      height: 70px;
       position: relative;
       background-color: transparent;
       padding: 0;
@@ -358,6 +365,7 @@ figure.effect-image {
       }
     }
     .options{
+      height: 70px;
       display: flex;
       justify-content: space-between;
       padding: 0 0 0 20px;
@@ -389,7 +397,36 @@ figure.effect-image {
   }
 }
 
+@media only screen and (max-width : 1023px) {
+  .audio-list{
+    max-width: 100%;
+    .audio-detail{
+      .thumb-img{
+        .detail{
+          .title{
+            font-size: 12px;
+            font-weight: bold;
+          }
+          .type{
+            font-size: 10px;
+          }
+        }
+      }
+      .options{
+        padding: 0 0 0 5px;
+        span{
+          font-size: 13px;
+          padding: 26px 0;
+        }
+      }      
+    }
+  }
+}
 @media only screen and (max-width : 768px) {
+
+  .bg-section{
+    padding: 20px;
+  }
   .container {
     &.search-container{
       display: none;
@@ -408,7 +445,7 @@ figure.effect-image {
   }
 
   .tab-group{
-    padding: 12px 0;
+    padding: 18px 0;
     justify-content: flex-start;   
     .tab{
       margin: 0 20px;
@@ -419,7 +456,7 @@ figure.effect-image {
   }
 
   .button-group-columns{
-    justify-content: flex-end;
+    justify-content: space-evenly;
   }
 
   .nav-group {
@@ -485,6 +522,22 @@ figure.effect-image {
         }
       }       
     }    
+  }
+  .audio-list{
+    max-width: 100%;
+    .audio-detail{
+      .thumb-img{
+        .detail{
+          .title{
+            font-size: 12px;
+            font-weight: bold;
+          }
+          .type{
+            font-size: 10px;
+          }
+        }
+      }      
+    }
   }
 }
 
