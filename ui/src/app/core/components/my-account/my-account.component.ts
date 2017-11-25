@@ -58,7 +58,8 @@ export class MyAccountComponent implements OnInit {
     this.handler.open({
       name: name,
       description: description,
-      amount: price
+      amount: price,
+      tax_percent: 20
     });
   }
 

@@ -10,6 +10,9 @@ const wrapper = require('./openshot/wrapper');
 const user = require('./user/user');
 const clips = require('./openshot/clips');
 
+const audios = require('./storyblocks/audios');
+const cors = require('cors')({origin: true});
+
 admin.initializeApp(functions.config().firebase);
 plans.setPlanResetWorker();
 
@@ -41,3 +44,6 @@ exports.updateClip = clips.update;
 
 //wrapper
 exports.project = wrapper.project;
+
+//audioblocks
+exports.getAudioFromStoryBlocks = audios.getAudioFromStoryBlocks;
