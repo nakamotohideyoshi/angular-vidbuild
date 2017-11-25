@@ -18,7 +18,7 @@ export class AddAudiosComponent implements OnInit {
   sum = 30;
   page = 1;
   total = 0;
-  columns: String = 'container-img col-xs-12';
+  columns: String = 'container-img col-sm-6 col-md-3 col-lg-3';
   searchItem: String = '';
   itemList: any = [];
   columns2: String = '';
@@ -28,7 +28,7 @@ export class AddAudiosComponent implements OnInit {
   isBlockView: String = 'active';
   isListView: String = '';
   intervalId: any;
-  // progress = '0%';
+  progress = '0%';
   previousIndex = 0;
   audioElement: HTMLAudioElement;
   htmlElement: HTMLElement;
@@ -78,7 +78,7 @@ export class AddAudiosComponent implements OnInit {
   }
 
   on2Columns() {
-    // this.columns = 'container-img col-sm-6 col-md-6 col-lg-6';
+    this.columns = 'container-img col-xs-12';
     this.columns2 = 'active';
     this.columns4 = '';
     this.isBlockView = '';
@@ -87,7 +87,7 @@ export class AddAudiosComponent implements OnInit {
   }
 
   on4Columns() {
-    // this.columns = 'container-img col-sm-6 col-md-3 col-lg-3';
+    this.columns = 'container-img col-sm-6 col-md-3 col-lg-3';
     this.columns2 = '';
     this.columns4 = 'active';
     this.isBlockView = 'active';
@@ -142,6 +142,9 @@ export class AddAudiosComponent implements OnInit {
     if (this.isListView === 'active') {
       document.getElementById('playicon' + i).classList.remove('active');
       document.getElementById('pauseicon' + i).classList.add('active');
+      document.getElementById('progress' + i).classList.add('active');
+    } else {
+      document.getElementById('fprogress' + i).classList.add('active');
     }
     this.getAudioElement(i);
     this.audioElement.play()
@@ -155,15 +158,15 @@ export class AddAudiosComponent implements OnInit {
     this.intervalId = setInterval(() => {
       if (this.isBlockView === 'active') {
         const rect = (document.getElementById('id' + i)).getBoundingClientRect();
-        this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
+        // this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
       } else {
-        document.getElementById('pointer' + i).classList.add('active');
         const rect = (document.getElementById('waveform' + i)).getBoundingClientRect();
-        this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
+        // this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
       }
       if (this.audioElement.ended) {
         this.audioLoad(i);
       }
+      this.progress = Math.floor( 100 * this.audioElement.currentTime / this.audioElement.duration) + '%';
     }, 100);
   }
 
@@ -171,7 +174,9 @@ export class AddAudiosComponent implements OnInit {
     if (this.isListView === 'active') {
       document.getElementById('playicon' + i).classList.add('active');
       document.getElementById('pauseicon' + i).classList.remove('active');
-      document.getElementById('pointer' + i).classList.remove('active');
+      document.getElementById('progress' + i).classList.remove('active');
+    } else {
+      document.getElementById('fprogress' + i).classList.remove('active');
     }
     this.getAudioElement(i);
     this.audioElement.load();
@@ -182,6 +187,7 @@ export class AddAudiosComponent implements OnInit {
     if (this.audioElement) {
       this.audioLoad(this.previousIndex);
     }
+    this.progress = '0%';
   }
 
   blockOnClick($event, i) {
@@ -207,19 +213,26 @@ export class AddAudiosComponent implements OnInit {
   }
 
   displayCursor(i) {
-    this.tempTime = 0;
-    this.getAudioElement(i);
-    if (this.audioElement.played.length === 0) {
-      this.audioPlay(i);
-    }
+    document.getElementById('pointer' + i).classList.add('active');
   }
 
+  moveCursor($event, i) {
+    const rect = (document.getElementById('waveform' + i)).getBoundingClientRect();
+    this.cursorPointer = $event.clientX - rect.left;
+  }
+
+
   hideCursor(i) {
-    this.getAudioElement(i);
-    if (this.audioElement.played.length !== 0) {
-      this.audioLoad(i);
-    }
+    document.getElementById('pointer' + i).classList.remove('active');
+  }
+
+  onClickPlay(i) {
     this.tempTime = 0;
+    this.audioPlay(i);
+  }
+  onClickPause(i) {
+    this.tempTime = 0;
+    this.audioLoad(i);
   }
 
   displayfCursor(i) {
@@ -229,6 +242,12 @@ export class AddAudiosComponent implements OnInit {
       this.audioPlay(i);
     }
   }
+
+  movefCursor($event, i) {
+    const rect = (document.getElementById('id' + i)).getBoundingClientRect();
+    this.cursorPointer = $event.clientX - rect.left;
+  }
+
   hidefCursor(i) {
     document.getElementById('fpointer' + i).classList.remove('active');
     this.getAudioElement(i);
