@@ -15,7 +15,7 @@ export class AddAudiosComponent implements OnInit {
   list: any = [];
   post$: Observable<Array<any>>;
   finished = false;
-  sum = 30;
+  sum = 20;
   page = 1;
   total = 0;
   columns: String = 'container-img col-sm-6 col-md-3 col-lg-3';
@@ -23,7 +23,7 @@ export class AddAudiosComponent implements OnInit {
   itemList: any = [];
   columns2: String = '';
   columns4: String = 'active';
-  params: String = 'preflight';
+  params: String = 'music';
   selectedVidCount = 0;
   isBlockView: String = 'active';
   isListView: String = '';
@@ -42,11 +42,11 @@ export class AddAudiosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.audioService.searchAudios(this.params).subscribe((res: any)=>{
-    //   this.list = JSON.parse(res._body).info;
-    //   console.log(this.editorService.currentProject);
-    // });
-    this.audioService.loadAudios(0, 30);
+    this.audioService.searchAudios(this.params).subscribe((res: any)=>{
+      this.list = JSON.parse(res._body).info;
+      console.log(this.list);
+    });
+    this.audioService.loadAudios(this.params, this.page, this.sum);
     this.post$ = this.audioService.audios();
     // console.log(this.post$);
     this.audioService.total().subscribe((total) => {
@@ -63,13 +63,13 @@ export class AddAudiosComponent implements OnInit {
   }
 
   onScroll(event) {
-    const start = this.sum;
-    this.sum += 10;
-    if (start < this.total) {
-      this.audioService.loadAudios(start, 10);
-    } else {
-      this.finished = true;
-    }
+    const start = ++this.page;
+    const totalPage =  this.total % this.sum ? (1 + Math.floor(this.total / this.sum)) : Math.floor(this.total / this.sum);
+     if ( start < totalPage + 1 ) {
+      this.audioService.loadAudios(this.params, this.page, this.sum);
+     } else {
+       this.finished = true;
+     }
 
   }
 
@@ -156,13 +156,6 @@ export class AddAudiosComponent implements OnInit {
     });
     this.audioElement.currentTime = this.tempTime;
     this.intervalId = setInterval(() => {
-      if (this.isBlockView === 'active') {
-        const rect = (document.getElementById('id' + i)).getBoundingClientRect();
-        // this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
-      } else {
-        const rect = (document.getElementById('waveform' + i)).getBoundingClientRect();
-        // this.cursorPointer = Math.floor((rect.right - rect.left) * this.audioElement.currentTime / this.audioElement.duration);
-      }
       if (this.audioElement.ended) {
         this.audioLoad(i);
       }
@@ -195,9 +188,10 @@ export class AddAudiosComponent implements OnInit {
     const rect = this.htmlElement.getBoundingClientRect();
     this.getAudioElement(i);
     this.tempTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
-    this.audioElement.currentTime = this.tempTime;
     if (this.audioElement.played.length === 0) {
       this.audioPlay(i);
+    } else {
+      this.audioElement.currentTime = this.tempTime;
     }
   }
 
@@ -206,9 +200,10 @@ export class AddAudiosComponent implements OnInit {
     const rect = this.htmlElement.getBoundingClientRect();
     this.getAudioElement(i);
     this.tempTime = this.audioElement.duration * ($event.clientX - rect.left) / (rect.right - rect.left);
-    this.audioElement.currentTime = this.tempTime;
     if (this.audioElement.played.length === 0) {
       this.audioPlay(i);
+    } else {
+      this.audioElement.currentTime = this.tempTime;
     }
   }
 

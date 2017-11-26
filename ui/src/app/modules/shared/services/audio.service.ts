@@ -39,19 +39,12 @@ export class AudioService {
   }
 
   public searchAudios(params) {
-    // let promise = new Promise((resolve, reject) => {
-
       if (this.auth.token) {
-        let requestOptions = new RequestOptions();
         const headers = new Headers();
         this.createAuthorizationHeader(headers);
-        const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks/getAudioFromStoryBlocks?keywords=music&page=1';
-        return this.http.get(url, {headers: headers})
+        const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks/getAudioFromStoryBlocks?keywords=music&page=1&num_results=30';
+        return this.http.get(url, {headers: headers});
       }
-      
-    // });
-
-    // return promise;
   }
 
 
@@ -59,8 +52,8 @@ export class AudioService {
     return this.store.select('audios').map(values => values.audios);
   }
 
-  loadAudios(from: number, size: number) {
-    this.store.dispatch(new GetAudios(from, size));
+  loadAudios(params: String, from: number, size: number) {
+    this.store.dispatch(new GetAudios(params, from, size));
   }
 
   total() {
