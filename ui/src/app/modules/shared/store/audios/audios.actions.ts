@@ -6,7 +6,7 @@ export const SORT = '[AUDIOS] SORT';
 export const SORTED = '[AUDIOS] SORTED';
 export class GetAudios implements Action {
   readonly type = GET;
-  constructor(public from: number, public size: number) { }
+  constructor(public params: String, public from: number, public size: number) { }
 }
 
 export class AudiosGathered implements Action {
