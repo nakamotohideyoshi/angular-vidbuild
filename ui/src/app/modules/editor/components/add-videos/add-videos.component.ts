@@ -51,11 +51,11 @@ export class AddVideosComponent implements OnInit {
     this.bindList();
   }
 
-  addVideo(type, file){
-    this.editorService.addFile(type, file)
-    .then((result)=>{
-      console.log(result)
-    })
+  addVideo(type, file, provider, stockID) {
+    this.editorService.addFile(type, file, provider, stockID)
+    .then((result) => {
+      // console.log(result);
+    });
   }
 
   onScroll(event) {

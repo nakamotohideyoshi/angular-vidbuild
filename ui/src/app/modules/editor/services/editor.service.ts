@@ -64,11 +64,10 @@ export class EditorService {
             })
     }
 
-    addFile(type, file) {
-        console.log('video added' + this.AuthService.currentUserId);
-        console.log(this.currentProject);
+    addFile(type, file, provider, stockID) {
+        console.log('video added to: ' + this.AuthService.currentUserId);
         return this.db.list(`users-current-project/${this.AuthService.currentUserId}/files`)
-            .push({ type: type, file: file, status: "pending" });
+            .push({ type: type, file: file, provider: provider, stockID: stockID, status: 'pending' });
 
     }
 
