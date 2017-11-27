@@ -4,7 +4,6 @@ import { ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Respons
 import { Observable } from 'rxjs/Rx';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../auth/providers/auth.service';
-
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -17,7 +16,6 @@ export class AudioService {
   api_key = 'p0QltE6gCkv0TdTtlOilmrMDo66EcJtAHllmrnEjINTq8j60Qlb7qdWzfKCfOy8u';
   resource = '/api/v1/stock-items/search/';
   audioBlocksUrl = environment.audioblocks.baseUrl + this.resource;
-
   constructor(
     private http: Http,
     private store: Store<any>,
@@ -42,7 +40,8 @@ export class AudioService {
       if (this.auth.token) {
         const headers = new Headers();
         this.createAuthorizationHeader(headers);
-        const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks/getAudioFromStoryBlocks?keywords=music&page=1&num_results=30';
+        const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks/getAudioFromStoryBlocks?'
+        + 'keywords=music&page=1&num_results=30';
         return this.http.get(url, {headers: headers});
       }
   }
