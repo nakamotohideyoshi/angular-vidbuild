@@ -164,7 +164,7 @@
             <div class="right-bottom-link-check" (click)="disCountSelectedVid(i)">
               <i class="fa fa-check"></i>
             </div>
-            <figcaption  (click)="addVideo('video', video, 'getty', video.id)">              
+            <figcaption  (click)="video.display_sizes? addVideo('video', video, 'getty', video.id): addVideo('video', video, 'VideoBlocks', video.id)">              
               <div class="right-top-link">
                 <i class="fa fa-star-o"></i>
               </div>
