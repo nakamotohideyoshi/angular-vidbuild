@@ -1,0 +1,46 @@
+<section class="vid-timeline">
+  <div class="video-timeline d-flex">
+    <div class="title">Text</div>
+    <div class="effects">FX<br>TS</div>
+    <div resizable draggable class="clips-strip">
+      <vid-text-clip *ngFor="let textClip of project.textClips; let i = index"
+                     [clip]="textClip" [project]="project"
+                     (removeClip)="onRemoveTextClip(i)">
+      </vid-text-clip>
+      <!--<vid-text-clip></vid-text-clip>
+      <vid-text-clip [posX]="33"></vid-text-clip>
+      <vid-text-clip [posX]="70"></vid-text-clip>-->
+    </div>
+    <div class="add"><button type="button">Add</button></div>
+  </div>
+  <div class="video-timeline d-flex">
+    <div class="title">Video</div>
+    <div class="effects">FX</div>
+    <div resizable draggable class="clips-strip"
+         (posChange)="onPosChange($event, 'video')"
+         (widthChange)="onWidthChange($event, 'video')">
+      <vid-video-clip *ngFor="let videoClip of project.videoClips; let i = index"
+                      [clip]="videoClip" [project]="project"
+                      (removeClip)="onRemoveVideoClip(i)">
+      </vid-video-clip>
+      <!--<vid-video-clip></vid-video-clip>
+      <vid-video-clip [posX]="30"></vid-video-clip>
+      <vid-video-clip [posX]="70"></vid-video-clip>-->
+    </div>
+    <div class="add"><button type="button">Add</button></div>
+  </div>
+  <div class="video-timeline d-flex">
+      <div class="title">Music</div>
+      <div class="effects">@</div>
+      <div class="clips-strip">
+      </div>
+      <div class="add"><button type="button">Add</button></div>
+    </div>
+    <div class="video-timeline d-flex">
+        <div class="title">Voiceover</div>
+        <div class="effects">@</div>
+        <div class="clips-strip">
+        </div>
+        <div class="add"><button type="button">Add</button></div>
+      </div>
+</section>

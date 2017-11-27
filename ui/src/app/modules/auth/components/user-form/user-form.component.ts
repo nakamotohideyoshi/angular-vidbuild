@@ -1,100 +1,93 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../providers/auth.service';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {  matchingPasswords } from '../../../shared/validators/validators';
 
 @Component({
   selector: 'user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
-})
-export class UserFormComponent implements OnInit {
+}) 
 
+export class UserFormComponent  {
   userForm: FormGroup;
+  userSignInForm: FormGroup;
   newUser = true; // to toggle login or signup form
   passReset = false; // set to true when password reset is triggered
   formErrors = {
+    'name': '',
     'email': '',
-    'password': ''
+    'password': '',
+    'mismatchedPasswords': ''
   };
+
   validationMessages = {
+    'name': {
+      'required': 'Name is required.'
+    },
     'email': {
       'required': 'Email is required.',
       'email': 'Email must be a valid email'
     },
     'password': {
       'required': 'Password is required.',
-      'pattern': 'Password must be include at one letter and one number.',
-      'minlength': 'Password must be at least 4 characters long.',
-      'maxlength': 'Password cannot be more than 40 characters long.',
+      'pattern': 'Password must be include at least one letter and one number.',
+      'minlength': 'Password must be at least 6 characters long.',
+      'maxlength': 'Password cannot be more than 40 characters long.', 
+      'mismatchedPasswords': 'Passwords do not match.'
     }
   };
 
-  constructor(private fb: FormBuilder, private auth: AuthService) { }
+  constructor(private fb: FormBuilder, private auth: AuthService) {
+    this.userForm = fb.group({
+      name: ['', [Validators.required]],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+        Validators.minLength(6),
+        Validators.maxLength(25),
+        Validators.required
+      ]],
+      confirmPassword: ['', [
+        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+        Validators.minLength(6),
+        Validators.maxLength(25),
+        Validators.required
+      ]]
+    }, { validator: matchingPasswords('password', 'confirmPassword') });
 
-  ngOnInit(): void {
-    this.buildForm();
+    this.userSignInForm = fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [ 
+        Validators.minLength(6),
+        Validators.maxLength(25),
+        Validators.required
+      ]],
+    });
   }
 
-  // toggleForm() {
-  //   this.newUser = !this.newUser;
-  // }
+ 
 
   signup(): void {
-    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'])
+    if (!this.userForm.valid) { return; }
+    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password']);
   }
 
   login(): void {
-    this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
+    if (!this.userSignInForm.valid) { return; }
+    this.auth.emailLogin(this.userSignInForm.value['email'], this.userSignInForm.value['password'])
   }
 
   resetPassword() {
     this.auth.resetPassword(this.userForm.value['email'])
       .then(() => this.passReset = true)
-  }
+  }  
 
-  private buildForm(): void {
-    this.userForm = this.fb.group({
-      'name': ['', [
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-        Validators.minLength(4),
-        Validators.maxLength(25)
-      ]
-      ],
-      'email': ['', [
-        Validators.required,
-        Validators.email
-      ]
-      ],
-      'password': ['', [
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-        Validators.minLength(4),
-        Validators.maxLength(25)
-      ]
-      ],
-    });
-
-    this.userForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged(); // reset validation messages
-  }
-
-  // Updates validation state on form changes.
-  private onValueChanged(data?: any) {
-    if (!this.userForm) { return; }
-    const form = this.userForm;
-    for (const field in this.formErrors) {
-      if (Object.prototype.hasOwnProperty.call(this.formErrors, field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (Object.prototype.hasOwnProperty.call(control.errors, key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
-  }
+ 
 }

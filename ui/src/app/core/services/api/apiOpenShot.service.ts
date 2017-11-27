@@ -39,7 +39,7 @@ export class ApiOpenShotService {
     clip.file = `${this.hostnameProxy}/files/${clip.file}/`;
     clip.project = `${this.hostnameProxy}/projects/${clip.project}/`;
     return this.http.post(url, clip, options)
-      .map((res: Response) => console.log(res.json()))
+      .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -62,12 +62,19 @@ export class ApiOpenShotService {
     const resource = 'projects';
     const url = `${this.hostname}/${resource}${this.formatJson}`;
     return this.http.post(url, project, options)
-      .map((res: Response) => console.log(res.json()))
+      .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error));
   }
 
-  public editClip() {
-    /** @todo To implement */
+  public editClip(clip: OpenShot.Clip) {
+    const headers: Headers = new Headers();
+    // headers.append('Authorization', `Basic ${btoa('demo-cloud:demo-password')}`);
+    const options: RequestOptionsArgs = { headers };
+    const resource = 'clips';
+    const url = `${this.hostname}/${resource}/${clip.id}${this.formatJson}`;
+    return this.http.put(url, clip, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error));
   }
 
   public editEffect() {
@@ -81,11 +88,11 @@ export class ApiOpenShotService {
     const resource = 'projects';
     const url = `${this.hostname}/${resource}/${project.id}${this.formatJson}`;
     return this.http.put(url, project, options)
-      .map((res: Response) => console.log(res.json()))
+      .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error));
   }
 
-  public export(exportConfig: OpenShot.Export): Observable<OpenShot.Export> {
+  public exportProject(exportConfig: OpenShot.Export): Observable<OpenShot.Export> {
     const headers: Headers = new Headers();
     // headers.append('Authorization', `Basic ${btoa('demo-cloud:demo-password')}`);
     const options: RequestOptionsArgs = { headers };
@@ -118,6 +125,14 @@ export class ApiOpenShotService {
 
   public isProjectValid() {
     /** @todo To implement */
+  }
+
+  public getFrame(id: number, frameConfig: OpenShot.Thumbnail): Observable<string> {
+    const resource = 'thumbnail';
+    const url = `${this.hostname}/projects/${id}/${resource}${this.formatJson}`;
+    return this.http.post(url, frameConfig)
+    .map((res: Response) => res.text())
+    .catch((error: any) => Observable.throw(error));
   }
 
   public UploadFile(file: OpenShot.RawFile) {

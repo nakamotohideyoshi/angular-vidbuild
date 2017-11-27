@@ -42,8 +42,8 @@
           <a href="editor/add-videos">New advert
           </a>
         </li>
-        <li>
-          <a href="login" *ngIf="!authService.authState">Login
+        <li *ngIf="!authService.authState"> 
+          <a href="login" >Login
           </a>
         </li>
         <li *ngIf="authService.authState">

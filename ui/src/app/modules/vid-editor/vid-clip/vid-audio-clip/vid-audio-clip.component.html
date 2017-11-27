@@ -1,0 +1,23 @@
+<div class="audio-clip"
+     res-objective
+     drag-objective
+     maxWidth="500"
+     [style.left.px]="posX"
+     [ngClass]="{ 'audio-clip_mousedown': clipDown }"
+     (mousedown)="onElementDown($event)">
+  <div class="frames-container d-flex"><span>TEXT</span></div>
+  <div class="clip-controls" [ngClass]="{ 'clip-controls_mousedown': clipDown }">
+    <div [ngClass]="{ 'clip-controls__resize_mousedown': resizerLeftDown }"
+         (mousedown)="onElementDown($event, 'left')"
+         data-position="left"
+         class="resizer clip-controls__resize clip-controls__resize_left">›
+    </div>
+    <span class="clip-controls__btn">֎</span>
+    <span class="clip-controls__btn">֎</span>
+    <div [ngClass]="{ 'clip-controls__resize_mousedown': resizerRightDown }"
+         (mousedown)="onElementDown($event, 'right')"
+         data-position="right"
+         class="resizer clip-controls__resize clip-controls__resize_right">‹
+    </div>
+  </div>
+</div>

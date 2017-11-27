@@ -1,0 +1,26 @@
+<div class="text-clip"
+     res-objective
+     drag-objective
+     [style.left.%]="posX"
+     [style.width.%]="clipWidth"
+     [ngClass]="{ 'text-clip_mousedown': clipDown }"
+     (mousedown)="onElementDown($event)">
+  <div class="clip-box d-flex"><p class="clip-box__text">TEXT</p></div>
+  <div class="clip-controls d-flex" [ngClass]="{ 'clip-controls_mousedown': clipDown }">
+    <div [ngClass]="{ 'clip-controls__resize_mousedown': resizerLeftDown }"
+         (mousedown)="onElementDown($event, 'left')"
+         data-position="left"
+         class="resizer clip-controls__resize clip-controls__resize_left">›
+    </div>
+    <div class="clip-commands d-flex align-items-center">
+      <span class="clip-commands__btn">֎</span>
+      <span class="clip-commands__btn">֎</span>
+      <span class="clip-commands__btn clip-commands__btn_close" (click)="onRemoveClip()" title="Remove">x</span>
+    </div>
+    <div [ngClass]="{ 'clip-controls__resize_mousedown': resizerRightDown }"
+         (mousedown)="onElementDown($event, 'right')"
+         data-position="right"
+         class="resizer clip-controls__resize clip-controls__resize_right">‹
+    </div>
+  </div>
+</div>
