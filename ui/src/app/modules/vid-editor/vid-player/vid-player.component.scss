@@ -1,0 +1,64 @@
+@import '../../../core/styles/core-variables';
+
+.vid-player {
+  width: 640px;
+}
+
+.controls {
+  &__playpause {
+    width: 80px;
+    background-color: $vid-aquamarine;
+    color: #ffffff;
+  }
+}
+
+.vid-preview {
+  position: relative;
+  height: 360px;
+  margin-bottom: 5px;
+
+  &__player {
+    background-color: #4c4c4c;
+  }
+}
+
+.vid-progress {
+  flex: 1;
+  margin: auto 10px;
+}
+
+.frame-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  &__text {
+    color: #ffffff;
+    font-size: 72px;
+    margin: 0 auto;
+  }
+
+  &__spinner {
+    border: 10px solid $vid-aquamarine;
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    width: 58px;
+    height: 58px;
+    margin: 0 auto;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.svg-editor {
+  position: absolute;
+}

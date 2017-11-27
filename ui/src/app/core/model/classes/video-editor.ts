@@ -16,11 +16,12 @@ export namespace vbuild {
     textClips?: VideoClip[]= [];
     videoClips?: VideoClip[] = [];
     voiceClips?: VoiceClip[] = [];
+    duration?: number = 30;   // secs
 
     constructor(params?: Project) {
       if (params) Object.assign(this, params);
     }
-
+    /* Duration won't be calculater at the moment. It'll be set.
     public duration?(): number {
       let duration: number = 0;
       duration += this.audioClips.map(audioClip => audioClip.duration()).reduce((acc, curr) => acc + curr, 0);
@@ -28,7 +29,7 @@ export namespace vbuild {
       duration += this.videoClips.map(videoClip => videoClip.duration()).reduce((acc, curr) => acc + curr, 0);
       duration += this.voiceClips.map(voiceClip => voiceClip.duration()).reduce((acc, curr) => acc + curr, 0);
       return duration;
-    }
+    }*/
 
     public secsToFrame?(secs: number): number {
       return Math.round(secs * (this.fps_num / this.fps_den));
@@ -44,6 +45,8 @@ export namespace vbuild {
     layer?: number;
     project?: string;   // url
     json?: Object;
+
+    fileDuration?:  number;
 
     constructor(params?: Clip) {
       if (params) Object.assign(this, params);
@@ -65,6 +68,7 @@ export namespace vbuild {
     json?: Object = {};
     thumbnail?: string | Blob;
     muted?: boolean = false;
+    frames?: { [sec: number]: string; };
 
     constructor(params?: VideoClip) {
       super(params);

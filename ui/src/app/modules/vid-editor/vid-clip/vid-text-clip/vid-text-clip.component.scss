@@ -1,0 +1,97 @@
+@import '../../../../core/styles/core-variables';
+@import '../../../../core/styles/core-placeholders';
+
+.text-clip {
+  position: absolute;
+  left: 0;
+  width: 26.5722%;
+  height: 100%;
+  border: 2px solid $vid-aquamarine;
+  @extend %no-selectable;
+
+  &_mousedown {
+    z-index: 1;
+  }
+}
+
+.clip-box {
+  background-color: #ffffff;
+  color: $vid-aquamarine;
+  width: 100%;
+  height: 100%;
+
+  &__text {
+    font-weight: 600;
+    font-size: 14px;
+    margin: auto;
+  }
+}
+
+.clip-controls {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  cursor: move;
+  opacity: 0;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &_mousedown {
+    opacity: 1;
+  }
+
+  &__resize {
+    position: absolute;
+    top: 0;
+    width: 15px;
+    height: 100%;
+    background-color: $vid-aquamarine;
+    color: #ffffff;
+    font-size: 21px;
+    opacity: 0;
+    cursor: ew-resize;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &_mousedown {
+      opacity: 1;
+    }
+
+    &_left {
+      left: 0;
+    }
+
+    &_right {
+      right: 0;
+    }
+  }
+}
+
+.clip-commands {
+  height: 30px;
+  margin: auto;
+
+  &__btn {
+    display: block;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 10px;
+
+    &_close {
+      background-color: $vid-aquamarine;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      line-height: 1;
+      font-size: 18px;
+    }
+  }
+}

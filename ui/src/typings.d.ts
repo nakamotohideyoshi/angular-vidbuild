@@ -19,7 +19,7 @@ declare namespace OpenShot {
     sample_rate?: number;
     channels?: number;
     channel_layout?: number;
-    json?: Object;
+    json?: any;
   }
 
   interface RawFile {
@@ -36,7 +36,7 @@ declare namespace OpenShot {
     end?: number;
     layer?: number;
     project?: string;
-    json?: Object;
+    json?: any;
   }
 
   interface Effect {
@@ -70,5 +70,13 @@ declare namespace OpenShot {
     output?: string;
     progress?: number;
     url?: string;
+  }
+
+  interface Thumbnail {
+    frame_number?: number;
+    width?: number;
+    height?: number;
+    image_quality?: number; // 0 to 100
+    image_format?: string; // JPG, JPEG, PNG, BMP
   }
 }

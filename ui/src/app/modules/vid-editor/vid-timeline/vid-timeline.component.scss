@@ -1,0 +1,34 @@
+.vid-timeline {
+  background-color: #eeeeee;
+  min-width: 760px;
+}
+
+.video-timeline {
+  display: flex;
+  padding: 5px;
+  height: 55px;
+}
+
+.title {
+  width: 100px;
+  text-align: center;
+  margin: auto;
+}
+
+.effects {
+  width: 50px;
+  margin: auto;
+}
+
+.add {
+  width: 60px;
+  text-align: center;
+  margin: auto;
+}
+
+.clips-strip {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  background-color: #e1e1e1;
+}

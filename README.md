@@ -10,6 +10,7 @@
 
 `npm install -g @angular/cli`
 `npm install -g firebase-tools`
+`npm install -g typings`
 
 `git clone https://github.com/vidbuild/firebase`
 `cd firebase/ui && npm install`

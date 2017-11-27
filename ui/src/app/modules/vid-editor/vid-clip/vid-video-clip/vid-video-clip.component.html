@@ -1,0 +1,37 @@
+<div class="video-clip"
+     res-objective
+     drag-objective
+     [attr.maxDeltaRight]="maxDeltaRight"
+     [attr.maxDeltaLeft]="maxDeltaLeft"
+     [style.left.%]="posX"
+     [style.width.%]="clipWidth"
+     [ngClass]="{ 'video-clip_mousedown': clipDown }"
+     (mousedown)="onElementDown($event)">
+  <div class="frames-container"></div>
+  <div class="clip-controls d-flex"
+      [ngClass]="{ 'clip-controls_mousedown': clipDown }">
+    <div class="clip-controls__crop-label clip-controls__crop-label_left"
+         [ngClass]="{ 'clip-controls__crop-label_mousedown': resizerLeftDown }">
+      <span *ngIf="clip.start >= 0.5">-</span>00:{{ clip.start | number:'2.0-0' }}
+    </div>
+    <div [ngClass]="{ 'clip-controls__resize_mousedown': resizerLeftDown }"
+         (mousedown)="onElementDown($event, 'left')"
+         data-position="left"
+         class="resizer clip-controls__resize clip-controls__resize_left">›
+    </div>
+    <div class="clip-commands d-flex align-items-center">
+      <span class="clip-commands__btn">֎</span>
+      <span class="clip-commands__btn">֎</span>
+      <span class="clip-commands__btn clip-commands__btn_close" (click)="onRemoveClip()" title="Remove">x</span>
+    </div>
+    <div [ngClass]="{ 'clip-controls__resize_mousedown': resizerRightDown }"
+         (mousedown)="onElementDown($event, 'right')"
+         data-position="right"
+         class="resizer clip-controls__resize clip-controls__resize_right">‹
+    </div>
+    <div class="clip-controls__crop-label clip-controls__crop-label_right"
+         [ngClass]="{ 'clip-controls__crop-label_mousedown': resizerRightDown }">
+      <span *ngIf="clip.end <= clip.fileDuration - 0.5">-</span>00:{{ clip.fileDuration - clip.end | number:'2.0-0' }}
+    </div>
+  </div>
+</div>
