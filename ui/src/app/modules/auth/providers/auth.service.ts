@@ -19,14 +19,14 @@ export class AuthService {
     private store: Store<any>
   ) {
 
-    this.afAuth.authState.subscribe((auth : any) => {
+    this.afAuth.authState.subscribe((auth: any) => {
       this.authState = auth;
-      if(auth){
+      if (auth) {
         firebase.auth().currentUser.getToken()
-        .then((val)=>{
+        .then((val) => {
           this.token = val;
-          console.log(val)
-        })
+          // console.log(val)
+        });
         this.store.dispatch(new AuthActions.LoginSuccessAction(auth));
         this.setCurrentCoins();
       }
@@ -39,7 +39,7 @@ export class AuthService {
         if (data) {
           this.currentCoins = data;
         }
-      })
+      });
     }
   }
 
@@ -55,7 +55,7 @@ export class AuthService {
 
   // Returns
   get currentUserObservable(): any {
-    return this.afAuth.authState
+    return this.afAuth.authState;
   }
 
   // Returns current user UID
@@ -65,47 +65,47 @@ export class AuthService {
 
   // Anonymous User
   get currentUserAnonymous(): boolean {
-    return this.authenticated ? this.authState.isAnonymous : false
+    return this.authenticated ? this.authState.isAnonymous : false;
   }
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
     if (!this.authState) {
-      return 'Guest'
+      return 'Guest';
     } else if (this.currentUserAnonymous) {
       return 'Anonymous'
     } else {
-      return this.authState['displayName'] || 'User without a Name'
+      return this.authState['displayName'] || 'User without a Name';
     }
   }
 
   //// Social Auth ////
 
   githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider()
+    const provider = new firebase.auth.GithubAuthProvider();
     return this.socialSignIn(provider);
   }
 
   googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider()
+    const provider = new firebase.auth.GoogleAuthProvider();
     return this.socialSignIn(provider);
   }
 
   facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider()
+    const provider = new firebase.auth.FacebookAuthProvider();
     return this.socialSignIn(provider);
   }
 
   twitterLogin() {
-    const provider = new firebase.auth.TwitterAuthProvider()
+    const provider = new firebase.auth.TwitterAuthProvider();
     return this.socialSignIn(provider);
   }
 
   private socialSignIn(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.authState = credential.user
-        this.updateUserData()
+        this.authState = credential.user;
+        this.updateUserData();
       })
       .catch(error => {
         console.log(error);
@@ -129,7 +129,7 @@ export class AuthService {
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user
+        this.authState = user;
         this.updateUserData();
         this.router.navigate(['/pricing']);
       })
@@ -142,9 +142,9 @@ export class AuthService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user
+        this.authState = user;
         this.updateUserData();
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
       })
       .catch(error => {
         console.log(error);
@@ -161,7 +161,7 @@ export class AuthService {
       .catch((error) => {
         console.log(error);
         alert(error.message);
-      })
+      });
   }
 
 
