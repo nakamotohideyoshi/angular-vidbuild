@@ -4,7 +4,8 @@ import { Response } from '@angular/http';
 import { AudioService } from '../../../shared/services/audio.service';
 import { Observable } from 'rxjs/Observable';
 import {MultiSearchSerivice} from './../../../shared/services/multi-search.service';
-
+import { AuthService } from '../../../auth/providers/auth.service';
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-add-audios',
   templateUrl: './add-audios.component.html',
@@ -38,22 +39,34 @@ export class AddAudiosComponent implements OnInit {
   constructor(
     public editorService: EditorService,
     private audioService: AudioService,
-    public multiSearchService: MultiSearchSerivice
+    public multiSearchService: MultiSearchSerivice,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
-    this.audioService.searchAudios(this.params).subscribe((res: any)=>{
-      this.list = JSON.parse(res._body).info;
-      console.log(this.list);
+
+    this.auth.currentUserObservable.subscribe((auth: any) => {
+      firebase.auth().currentUser.getToken()
+      .then((val) => {
+        this.loadAudio();
+      });
     });
+  }
+
+  loadAudio() {
+    // console.log('loadAudio');
+    // this.audioService.searchAudios(this.params).subscribe((res: any)=>{
+    //   this.list = JSON.parse(res._body).info;
+    //   console.log(this.list);
+    // });
     this.audioService.loadAudios(this.params, this.page, this.sum);
     this.post$ = this.audioService.audios();
-    // console.log(this.post$);
     this.audioService.total().subscribe((total) => {
     this.total = total;
     });
     this.bindList();
   }
+
 
   addVideo(type, file) {
     this.editorService.addFile(type, file)
