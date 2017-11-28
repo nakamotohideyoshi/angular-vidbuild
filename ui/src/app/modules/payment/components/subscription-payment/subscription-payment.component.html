@@ -8,7 +8,7 @@
   </div>
   <div>
     <div class="row" *ngIf="paymentService.plans">
-       <div *ngFor="let plan of paymentService.plans "  [ngClass]="{'card-container':plan.frequency === 'month'}">
+      <div *ngFor="let plan of paymentService.plans | orderBy; let current = index"  [ngClass]="{'card-container':plan.frequency === 'month'}">
         <div  *ngIf="plan.frequency == 'month'">
           <div   class="card text-xs-center" (click)="openHandler(plan.name, plan.description, plan.stripePrice, plan.plan)">
             <div *ngIf="current === 2" class="most-popular">Most Popular</div>
