@@ -110,7 +110,7 @@ export class AddAudiosComponent implements OnInit {
 
 
   keyEvent(event) {
-    if (event.keyCode === 32) {
+    if (event.keyCode === 32 || event.keyCode === 13) {
       this.searchItem = this.searchItem.replace(' ', '');
       if (this.searchItem.length > 0) {
         this.onAdd();

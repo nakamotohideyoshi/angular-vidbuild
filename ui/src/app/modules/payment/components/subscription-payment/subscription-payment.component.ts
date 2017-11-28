@@ -71,7 +71,7 @@ export class SubscriptionPaymentComponent implements OnInit {
         tax_percent: 20
       });
     } else {
-      alert('Change your plan in user profile page');
+      alert('Change your plan in user profile page'); 
     }
   }
 }
