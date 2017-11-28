@@ -67,7 +67,7 @@ export class SubscriptionPaymentComponent implements OnInit {
       this.handler.open({
         name: name,
         description: description,
-        amount: amount,
+        amount: amount + amount * 0.2,
         tax_percent: 20
       });
     } else {
