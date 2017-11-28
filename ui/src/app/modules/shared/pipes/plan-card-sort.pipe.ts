@@ -8,7 +8,7 @@ export class OrderBy implements PipeTransform {
  transform(items: any[]) {
      // ascending
   return Array.from(items).sort((item1: any, item2: any) => {
-    return this.orderByComparator(item1.credits, item2.credits);
+    return this.orderByComparator(item1.stripePrice, item2.stripePrice);
   });
  }
 
