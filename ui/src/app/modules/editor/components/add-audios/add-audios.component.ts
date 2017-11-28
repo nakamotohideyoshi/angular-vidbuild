@@ -68,8 +68,8 @@ export class AddAudiosComponent implements OnInit {
   }
 
 
-  addVideo(type, file) {
-    this.editorService.addFile(type, file)
+  addVideo(type, file, provider, stockID) {
+    this.editorService.addFile(type, file, provider, stockID)
     .then((result) => {
       console.log(result);
     });
