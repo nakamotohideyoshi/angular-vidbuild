@@ -75,13 +75,13 @@ export class PaymentService {
   }
 
   processCoinsPayment(token: any, amount: string) {
-    return this.db.list(`users-purchases/${this.AuthService.authState.uid}/coins`)
+    return this.db.list(`users-purchases/${this.AuthService.authState.uid}/credits`)
       .push({ token: token.id, amount: amount });
   }
 
-  payWithCoins(coins) {
+  payWithCoins(credits) {
     return this.db.list(`users-purchases/${this.AuthService.authState.uid}/builds`)
-      .push({ amount: coins });
+      .push({ amount: credits });
   }
 
   get hasSubscription(): boolean {
