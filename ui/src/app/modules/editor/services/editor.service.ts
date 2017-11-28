@@ -18,10 +18,11 @@ export class EditorService {
         private afAuth: AngularFireAuth,
         public AuthService: AuthService
     ) {
-        this.AuthService.currentUserObservable.subscribe(() => {
+        this.AuthService.currentUserObservable.subscribe((auth: any) => {
+            console.log('eeeeeeeeeeeeeee:', auth);
             this.getCurrentProyect(this.AuthService.currentUserId);
             this.getCurrentProyectQueue(this.AuthService.currentUserId);
-        })
+        });
     }
 
     uploadResources() {
