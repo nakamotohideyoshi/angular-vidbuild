@@ -48,12 +48,14 @@ export class EditorService {
         return this.db.object(`users-current-project/${this.AuthService.currentUserId}/`)
             .valueChanges()
             .subscribe((data: any) => {
-                console.log(data)
-                this.currentProject = data;
-                if (data && data.clips) {
-                    this.getClips();
+                if (data) {
+                    console.log(data)
+                    this.currentProject = data;
+                    if (data && data.clips) {
+                        this.getClips();
+                    }
                 }
-            })
+            });
     }
 
     getCurrentProyectQueue(userId) {
