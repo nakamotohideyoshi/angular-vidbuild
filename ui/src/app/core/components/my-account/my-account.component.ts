@@ -13,7 +13,7 @@ import { AuthService } from '../../../modules/auth/providers/auth.service';
 export class MyAccountComponent implements OnInit {
   accountDetails: FormGroup;
   handler: any;
-  coinsAmount: string;
+  creditsAmount: string;
   formErrors = {
     'email': '',
     'password': ''
@@ -38,7 +38,7 @@ export class MyAccountComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.configHandler();
-    
+
   }
 
   private configHandler() {
@@ -48,13 +48,13 @@ export class MyAccountComponent implements OnInit {
       email: this.AuthService.currentUser.email,
       locale: 'auto',
       token: token => {
-        this.paymentService.processCoinsPayment(token, this.coinsAmount);
+        this.paymentService.processCoinsPayment(token, this.creditsAmount);
       }
     });
   }
 
   openHandler(name, description, price, coins) {
-    this.coinsAmount = coins;
+    this.creditsAmount = coins;
     this.handler.open({
       name: name,
       description: description,
@@ -67,8 +67,8 @@ export class MyAccountComponent implements OnInit {
     this.paymentService.updateSubscription(plan);
   }
 
-  payWithCoins(coins){
-    this.paymentService.payWithCoins(coins);
+  payWithCoins(credits){
+    this.paymentService.payWithCoins(credits);
   }
 
   signup(): void {
