@@ -21,6 +21,7 @@ export class AuthService {
 
     this.afAuth.authState.subscribe((auth: any) => {
       this.authState = auth;
+      console.log('------------', auth);
       if (auth) {
         firebase.auth().currentUser.getToken()
         .then((val) => {
