@@ -15,8 +15,8 @@ const stripe = require('stripe')('sk_test_dktidDoEiKIl0rRRibYLbI5N'); //function
             const updates = {};
             updates["/customers/" + customer.id] = user.uid;
             updates["/users/" + user.uid + "/customerId"] = customer.id;
-            updates["/users/" + user.uid + "/coins"] = 0;
-            updates["/users-purchases/" + user.uid + "/coins"] = [];
+            updates["/users/" + user.uid + "/credits"] = 0;
+            updates["/users-purchases/" + user.uid + "/credits"] = [];
             updates["/users-purchases/" + user.uid + "/builds"] = [];
             return admin.database().ref().update(updates);
         });
@@ -87,7 +87,7 @@ exports.updateSubscription = functions.database.ref('/users/{userId}/membership/
             .then((sub) => {
                 const updates = {};
                 updates["/users/" + user.uid + "/membership"] = { status: 'inactive', timestamp: Date.now() };
-                updates["/users/" + user.uid + "/coins"] = 0;
+                updates["/users/" + user.uid + "/credits"] = 0;
                 return admin.database().ref().update(updates);
             })
             .catch(err => console.log(err));

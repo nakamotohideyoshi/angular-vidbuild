@@ -19,7 +19,6 @@ import { OrderBy } from './../../../shared/pipes/plan-card-sort.pipe';
 export class SubscriptionPaymentComponent implements OnInit {
   handler: any;
   planSelected: string;
-  monthly: Boolean = true;
   dataPlans: any;
   loggedIn: Boolean = false;
   plans: any = [];
@@ -32,10 +31,6 @@ export class SubscriptionPaymentComponent implements OnInit {
 
   ngOnInit() {
     this.configHandler();
-  }
-
-  public toggleElement() {
-     this.monthly = !this.monthly;
   }
 
   private configHandler() {
