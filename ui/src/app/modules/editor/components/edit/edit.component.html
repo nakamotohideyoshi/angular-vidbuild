@@ -8,6 +8,8 @@
 <div *ngIf="editorService.currentProject && editorService.currentProject.OpenSId != 0 && editorService.currentProject.status == 'upload finished' ||  editorService.currentProject && editorService.currentProject.status == 'exported preview'">
   <h2>Compose Step</h2>
 
+  <vid-editor [project]="editorService.currentProject"></vid-editor>
+  
   <div *ngIf="editorService.currentProject.status == 'exported preview'">Preview:
     <video controls [src]="editorService.currentProject.outputUrl" type="video/mp4"></video>
   </div>
@@ -36,9 +38,6 @@
       <button type="button" (click)="onUpdateClip(clip.fkey)">Update Clip</button>
     </li>
   </ul>
-
- 
-
 
   <h4>Project</h4>
   <pre>{{editorService.currentProject | json}}</pre>

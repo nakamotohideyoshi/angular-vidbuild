@@ -1,63 +1,72 @@
 <section class="header">
   <div class="row">
     <div class="col-sm-2 col-xs-4">
-      <div class="btn-logo" routerLink="/home"><img alt="Vid Build Logo" src="assets/vidBuildLogo.png"/></div>
+      <div class="btn-logo" routerLink="/home">
+        <img alt="Vid Build Logo" src="assets/vidBuildLogo.png" />
+      </div>
     </div>
-    <div class="col-sm-1 hidden-sm-less" >
+    <div class="col-sm-1 hidden-sm-less">
       <button class="btn btn-secondary btn-pricing" routerLink="/pricing">Pricing</button>
     </div>
     <div class="col-sm-2 hidden-sm-less">
-      <button class="btn btn-primary btn-new-advert hidden-sm" routerLink="/editor/add-videos" >New advert</button>
+      <button class="btn btn-primary btn-new-advert hidden-sm" routerLink="/editor/add-videos">New advert</button>
     </div>
     <div class="col-sm-7 col-xs-8 txt-right">
-      <button class="btn btn-secondary btn-signin" *ngIf="!authService.authState"  routerLink="/login"> Login </button>
-      <!-- <span class="btn-my-account" *ngIf="!authService.authState" (click)="signInEmail()"> signInEmail </span>
-      <span class="btn-my-account" *ngIf="!authService.authState" (click)="signUpEmail()"> signUpEmail </span> -->
+
+      <button class="btn btn-secondary btn-signin" *ngIf="!authService.authState" routerLink="/login"> Login </button>
+
       <button class="btn btn-secondary btn-logout" *ngIf="authService.authState" (click)="logout()"> Log Out </button>
-      <!-- <button class="hidden-sm-less"  *ngIf="authService.authState" routerLink="/subscription">Subscription</button> -->
-      <!--<button class="btn btn-secondary btn-login-create" ><span class="account-icon"></span><span class="hidden-sm-less">Sign In / Create Account</span></button>-->
-      
-      <button class="btn btn-secondary btn-my-account" *ngIf="authService.authState" routerLink="/account"><span class="account-icon"></span><span class="hidden-sm-less">My Account</span></button>
-      <button class="btn btn-secondary btn-my-library hidden-sm-less" *ngIf="authService.authState" routerLink="/library"><span class="account-icon"></span>My Library</button>
+
+      <button class="btn btn-secondary btn-my-account" *ngIf="authService.authState" routerLink="/account">
+        <span class="account-icon col-lg-3"></span>
+        <span class="hidden-sm-less col-lg-9">My Account</span>
+        <span class="account-credit col-lg-9 offset-lg-3">Credits remaining {{authService.currentCoins}} </span>
+     
+      </button>
+
+      <button class="btn btn-secondary btn-my-library hidden-sm-less" *ngIf="authService.authState" routerLink="/library">
+        <span class="account-icon"></span>My Library</button>
     </div>
+ 
+      
   </div>
   <div id="toggle" (click)="toggleNav()" ngClass={{navToggle}}>
     <ul>
       <li>
-          <span class="line l1"></span>
-          <span class="line l2"></span>
-          <span class="line l3"></span>
+        <span class="line l1"></span>
+        <span class="line l2"></span>
+        <span class="line l3"></span>
       </li>
     </ul>
-  </div>  
+  </div>
 </section>
 <section id="full-screen-nav" class="menu-panel {{navActive}}">
-    <nav id="nav">
-      <ul>
-        <li>
-          <a href="pricing">Pricing
-          </a>
-        </li>
-        <li>
-          <a href="editor/add-videos">New advert
-          </a>
-        </li>
-        <li *ngIf="!authService.authState"> 
-          <a href="login" >Login
-          </a>
-        </li>
-        <li *ngIf="authService.authState">
-          <a (click)="logout()">Log Out
-          </a>
-        </li>
-        <li *ngIf="authService.authState">
-          <a href="account">My Account
-          </a>
-        </li>
-        <li *ngIf="authService.authState">
-          <a href="library">My Library
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </section>
+  <nav id="nav">
+    <ul>
+      <li>
+        <a href="pricing">Pricing
+        </a>
+      </li>
+      <li>
+        <a href="editor/add-videos">New advert
+        </a>
+      </li>
+      <li *ngIf="!authService.authState">
+        <a href="login">Login
+        </a>
+      </li>
+      <li *ngIf="authService.authState">
+        <a (click)="logout()">Log Out
+        </a>
+      </li>
+      <li *ngIf="authService.authState">
+        <a href="account">My Account
+        </a>
+      </li>
+      <li *ngIf="authService.authState">
+        <a href="library">My Library
+        </a>
+      </li>
+    </ul>
+  </nav>
+</section>

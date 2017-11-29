@@ -28,13 +28,24 @@ exports.createUserEntities = functions.auth.user().onCreate(event => {
     updates[`/users-current-project/${user.uid}`] = {
         OpenSId: 0,
         files: [],
-        clips: [],
+        audioClips: [],
+        textClips: [],
+        videoClips: [],
+        voiceClips: [],
+        duration: 30,   // secs
         exports: [],
         effects:[],
         type: 'preview',
         created: 0,
         status: 'created',
-        exportResolution: 360
+        width: 640,
+        height: 360,
+        fps_num: 25,
+        fps_den: 1,
+        sample_rate: 44100,
+        channels: 2,
+        channel_layout: 3,
+        json: {}
     };
 
     return admin.database().ref().update(updates);

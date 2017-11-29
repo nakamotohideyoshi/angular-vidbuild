@@ -18,3 +18,12 @@ export function type<T>(label: T | ''): T {
 
   return <T>label;
 }
+
+export function cloudFunctionUrl() {
+  console.log(window.location.hostname)
+  if(window.location.hostname === "localhost"){
+    return "https://dev.vidbuild.com";
+  } else {
+    return "https://" + window.location.hostname;
+  }
+};

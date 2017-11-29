@@ -6,6 +6,7 @@ import { AuthService } from './../../auth/providers/auth.service';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
 import * as _ from "lodash";
+import { vbuild } from './../../../core/model/classes/video-editor';
 
 @Injectable()
 export class EditorService {
@@ -19,9 +20,7 @@ export class EditorService {
         public AuthService: AuthService
     ) {
         this.AuthService.currentUserObservable.subscribe((auth: any) => {
-            console.log('eeeeeeeeeeeeeee:', auth);
             this.getCurrentProyect(this.AuthService.currentUserId);
-            this.getCurrentProyectQueue(this.AuthService.currentUserId);
         });
     }
 
@@ -37,9 +36,8 @@ export class EditorService {
                 this.clips = [];
                 clips.forEach(clip => {
                     let newClip = Object.assign({}, clip.payload.val(), { fkey: clip.key });
-                    console.log(clip.payload.val());
                     this.clips.push(newClip);
-                  });
+                });
             })
     }
 
@@ -48,23 +46,15 @@ export class EditorService {
         return this.db.object(`users-current-project/${this.AuthService.currentUserId}/`)
             .valueChanges()
             .subscribe((data: any) => {
-                if (data) {
-                    console.log(data)
-                    this.currentProject = data;
-                    if (data && data.clips) {
-                        this.getClips();
-                    }
+                this.currentProject = new vbuild.Project(
+                    Object.assign({},
+                        { id: data.OpenSId },
+                        data
+                    ));
+                if (data && data.clips) {
+                    this.getClips();
                 }
             });
-    }
-
-    getCurrentProyectQueue(userId) {
-        return this.db.object(`users-files-queue/${this.AuthService.currentUserId}/`)
-            .valueChanges()
-            .subscribe((data) => {
-                console.log(data)
-                this.currentProjectQueue = data;
-            })
     }
 
     addFile(type, file, provider, stockID) {

@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { editorRouting } from './routes';
+
+import { VidEditorModule } from './../vid-editor/vidEditor.module';
+
 import { AddVideosComponent } from './components/add-videos/add-videos.component';
 import { AddAudiosComponent } from './components/add-audios/add-audios.component';
 import { AddVoiceoverComponent } from './components/add-voiceover/add-voiceover.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ExportComponent } from './components/export/export.component';
-import { EditorService } from './services/editor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SharedModule } from './../shared/shared.module';
 
 
@@ -19,7 +21,8 @@ import { SharedModule } from './../shared/shared.module';
     editorRouting,
     FormsModule,
     InfiniteScrollModule,
-    SharedModule
+    SharedModule,
+    VidEditorModule
   ],
   declarations: [
     AddVideosComponent,
@@ -28,8 +31,6 @@ import { SharedModule } from './../shared/shared.module';
     EditComponent,
     ExportComponent
   ],
-  providers:[
-    EditorService
-  ]
+  providers:[]
 })
 export class EditorModule { }
