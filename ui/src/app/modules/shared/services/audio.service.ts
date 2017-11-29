@@ -42,7 +42,7 @@ export class AudioService {
       if (this.auth.token) {
         const headers = new Headers();
         this.createAuthorizationHeader(headers);
-        const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks/getAudioFromStoryBlocks?keywords=music&page=1&num_results=30';
+        const url = '/getAudioFromStoryBlocks/getAudioFromStoryBlocks?keywords=music&page=1&num_results=30';
         return this.http.get(url, {headers: headers});
       }
   }

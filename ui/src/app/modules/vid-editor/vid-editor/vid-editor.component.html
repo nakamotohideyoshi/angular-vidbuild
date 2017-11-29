@@ -1,32 +1,42 @@
-<vid-player [frameSrc]="currFrame"          
-            [videoSrc]="videoSrc"
-            [project]="project"
-            (durationChange)="onDurationChange($event)"
-            (frameSeek)="onFrameSeek_thumb($event)">
+<vid-player [frameSrc]="currFrame" [videoSrc]="videoSrc" [project]="project" (durationChange)="onDurationChange($event)"
+  (frameSeek)="onFrameSeek_thumb($event)">
 </vid-player>
-<br><br>
+<br>
+<br>
 <vid-timeline #timeline [project]="project" (clipChange)="onClipChange($event)"></vid-timeline>
-<br><br>
-<div *ngIf="rendering"><span *ngIf="rendering === 'in-progress' || rendering === 'pending'">Exporting... </span><span>{{ renderProgress }} %</span><span *ngIf="rendering === 'completed'"> ...Done</span></div>
+<br>
+<br>
+<div *ngIf="rendering">
+  <span *ngIf="rendering === 'in-progress' || rendering === 'pending'">Exporting... </span>
+  <span>{{ renderProgress }} %</span>
+  <span *ngIf="rendering === 'completed'"> ...Done</span>
+</div>
 <div *ngIf="processTime">{{ processTime }} secs</div>
 <br>
+<!--
 <button type="button" (click)="onExportVideo()">Export (Render)</button>
-<br><br>
+<br>
+<br>
 <h3>Vid Editor</h3>
-<br><br>
+<br>
+<br>
 <input [(ngModel)]="project.name" type="text" placeholder="Project Name">
 <br>
 <button type="button" (click)="onCreateProject()">Create Project</button>
-<br><br>
+<br>
+<br>
 <button (click)="onGetProjects()">Get Projects</button>
-<br><br>
+<br>
+<br>
 <hr>
 <h4>Upload a File</h4>
 <input [(ngModel)]="project.id" type="text" placeholder="Project ID">
 <input type="file" (change)="onFileSelected($event)" placeholder="Upload File">
-<br><br>
+<br>
+<br>
 <button type="button" (click)="onUploadFile()">Upload File</button>
-<br><br>
+<br>
+<br>
 <hr>
 <h4>Create Clip</h4>
 <input [(ngModel)]="project.id" type="text" placeholder="Project ID">
@@ -35,9 +45,11 @@
 <input [(ngModel)]="clipStartAt" type="number" placeholder="Start (in secs)">
 <input [(ngModel)]="clipEndAt" type="number" placeholder="End (in secs)">
 <input [(ngModel)]="layer" type="number" placeholder="Layer (num)">
-<br><br>
+<br>
+<br>
 <button type="button" (click)="onCreateClip()">Create Clip</button>
-<br><br>
+<br>
+<br>
 <hr>
 <h4>Create Effect</h4>
 <input [(ngModel)]="project.id" type="text" placeholder="Project ID">
@@ -49,22 +61,31 @@
 <input [(ngModel)]="effectStartAt" type="number" placeholder="Start (in secs)">
 <input [(ngModel)]="effectEndAt" type="number" placeholder="End (in secs)">
 <input [(ngModel)]="layer" type="number" placeholder="Layer (num)">
-<br><br>
+<br>
+<br>
 <button type="button" (click)="onCreateEffect()">Create Effect</button>
-<br><br>
+<br>
+<br>
 <hr>
 <h4>Render</h4>
 <input [(ngModel)]="project.id" type="text" placeholder="Project ID">
 <h5>Resolution</h5>
 <input [(ngModel)]="width" type="number" placeholder="Width">
 <input [(ngModel)]="height" type="number" placeholder="Height">
-<br><br>
+<br>
+<br>
 <button type="button" (click)="onExportVideo()">Export (Render)</button>
-<br><br>
-<div *ngIf="rendering"><span *ngIf="rendering === 'in-progress' || rendering === 'pending'">Exporting... </span><span>{{ renderProgress }} %</span><span *ngIf="rendering === 'completed'"> ...Done</span></div>
+<br>
+<br>
+<div *ngIf="rendering">
+  <span *ngIf="rendering === 'in-progress' || rendering === 'pending'">Exporting... </span>
+  <span>{{ renderProgress }} %</span>
+  <span *ngIf="rendering === 'completed'"> ...Done</span>
+</div>
 <div *ngIf="processTime">{{ processTime }} secs</div>
 <video #videoPlayer width="640" height="360" [src]="videoSrc" controls>
   Your browser does not support HTML5 video.
 </video>
-<br><br>
-<!--<vid-timeline></vid-timeline>-->
+<br>
+<br>
+-->

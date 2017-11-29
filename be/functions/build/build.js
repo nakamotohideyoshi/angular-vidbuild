@@ -112,7 +112,7 @@ const checkFilesStatus = (userId, project) => {
               return admin.database().ref(`/users-current-project/${userId}/files/${file}`).update({
                 status: 'uploaded',
                 fileId: parsedBody.body.id,
-                type: 'update'
+                duration: parsedBody.body.json.duration
               });
               // return admin.database().ref(`/users-files-queue/${userId}/${file}`).update({
               //   status: 'uploaded',

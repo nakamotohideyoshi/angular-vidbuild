@@ -15,10 +15,10 @@ import { VidAudioClipComponent } from './vid-clip/vid-audio-clip/vid-audio-clip.
 import { VidTextClipComponent } from './vid-clip/vid-text-clip/vid-text-clip.component';
 import { VidVideoClipComponent } from './vid-clip/vid-video-clip/vid-video-clip.component';
 import { VidVoiceClipComponent } from './vid-clip/vid-voice-clip/vid-voice-clip.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  imports: [ CommonModule, FormsModule, NgbModule ],
+  imports: [ CommonModule, FormsModule, NgbModule, SharedModule ],
   providers: [],
   declarations: [
     DraggableDirective,

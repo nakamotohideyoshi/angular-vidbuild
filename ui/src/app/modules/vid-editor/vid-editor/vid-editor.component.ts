@@ -12,6 +12,8 @@ import { ApiOpenShotService } from '../../../core/services/api/apiOpenShot.servi
 import { VidTimelineComponent } from '../vid-timeline/vid-timeline.component';
 import { Text } from '@angular/compiler';
 
+import { EditorService } from '../../editor/services/editor.service';
+
 
 @Component({
   selector: 'vid-editor',
@@ -32,7 +34,7 @@ export class VidEditorComponent {
   public effectTitle: string = undefined;
   public rendering = '';
   public renderProgress = 0;
-  public videoSrc = 'http://cloud.openshot.org/media/video/output/8/output-8-18-8ade53b6.mp4'; // 'http://34.241.170.14/media/video/output/20/output-20-92-630826c2.mp4';
+  public videoSrc = '';
   public width: number = 640;
   public height: number = 360;
   public processTime = 0;
@@ -43,48 +45,24 @@ export class VidEditorComponent {
   @ViewChild('timeline') private timeline: VidTimelineComponent;
   private fileToUpload: File = undefined;
 
-  constructor(private openShotService: ApiOpenShotService, private sanitizer: DomSanitizer) {
-    this.project = new vbuild.Project({
-      width: this.width,
-      height: this.height,
-      videoClips: [
-        // new vbuild.VideoClip({ position: 0, start: 0, end: 10, fileDuration: 10 }),
-        // new vbuild.VideoClip({ position: 15, start: 0, end: 12, fileDuration: 12 })
-      ],
-      textClips: [
-        new vbuild.TextClip({ position: 0, start: 0, end: 8 }),
-        new vbuild.TextClip({ position: 10, start: 0, end: 8 }),
-        new vbuild.TextClip({ position: 21, start: 0, end: 8 })
-      ]
-    });
-  }
-
-  public onCreateProject(): void {
-    this.openShotService.createProject(this.project).subscribe();
-  }
-
-  public onGetProjects(): void {
-    this.openShotService.getProjects().subscribe();
-  }
-
-  public onFileSelected(event: Event): void {
-    this.fileToUpload = (<HTMLInputElement>event.target).files[0];
-    /*const fileReader: FileReader = new FileReader();
-
-    fileReader.onload = (result) => {
-      // this.fileToUpload = result.target;
-    };
-    fileReader.readAsArrayBuffer(file);*/
-  }
-
-  public onUploadFile(): void {
-    console.log(this.fileToUpload);
-    window['fileToUpload'] = this.fileToUpload;
-    this.openShotService.UploadFile(<OpenShot.RawFile>{
-      media: this.fileToUpload,
-      project: String(this.project.id),
-      json: {}
-    }).subscribe();
+  constructor(
+    private openShotService: ApiOpenShotService,
+    private sanitizer: DomSanitizer,
+    private editorService: EditorService
+  ) {
+    // this.project = new vbuild.Project({
+    //   width: this.width,
+    //   height: this.height,
+    //   videoClips: [
+    //     // new vbuild.VideoClip({ position: 0, start: 0, end: 10, fileDuration: 10 }),
+    //     // new vbuild.VideoClip({ position: 15, start: 0, end: 12, fileDuration: 12 })
+    //   ],
+    //   textClips: [
+    //     new vbuild.TextClip({ position: 0, start: 0, end: 8 }),
+    //     new vbuild.TextClip({ position: 10, start: 0, end: 8 }),
+    //     new vbuild.TextClip({ position: 21, start: 0, end: 8 })
+    //   ]
+    // });
   }
 
   public onCreateClip(): void {
@@ -105,20 +83,10 @@ export class VidEditorComponent {
   }
 
   public onClipChange(clip: OpenShot.Clip): void {
-    this.openShotService.editClip(clip).subscribe(() => console.log('Clip Edited'));
+    // this.openShotService.editClip(clip).subscribe(() => console.log('Clip Edited'));
   }
 
   public onCreateEffect(): void {
-    this.openShotService.createEffect(<OpenShot.Effect>{
-      title: this.effectTitle,
-      type: this.effectType,
-      position: this.timelinePos,
-      start: this.effectStartAt,
-      end: this.effectEndAt,
-      layer: this.layer,
-      project: String(this.project.id),
-      json: {}
-    }).subscribe();
   }
 
   public onDurationChange(duration: number): void {

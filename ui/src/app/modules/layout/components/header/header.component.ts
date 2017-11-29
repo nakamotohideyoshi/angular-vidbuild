@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../../../auth/providers/auth.service';
+import { Component, OnInit  } from '@angular/core';
+import { AuthService } from './../../../auth/providers/auth.service'; 
 
 import { AuthActions } from './../../../auth/actions';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs';
-
+  
 
 @Component({
   selector: 'app-header',
@@ -18,23 +18,24 @@ export class HeaderComponent implements OnInit {
   authSubcription: Subscription;
   authData: any;
   navToggle: String = '';
-  navActive: String = '';
+  navActive: String = ''; 
+  currentCoins: any;
+ 
 
   constructor(
     private store: Store<any>,
-    public authService: AuthService
+    public authService: AuthService 
   ) {
     this.auth$ = store.select('Auth');
     this.auth$.subscribe((data) => {
       this.authData = data;
-    })
+    }) 
   }
 
-  ngOnInit() {
-    //this.checkSession();
-  }
+  ngOnInit() { 
+  } 
 
-  login(){
+  login() {
     this.authService.googleLogin();
   }
 
@@ -42,6 +43,7 @@ export class HeaderComponent implements OnInit {
     this.authService.signOut();
     this.store.dispatch(new AuthActions.LogoutAction());
   }
+
   toggleNav() {
     if (this.navToggle !== '') {
       this.navToggle = '';
@@ -51,14 +53,4 @@ export class HeaderComponent implements OnInit {
       this.navActive = 'active';
     }
   }
-
-
-  // checkSession() {
-  //   this.authService.authState.subscribe((data) => {
-  //     if (data) {
-  //       this.store.dispatch(new AuthActions.LoginSuccessAction(data));
-  //     }
-  //   });
-  // }
-
 }

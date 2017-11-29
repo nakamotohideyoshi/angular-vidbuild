@@ -21,10 +21,10 @@
   }
   .btn-my-account, .btn-my-library, .btn-signin, .btn-logout{
       padding: 10px 0;
-      text-align: center;
-      display: inline-block;
+      text-align: center; 
       width: 130px;
-      margin: 0 auto;
+      margin: 0 auto; 
+      vertical-align: top;
 
       .account-icon{
           width: 26px;
@@ -34,10 +34,23 @@
           display: inline-block;
           top: 6px;
           margin-right: 5px;
+          float: left;
       }
+
+      .account-credit {
+        font-size: 12px;
+        float: left;
+      }
+  }
+  .btn-my-account {
+    margin-right: 35px;
+  }
+  .btn-logout {
+    margin-right: 0px;
   }
   .btn-my-account, .btn-my-library, .btn-signin, .btn-logout{
       color: $regent-grey;
+      vertical-align: top;
   }
   .btn-logout, .btn-pricing{
       margin-top: 10px;
@@ -210,6 +223,7 @@ nav#nav{
         .btn-my-account{
             text-align: right;
             width: 30px;
+            margin-right: 25px;
         }
         .btn-logout{
             width: 85px
@@ -229,6 +243,9 @@ nav#nav{
     .header{
         .btn-new-advert{
             width: 120px;
+        }
+        .btn-my-account {
+          margin-right: 25px;
         }
         .btn-my-account, .btn-my-library, .btn-signin{
             width: 125px;
@@ -260,3 +277,5 @@ nav#nav{
     }
   }
 }
+
+

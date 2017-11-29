@@ -64,11 +64,7 @@
           <button class="btn btn-primary btn-create-account" [ngStyle]="{disabled : !f.form.valid}">Create Account</button>
         </div>
       </div>
-      <span *ngIf="f.form.valid" class="help is-success">Form Looks Valid</span>
-      <button *ngIf="!passReset && userForm.controls.email.valid" type="button" (click)="resetPassword()" class="btn btn-light">Reset Password for {{userForm.value.email}}?</button>
-      <div *ngIf="passReset" class="alert alert-success alert-dismissable">
-        Reset requested. Check your email instructions.
-      </div>
+
     </form>
   </div>
 </div>
@@ -98,17 +94,21 @@
             class="is-danger">
             <ul class="error-list is-danger">
               <li [hidden]="!userSignInForm.get('password').hasError('required')">{{validationMessages.password.required}}</li>
-               <li [hidden]="!userSignInForm.get('password').hasError('minlength')">{{validationMessages.password.minlength}}</li>
+              <li [hidden]="!userSignInForm.get('password').hasError('minlength')">{{validationMessages.password.minlength}}</li>
               <li [hidden]="!userSignInForm.get('password').hasError('maxlength')">{{validationMessages.password.maxlength}}</li>
             </ul>
           </span>
         </div>
       </div>
       <div class="form-group row margin-bottom-20">
-          <span class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-form-label"></span>
-          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-form-label"></span>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
           <button class="btn btn-primary btn-create-account">Sign in</button>
         </div>
+      </div>
+      <button *ngIf="!passReset && userSignInForm.controls.email.valid" type="button" (click)="resetPassword()" class="btn btn-light">Reset Password for {{userSignInForm.value.email}}?</button>
+      <div *ngIf="passReset" class="alert alert-success alert-dismissable">
+        Reset requested. Check your email instructions.
       </div>
     </form>
   </div>

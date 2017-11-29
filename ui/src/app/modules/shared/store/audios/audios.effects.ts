@@ -6,6 +6,8 @@ import { Actions, Effect } from '@ngrx/effects';
 import * as _ from 'lodash';
 import { AuthService } from '../../../auth/providers/auth.service';
 
+import * as utils from './../../../../utils';
+console.log(utils)
 @Injectable()
 export class AudiosEffects {
   @Effect() get$ = this.actions$
@@ -30,7 +32,7 @@ export class AudiosEffects {
   constructor(private http: Http, private actions$: Actions, public auth: AuthService) { }
 
   private createAuthorizationHeader(headers: Headers) {
-    headers.append('Authorization', 'Bearer ' +  this.auth.token);
+    headers.append('Authorization', 'Bearer ' + this.auth.token);
     headers.append('Content-Type', 'application/json');
   }
 
@@ -38,14 +40,14 @@ export class AudiosEffects {
     // return this.http.get('assets/audios.json').map(response => response.json());
     const headers = new Headers();
     this.createAuthorizationHeader(headers);
-    const url = 'https://us-central1-vidbuild-61b8e.cloudfunctions.net/getAudioFromStoryBlocks/getAudioFromStoryBlocks?keywords='
-    + params
-    + '&page='
-    + from
-    + '&num_results='
-    + size;
-    return this.http.get(url, {headers: headers})
-    .map(response => response.json());
+    const url = utils.cloudFunctionUrl() + '/getAudioFromStoryBlocks?keywords='
+      + params
+      + '&page='
+      + from
+      + '&num_results='
+      + size;
+    return this.http.get(url, { headers: headers })
+      .map(response => response.json());
   }
 
   simulatePagination(data: any[], from: number, size: number) {
