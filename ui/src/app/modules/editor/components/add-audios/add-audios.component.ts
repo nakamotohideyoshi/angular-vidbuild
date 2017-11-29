@@ -35,6 +35,7 @@ export class AddAudiosComponent implements OnInit {
   htmlElement: HTMLElement;
   cursorPointer = 0;
   tempTime = 0;
+  characters = 0;
 
   constructor(
     public editorService: EditorService,
@@ -116,10 +117,15 @@ export class AddAudiosComponent implements OnInit {
         this.onAdd();
       }
     } else if (event.keyCode === 8) {
-      if (this.searchItem.length === 0 && this.multiSearchService.searchItemList.length !== 0) {
+      this.characters--;
+      if (this.characters === -1 && this.multiSearchService.searchItemList.length !== 0) {
         this.multiSearchService.searchItemList.splice(this.multiSearchService.searchItemList.length - 1, 1);
         this.bindList();
+      } else if (this.multiSearchService.searchItemList.length === 0) {
+        this.characters = 0;
       }
+    } else if (event.keyCode >= 65 && event.keyCode <= 90) {
+      this.characters++;
     }
   }
 
@@ -135,6 +141,7 @@ export class AddAudiosComponent implements OnInit {
   }
 
   bindList() {
+    this.characters = 0;
     for (let index = 0 ; index < 5 ; index++ ) {
       if (this.multiSearchService.searchItemList[index]) {
         this.itemList[index] = this.multiSearchService.searchItemList[index];
