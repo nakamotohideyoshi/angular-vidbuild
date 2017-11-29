@@ -26,6 +26,7 @@ export class AddVideosComponent implements OnInit {
   params: String = 'luxury cars';
   selectedVidCount = 0;
   videoElement: HTMLVideoElement;
+  characters = 0;
 
 
   constructor(
@@ -92,10 +93,15 @@ export class AddVideosComponent implements OnInit {
         this.onAdd();
       }
     } else if (event.keyCode === 8) {
-      if (this.searchItem.length === 0 && this.multiSearchService.searchItemList.length !== 0) {
+      this.characters--;
+      if (this.characters === -1 && this.multiSearchService.searchItemList.length !== 0) {
         this.multiSearchService.searchItemList.splice(this.multiSearchService.searchItemList.length - 1, 1);
         this.bindList();
+      } else if (this.multiSearchService.searchItemList.length === 0) {
+        this.characters = 0;
       }
+    } else if (event.keyCode >= 65 && event.keyCode <= 90) {
+      this.characters++;
     }
   }
 
@@ -110,6 +116,7 @@ export class AddVideosComponent implements OnInit {
   }
 
   bindList() {
+    this.characters = 0;
     for (let index = 0 ; index < 5 ; index++ ) {
       if (this.multiSearchService.searchItemList[index]) {
         this.itemList[index] = this.multiSearchService.searchItemList[index];
