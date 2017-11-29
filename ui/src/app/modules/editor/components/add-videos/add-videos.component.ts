@@ -91,7 +91,22 @@ export class AddVideosComponent implements OnInit {
       if (this.searchItem.length > 0) {
         this.onAdd();
       }
+    } else if (event.keyCode === 8) {
+      console.log(this.searchItem);
+      if (this.searchItem.length === 0) {
+        console.log(this.searchItem);
+        if (this.multiSearchService.searchItemList.length !== 0) {
+          console.log(this.multiSearchService.searchItemList);
+          this.deleteLastItem();
+        }
+      }
     }
+  }
+
+  deleteLastItem() {
+    const index = this.multiSearchService.searchItemList.length - 1;
+    const item = this.multiSearchService.searchItemList.index;
+   this.onDelete(item);
   }
 
   onDelete(item) {
