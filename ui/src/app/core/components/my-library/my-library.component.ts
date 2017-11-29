@@ -90,21 +90,11 @@ export class MyLibraryComponent implements OnInit, OnDestroy {
         this.onAdd();
       }
     } else if (event.keyCode === 8) {
-      console.log(this.searchItem);
-      if (this.searchItem.length === 0) {
-        console.log(this.searchItem);
-        if (this.multiSearchService.searchItemList.length !== 0) {
-          console.log(this.multiSearchService.searchItemList);
-          this.deleteLastItem();
-        }
+      if (this.searchItem.length === 0 && this.multiSearchService.searchItemList.length !== 0) {
+        this.multiSearchService.searchItemList.splice(this.multiSearchService.searchItemList.length - 1, 1);
+        this.bindList();
       }
     }
-  }
-
-  deleteLastItem() {
-    const index = this.multiSearchService.searchItemList.length - 1;
-    const item = this.multiSearchService.searchItemList.index;
-   this.onDelete(item);
   }
 
   onDelete(item) {
