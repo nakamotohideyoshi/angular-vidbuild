@@ -1,0 +1,185 @@
+.voiceover{
+  margin: 100px 0;
+  padding: 0 30px;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+ .nav-tabs{
+   height: 40px;
+   background-color: #f0f5f4;
+   border: none;
+   display: flex;
+  //  justify-content: space-around;
+   .tab-header{
+     padding: 7px 0;
+     width: 50%;
+     text-align: center;
+     background-color: #dae0df;
+     a{
+       color: #000000;
+       &:hover{
+        text-decoration: none;
+      }
+     }
+     &.active{
+       background-color: transparent;
+     }     
+   }
+ }
+ .tab-content{
+  background-color: #f0f5f4;  
+  .tab-pane{
+    padding: 40px 20px;
+    min-height: 500px;
+    max-height: 900px;
+    &#upload-file{
+      justify-content: center;
+      text-align: center;
+    }
+    &.active{
+      display: flex;
+      flex-wrap: wrap;
+      .form-group{
+        &.sliders{
+          padding: 20px 15px;
+        }
+        &.control-group{
+          padding-top: 30px;
+        }
+        &.select-group{
+          max-width: 450px;
+        }
+        .slider-group{
+          padding-top: 15px;
+          padding-bottom: 15px;
+          display: flex;
+          label{
+            width: 80px;
+          }
+          .form-slider{
+            position: relative;
+            background-color: transparent;
+            height: 25px;
+            width: 100%;
+            .slider-range{
+              position: absolute;
+              top: 11px;
+              height: 2px;
+              width: 100%;
+              background-color: #c8c8c8;
+            }
+            .slider-value{
+              position: absolute;
+              top: 11px;
+              height: 2px;
+              width: 50%;
+              background-color: #19b2ad;
+            }
+            .slider {
+              position: absolute;
+              top: 11px;
+              -webkit-appearance: none;  /* Override default CSS styles */
+              appearance: none;
+              width: 100%; /* Full-width */
+              height: 2px; /* Specified height */
+              background: transparent; /* Grey background */
+              outline: none; /* Remove outline */
+              opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+              -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+              transition: opacity .2s;
+              &::-webkit-slider-thumb{
+                -webkit-appearance: none; /* Override default look */
+                appearance: none;
+                width: 25px; /* Set a specific slider handle width */
+                height: 25px; /* Slider handle height */
+                background: #19b2ad; /* Green background */
+                border-radius: 50%; 
+                cursor: pointer; /* Cursor on hover */
+              }
+              &::-moz-range-thumb{
+                width: 25px; /* Set a specific slider handle width */
+                height: 25px; /* Slider handle height */
+                background: #19b2ad; /* Green background */
+                cursor: pointer; /* Cursor on hover */
+                border-radius: 50%; 
+              }
+            }                   
+          }               
+        } 
+        .whisper-group{
+          padding-top: 15px;
+          padding-bottom: 15px;
+          display: flex;
+          .form-whisper{
+            display: flex;
+            width: 100%;
+            height: 44px;
+            label{
+              width: 80px;
+              padding: 8px 0;
+            }
+            #whisper{
+              border-radius: 4px;
+              padding: 2px;
+              display: flex;
+              width: 124px;
+              background-color: #ffffff;
+              text-align: center;
+              .whisper-off{
+                border-bottom-left-radius: 4px;
+                border-top-left-radius: 4px;
+                height: 100%;
+                width: 50%;
+                padding: 8px 0;
+                &.active{
+                  background-color: #f1f1f1;
+                  color: #19b2ad;
+                }
+              }
+              .whisper-on{
+                border-bottom-right-radius: 4px;
+                border-top-right-radius: 4px;
+                height: 100%;
+                width: 50%;
+                padding: 8px 0;
+                &.active{
+                  background-color: #f1f1f1;
+                  color: #19b2ad;
+                }
+              }
+              
+            }
+          }
+        }        
+         
+      }
+    }    
+  }
+ }
+}
+.btn-reset{
+  color: #19b2ad;
+  background-color: transparent;
+  border: solid 2px #19b2ad;
+  width: 90px;
+  &:hover{
+    color: #ffffff;
+    background-color: #19b2ad;
+  }
+}      
+
+.btn-control{
+  width: 120px;
+  height: 40px
+}
+
+@media only screen and (max-width : 768px) {
+  .voiceover{
+    padding: 0 5px;
+  }
+}
+
+
+
+
+
