@@ -9,6 +9,7 @@ import { MyAccountComponent } from './components/my-account/my-account.component
 import { MyLibraryComponent } from './components/my-library/my-library.component';
 import { UserComponent } from './components/user/user.component';
 import { PaymentService } from '../modules/payment/services/payment.service';
+import { AccountDetailsService } from './services/accountDetails.service';
 import { ComponentMapComponent } from './components/component-map/component-map.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -37,7 +38,8 @@ import { VidEditorModule } from '../modules/vid-editor/vidEditor.module';
   ],
   providers: [
     ApiOpenShotService,
-    PaymentService
+    PaymentService,
+    AccountDetailsService
   ]
 
 })

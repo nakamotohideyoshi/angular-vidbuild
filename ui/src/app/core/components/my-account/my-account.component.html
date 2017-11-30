@@ -7,11 +7,13 @@
             <div class="col-md-4">
               <div class="card">
                 <h2 class="account-subtitle">Account Details</h2>
+                <pre>{{AuthService.authState | json}}</pre>
                 <form [formGroup]="accountDetails" (ngSubmit)="saveAccountDetails()">
                   <div class="form-group row">
                     <label for="text" class="col-4 col-form-label">First Name</label>
                     <div class="col-8">
-                      <input class="form-control input-primary" formControlName="text" type="text">
+                      <input class="form-control input-primary" formControlName="name" type="text">
+                      <!--<p class="text-danger" [hidden]="!form.text.errors?.required">This is required</p>-->
                     </div>
                   </div>
                   <div class="form-group row">
@@ -41,7 +43,7 @@
                   <div class="form-group row margin-bottom-20">
                     <div class="col-12">
                       <div class="save-account-details-btn-container">
-                        <button class="btn btn-tertiary btn-save-account-details" type="submit" [disabled]="!accountDetails.valid">Save</button>
+                        <button class="btn btn-tertiary btn-save-account-details" type="submit" >Save</button>
                       </div>
                     </div>
                   </div>
@@ -56,7 +58,7 @@
                 <h2 class="account-subtitle">My Plan</h2>
                 <div>
                   <div class="card-header">
-                    <div class="pricing-plan"><span class="currency bolder">£ {{paymentService.myplan.price}}</span><span class="period">per {{paymentService.myplan.frequency}}</span></div>
+                    <div class="pricing-plan"><span class="currency bolder">£ {{priceCurrentPlan}}</span><span class="period">per {{paymentService.myplan.frequency}}</span></div>
                   </div>
                   <div class="card-block">
                     <div>
@@ -65,7 +67,7 @@
                       <span class="txt-card-description">Create unlimited videos*</span>
                     </div>
                     <button routerLink="/pricing" class="btn btn-primary btn-change-plan">Change Plan</button>
-                    <button class="btn btn-secondary btn-cancel-subscription" (click)="updateSubscription('canceled')">Cancel Subscription</button>
+                    <button class="btn btn-secondary btn-cancel-subscription" (click)="clearPlan()">Cancel Subscription</button>
                   </div>
                 </div>
               </div>

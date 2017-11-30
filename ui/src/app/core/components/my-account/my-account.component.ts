@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 import { PaymentService } from '../../../modules/payment/services/payment.service';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../modules/auth/providers/auth.service';
+import { AccountDetailsService } from '../../services/accountDetails.service';
 
 @Component({
   selector: 'app-my-account',
@@ -14,6 +15,8 @@ export class MyAccountComponent implements OnInit {
   accountDetails: FormGroup;
   handler: any;
   creditsAmount: string;
+  priceCurrentPlan: string;
+  hideErrors: boolean = true;
   formErrors = {
     'email': '',
     'password': ''
@@ -33,12 +36,14 @@ export class MyAccountComponent implements OnInit {
 
   constructor(public paymentService: PaymentService,
               public AuthService: AuthService,
+              public accountDetailesService : AccountDetailsService;
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.buildForm();
     this.configHandler();
-
+    this.formatCurrentPricePlan();
+    
   }
 
   private configHandler() {
@@ -62,7 +67,9 @@ export class MyAccountComponent implements OnInit {
       tax_percent: 20
     });
   }
-
+  clearPlan (){
+    this.paymentService.clearPlan();
+  }
   updateSubscription(plan){
     this.paymentService.updateSubscription(plan);
   }
@@ -76,12 +83,27 @@ export class MyAccountComponent implements OnInit {
   }
   saveAccountDetails(): void {
     console.log('saveAccountDetails');
+    // if (this.accountDetails.valid) {
+      let userInformation = { 
+        displayName: this.accountDetails.value.name,
+      }
+      this.accountDetailesService.updateAccountDetails(userInformation);
+    // } else {
+    //   this.hideErrors =  false;
+    // }
+    
     // this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'])
   }
+
   buildForm(): void {
     this.accountDetails = this.formBuilder.group({
       'text': ['', [
         Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+        Validators.minLength(4),
+        Validators.maxLength(25)
+        ]
+      ],
+      'name': [this.AuthService.authState.displayName || '', [
         Validators.minLength(4),
         Validators.maxLength(25)
         ]
@@ -96,8 +118,35 @@ export class MyAccountComponent implements OnInit {
     this.accountDetails.valueChanges.subscribe(data => this.onValueChanged(data));
     this.onValueChanged(); // reset validation messages
   }
+  // buildForm(): void {
+  //   this.accountDetails = this.formBuilder.group({
+  //     'text': ['', [
+  //       Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+  //       Validators.minLength(4),
+  //       Validators.maxLength(25)
+  //       ]
+  //     ],
+  //     'email': ['', [
+  //       Validators.required,
+  //       Validators.email
+  //     ]
+  //     ],
+  //   });
+
+  //   this.accountDetails.valueChanges.subscribe(data => this.onValueChanged(data));
+  //   this.onValueChanged(); // reset validation messages
+  // }
+
+  formatCurrentPricePlan(){
+    const priceDB = this.paymentService.myplan.priceWithVat;
+    console.log(priceDB);
+    this.priceCurrentPlan = priceDB.toString();
+    this.priceCurrentPlan = this.priceCurrentPlan.slice(0, -2);
+  }
+  
   // Updates validation state on form changes.
   onValueChanged(data?: any) {
+    console.log('onValueChangeddd')
     if (!this.accountDetails) { return; }
     const form = this.accountDetails;
     for (const field in this.formErrors) {

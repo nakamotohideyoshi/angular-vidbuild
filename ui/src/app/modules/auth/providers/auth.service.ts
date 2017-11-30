@@ -25,19 +25,19 @@ export class AuthService {
         firebase.auth().currentUser.getToken()
         .then((val)=>{
           this.token = val;
-          console.log(val)
         })
         this.store.dispatch(new AuthActions.LoginSuccessAction(auth));
-        this.setCurrentCoins();
+        this.getCurrentUser();
       }
     });
   }
 
-  setCurrentCoins(): any {
+  getCurrentUser(): any {
     if (this.authenticated) {
-      this.db.object(`users/${this.currentUserId}/credits`).valueChanges().subscribe(data => {
+      this.db.object(`users/${this.currentUserId}`).valueChanges().subscribe(data => {
         if (data) {
-          this.currentCoins = data;
+          console.log('dataaaaaa: ', data)
+          this.currentCoins = data.credits;
         }
       })
     }
