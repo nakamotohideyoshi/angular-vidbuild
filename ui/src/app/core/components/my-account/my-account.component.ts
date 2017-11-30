@@ -85,7 +85,11 @@ export class MyAccountComponent implements OnInit {
     console.log('saveAccountDetails');
     // if (this.accountDetails.valid) {
       let userInformation = { 
-        displayName: this.accountDetails.value.name,
+        name: this.accountDetails.value.name,
+        lastname: this.accountDetails.value.lastname,
+        businessname: this.accountDetails.value.businessname,
+        email: this.accountDetails.value.email,
+        address: this.accountDetails.value.address,
       }
       this.accountDetailesService.updateAccountDetails(userInformation);
     // } else {
@@ -103,15 +107,30 @@ export class MyAccountComponent implements OnInit {
         Validators.maxLength(25)
         ]
       ],
-      'name': [this.AuthService.authState.displayName || '', [
+      'name': [this.AuthService.authState.name || '', [
         Validators.minLength(4),
         Validators.maxLength(25)
         ]
       ],
-      'email': ['', [
+      'lastname': [this.AuthService.authState.lastname || '', [
+        Validators.minLength(4),
+        Validators.maxLength(25)
+        ]
+      ],
+      'businessname': [this.AuthService.authState.businessname || '', [
+        Validators.minLength(4),
+        Validators.maxLength(25)
+        ]
+      ],
+      'email': [this.AuthService.authState.email, [
         Validators.required,
         Validators.email
-      ]
+        ]
+      ],
+      'address': [this.AuthService.authState.address || '', [
+        Validators.minLength(4),
+        Validators.maxLength(25)
+        ]
       ],
     });
 
