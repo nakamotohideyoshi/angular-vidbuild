@@ -36,7 +36,7 @@ export class MyAccountComponent implements OnInit {
 
   constructor(public paymentService: PaymentService,
               public AuthService: AuthService,
-              public accountDetailesService : AccountDetailsService;
+              public accountDetailesService : AccountDetailsService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
