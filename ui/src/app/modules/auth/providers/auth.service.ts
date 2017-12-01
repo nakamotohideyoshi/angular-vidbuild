@@ -37,7 +37,8 @@ export class AuthService {
       this.db.object(`users/${this.currentUserId}`).valueChanges().subscribe(data => {
         if (data) {
           console.log('dataaaaaa: ', data)
-          this.currentCoins = data.credits;
+          this.currentCoins = 0;
+          //this.currentCoins = data.credits;
         }
       })
     }
