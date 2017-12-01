@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../providers/auth.service';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {  matchingPasswords } from '../../../shared/validators/validators';
+import { matchingPasswords } from '../../../shared/validators/validators';
+import { Modal } from '../modal/modal.component';  
 
 @Component({
   selector: 'user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
-}) 
+})
 
-export class UserFormComponent  {
+export class UserFormComponent {
   userForm: FormGroup;
   userSignInForm: FormGroup;
+  resetPasswordForm: FormGroup;
   newUser = true; // to toggle login or signup form
   passReset = false; // set to true when password reset is triggered
+  
   formErrors = {
     'name': '',
     'email': '',
@@ -33,7 +36,7 @@ export class UserFormComponent  {
       'required': 'Password is required.',
       'pattern': 'Password must be include at least one letter and one number.',
       'minlength': 'Password must be at least 6 characters long.',
-      'maxlength': 'Password cannot be more than 40 characters long.', 
+      'maxlength': 'Password cannot be more than 40 characters long.',
       'mismatchedPasswords': 'Passwords do not match.'
     }
   };
@@ -64,15 +67,25 @@ export class UserFormComponent  {
         Validators.required,
         Validators.email
       ]],
-      password: ['', [ 
+      password: ['', [
         Validators.minLength(6),
         Validators.maxLength(25),
         Validators.required
       ]],
     });
+
+    this.resetPasswordForm = fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]]
+    });
   }
 
- 
+  openModal() {
+    this.passReset = false; 
+    this.resetPasswordForm.reset();  
+  }
 
   signup(): void {
     if (!this.userForm.valid) { return; }
@@ -85,9 +98,12 @@ export class UserFormComponent  {
   }
 
   resetPassword() {
-    this.auth.resetPassword(this.userForm.value['email'])
-      .then(() => this.passReset = true)
-  }  
-
- 
+    if (!this.resetPasswordForm.valid) { return; }
+    this.passReset = false;
+    this.auth.resetPassword(this.resetPasswordForm.value['email'])
+      .then((data) => { 
+        this.passReset = true 
+      } )
+      .catch((error) => console.log("error reset", error));
+  }
 }

@@ -7,7 +7,7 @@
             <div class="col-md-4">
               <div class="card">
                 <h2 class="account-subtitle">Account Details</h2>
-                <pre>{{AuthService.authState | json}}</pre>
+                <!--<pre>{{AuthService.authState | json}}</pre>-->
                 <form [formGroup]="accountDetails" (ngSubmit)="saveAccountDetails()">
                   <div class="form-group row">
                     <label for="text" class="col-4 col-form-label">First Name</label>

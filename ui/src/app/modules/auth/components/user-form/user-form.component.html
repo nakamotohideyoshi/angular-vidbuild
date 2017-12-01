@@ -64,11 +64,9 @@
           <button class="btn btn-primary btn-create-account" [ngStyle]="{disabled : !f.form.valid}">Create Account</button>
         </div>
       </div>
-
     </form>
   </div>
 </div>
-
 <div class="row">
   <div class="col-sm-12">
     <h2 class="login-title">or Sign In</h2>
@@ -104,12 +102,40 @@
         <span class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-form-label"></span>
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
           <button class="btn btn-primary btn-create-account">Sign in</button>
+          <button type="button" (click)="openModal(); resetModal.show()" class="btn btn-link">Forgot your password ? </button>
         </div>
-      </div>
-      <button *ngIf="!passReset && userSignInForm.controls.email.valid" type="button" (click)="resetPassword()" class="btn btn-light">Reset Password for {{userSignInForm.value.email}}?</button>
-      <div *ngIf="passReset" class="alert alert-success alert-dismissable">
-        Reset requested. Check your email instructions.
       </div>
     </form>
   </div>
 </div>
+<app-modal-auth #resetModal>
+  <div class="app-modal-header">
+    <h2> Reset Your Password </h2>
+  </div>
+  <div class="app-modal-body">
+    <form [formGroup]="resetPasswordForm" (ngSubmit)="resetPassword()" #resetForm="ngForm" novalidate>
+      <div class="form-group row">
+        <label for="email" class="col-lg-4 col-md-4 col-sm-4  col-xs-12 col-form-label">Email Address</label>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+          <input class="form-control input-primary" type="email" formControlName="email">
+          <span *ngIf="(!resetPasswordForm.get('email').valid && resetPasswordForm.get('email').touched) || (resetForm.submitted && !resetPasswordForm.get('email').valid)"
+            class="is-danger">
+            <ul class="error-list is-danger">
+              <li [hidden]="!resetPasswordForm.get('email').hasError('required')">{{validationMessages.email.required}}</li>
+              <li [hidden]="!resetPasswordForm.get('email').hasError('email') || resetPasswordForm.get('email').hasError('required')">{{validationMessages.email.email}}</li>
+            </ul>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-8 col-sm-8 col-xs-12">
+        <button class="btn btn-primary ">Send</button>
+        <button type="button" class="btn btn-secondary" (click)="resetModal.hide()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <div class="app-modal-footer">
+    <div *ngIf="passReset" class="alert alert-info">
+      Reset requested. Check your email instructions.
+    </div>
+  </div>
+</app-modal-auth>
