@@ -25,7 +25,7 @@ export class AddVoiceoverComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pollyService.getVoiceList();
+    // this.pollyService.getVoiceList();
   }
 
   tab1() {

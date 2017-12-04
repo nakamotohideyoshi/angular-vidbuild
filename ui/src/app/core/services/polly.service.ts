@@ -13,6 +13,10 @@ export class PollyService {
 
   constructor() {
     this.loggedin = false;
+
+   }
+
+   textToSpeech( audioElement: HTMLAudioElement, speechText: String, speed: any, volume: any ) {
     this.aws_region = 'us-west-2';
     AWS.config.update({
         region: this.aws_region,
@@ -20,9 +24,6 @@ export class PollyService {
         secretAccessKey: this.aws_secretAccessKey
     });
     this.polly = new AWS.Polly({apiVersion: '2016-06-10'});
-   }
-
-   textToSpeech( audioElement: HTMLAudioElement, speechText: String, speed: any, volume: any ) {
         const params = {
         OutputFormat: 'mp3',
         Text: speechText,
@@ -52,8 +53,8 @@ export class PollyService {
         LanguageCode: 'en-GB'
        };
        this.polly.describeVoices(params, function(err, data) {
-         if (err) console.log(err, err.stack); // an error occurred
-         else     console.log(data);           // successful response
+         if (err) console.log(err, err.stack);
+         else     console.log(data);
          /*
          data = {
           Voices: [
