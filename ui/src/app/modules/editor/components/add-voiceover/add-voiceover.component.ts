@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { EditorService } from './../../services/editor.service';
+import {PollyService} from './../../../../core/services/polly.service';
 @Component({
   selector: 'app-add-voiceover',
   templateUrl: './add-voiceover.component.html',
-  styleUrls: ['./add-voiceover.component.scss']
+  styleUrls: ['./add-voiceover.component.scss'],
+  providers: [
+    PollyService
+  ]
 })
 export class AddVoiceoverComponent implements OnInit {
   pitch = 50;
@@ -12,12 +16,16 @@ export class AddVoiceoverComponent implements OnInit {
   speed_value = '50%';
   volume = 50;
   volume_value = '50%';
+  audioElement: HTMLAudioElement;
+  speechText = '';
 
   constructor(
-    public editorService: EditorService
+    public editorService: EditorService,
+    public pollyService: PollyService
   ) { }
 
   ngOnInit() {
+    this.pollyService.getVoiceList();
   }
 
   tab1() {
@@ -52,6 +60,11 @@ export class AddVoiceoverComponent implements OnInit {
     this.speed_value = '50%';
     this.volume = 50;
     this.volume_value = '50%';
+  }
+
+  clickPreview() {
+    this.audioElement = document.getElementById('audio1') as HTMLAudioElement;
+    this.pollyService.textToSpeech(this.audioElement, this.speechText, this.speed, this.volume);
   }
 
 }
