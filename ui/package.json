@@ -55,7 +55,7 @@
     "ng2-search-filter": "^0.3.1",
     "ngx-bootstrap": "^1.9.3",
     "ngx-infinite-scroll": "^0.6.1",
-    "node-sass": "^4.6.0",
+    "node-sass": "^7.0.0",
     "push.js": "^1.0.5",
     "rxjs": "^5.5.2",
     "tether": "^1.4.1",
